@@ -1,6 +1,7 @@
 //			main.cpp
 
 #include "battle_ship_function.h"
+#include "battleship.h"
 
 void shipInit();
 void WindowSize(int w, int h);
@@ -52,19 +53,7 @@ bool palyer_init = false;
 bool palyer_down = true;
 uchar alpha = 0;
 
-//		computer
-int computer_row, computer_column;
-int computer_board[table][table] = {0};
-int computer_ships[table][table] = {0};
-int computer_shot[table][table] = {0};
-int computer_hits[2] = {0};
-
-//		player
-int player_row, player_column;
-int player_board[table][table] = {0};
-int player_ships[table][table] = {0};
-int player_shot[table][table] = {0};
-int player_hits[2] = {0};
+Battleship computer, player;
 
 FILE *pFile;
 char buffer[1024];
@@ -75,7 +64,7 @@ void testtable(){
 	setFontXY(0, 200);
 	for (int i = 0; i < table; i++){
 		for (int j = 0; j < table; j++){
-			Print_Font("%d ", player_ships[i][j]);
+			Print_Font("%d ", computer.getShipCell(i, j));
 		}
 		Print_Font("\n");
 	}
@@ -83,14 +72,9 @@ void testtable(){
 
 int main() {
 	srand(time(NULL));
-	//		battle_ship_main.h
-	//	computer
-	startBoard(computer_board, computer_shot);
-	startShips(computer_ships);
-	//	player
-	startBoard(player_board, player_shot);
-
-	//		battle_ship_function.h
+	
+	computer.randomShips();
+	
 	shipInit();
 
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
@@ -261,13 +245,13 @@ void MouseButton(int button, int state, int x, int y){
 						shipXY(123, 167, 578, 578);
 						for (int i = ship[shipMOVE].ShipRowCol.HeadColumn; i <= ship[shipMOVE].ShipRowCol.BodyColumn; i++)
 							for (int j = ship[shipMOVE].ShipRowCol.HeadRow; j <= ship[shipMOVE].ShipRowCol.BodyRow; j++)
-								if (player_ships[j][i] != 0)
+								if (player.getShipCell(j, i) != 0)
 									initShipXY();
 								else{
 									if (ship[i].rotation)
-										player_ships[j][i] = ship[shipMOVE].shipLength.width;
+										player.setShipCell(j, i, ship[shipMOVE].shipLength.width);
 									else
-										player_ships[j][i] = ship[shipMOVE].shipLength.height;
+										player.setShipCell(j, i, ship[shipMOVE].shipLength.height);
 									ship[i].ready = true;
 								}
 					}
@@ -292,15 +276,15 @@ void MouseButton(int button, int state, int x, int y){
 						shipMOVE = i;
 						initShipXY();
 					}
-					initShip(player_ships);
+					player.initShips();
 				}
 				if (state == 0){
 					for (int j = ship[shipMOVE].ShipRowCol.HeadColumn; j <= ship[shipMOVE].ShipRowCol.BodyColumn; j++)
 						for (int k = ship[shipMOVE].ShipRowCol.HeadRow; k <= ship[shipMOVE].ShipRowCol.BodyRow; k++){
 							if (ship[shipMOVE].rotation)
-								player_ships[k][j] = 0;
+								player.setShipCell(k, j, 0);
 							else
-								player_ships[k][j] = 0;
+								player.setShipCell(k, j, 0);
 							ship[shipMOVE].ready = false;
 						}
 				}
@@ -308,8 +292,8 @@ void MouseButton(int button, int state, int x, int y){
 			case 3:
 				if (state == 1 && button_mouseX >= 800 && button_mouseX <= 1340 &&
 						button_mouseY >= 310 && button_mouseY <= 850 && player_computer_sleep && palyer_down){
-					computer_row = (button_mouseY - 310) / 67.5;
-					computer_column = (button_mouseX - 800) / 67.5;
+					computer.setRow((button_mouseY - 310) / 67.5);
+					computer.setColumn((button_mouseX - 800) / 67.5);
 					player_computer_flag = true;
 					palyer_init = true;
 				}
@@ -334,11 +318,11 @@ void MouseButton(int button, int state, int x, int y){
 						for (int i = ship[shipMOVE].ShipRowCol.HeadColumn; i <= ship[shipMOVE].ShipRowCol.BodyColumn; i++)
 							for (int j = ship[shipMOVE].ShipRowCol.HeadRow; j <= ship[shipMOVE].ShipRowCol.BodyRow; j++){
 								if (ship[shipMOVE].rotation)
-									player_ships[j][i] = 0;
+									player.setShipCell(j, i, 0);
 								else
-									player_ships[j][i] = 0;
+									player.setShipCell(j, i, 0);
 								ship[shipMOVE].ready = false;
-								if (player_ships[i][j] == 0){
+								if (player.getShipCell(i, j) == 0){
 									if (ship[shipMOVE].rotation){
 										ship[shipMOVE].rotation = false;
 										transWidthHeight();
@@ -358,13 +342,13 @@ void MouseButton(int button, int state, int x, int y){
 										}
 									}
 									if (ship[shipMOVE].rotation)
-										player_ships[j][i] = ship[shipMOVE].shipLength.width;
+										player.setShipCell(j, i, ship[shipMOVE].shipLength.width);
 									else
-										player_ships[j][i] = ship[shipMOVE].shipLength.height;
+										player.setShipCell(j, i, ship[shipMOVE].shipLength.height);
 									ship[shipMOVE].ready = true;
 								}
 							}
-						ship[shipMOVE].ShipRowCol = {(ship[shipMOVE].newXY.y - 167) / 72.25, (ship[shipMOVE].newXY.x - 123) / 72.25,
+						ship[shipMOVE].ShipRowCol = {(int)((ship[shipMOVE].newXY.y - 167) / 72.25), (int)((ship[shipMOVE].newXY.x - 123) / 72.25),
 																				 ship[shipMOVE].ShipRowCol.HeadRow + ship[shipMOVE].shipLength.height - 1,
 																				 ship[shipMOVE].ShipRowCol.HeadColumn + ship[shipMOVE].shipLength.width - 1};
 						shipXY(123, 167, 578, 578);
@@ -385,7 +369,7 @@ void MouseMove(int x, int y){
 		if (shipMOVE != -1 && mouse_down == 0){
 			ship[shipMOVE].newXY = {ship[shipMOVE].oldXY.x - button_mouseX + move_mouseX,
 															ship[shipMOVE].oldXY.y - button_mouseY + move_mouseY};
-			ship[shipMOVE].ShipRowCol = {(ship[shipMOVE].newXY.y - 167) / 72.25, (ship[shipMOVE].newXY.x - 123) / 72.25,
+			ship[shipMOVE].ShipRowCol = {(int)((ship[shipMOVE].newXY.y - 167) / 72.25), (int)((ship[shipMOVE].newXY.x - 123) / 72.25),
 																	 ship[shipMOVE].ShipRowCol.HeadRow + ship[shipMOVE].shipLength.height - 1,
 																	 ship[shipMOVE].ShipRowCol.HeadColumn + ship[shipMOVE].shipLength.width - 1};
 		}
@@ -496,7 +480,7 @@ void Init_two(){
 	setFontXY(0, 0);
 
 	if (mouse_down){
-		initShip(player_ships);
+		player.initShips();
 		for (int i = 0; i < 6; i++)
 			if (123 > ship[i].newXY.x || 701 < ship[i].newXY.x || 167 > ship[i].newXY.y || 745 < ship[i].newXY.y){
 				ship[i].ready = false;
@@ -505,9 +489,9 @@ void Init_two(){
 				for (int j = ship[i].ShipRowCol.HeadColumn; j <= ship[i].ShipRowCol.BodyColumn; j++)
 					for (int k = ship[i].ShipRowCol.HeadRow; k <= ship[i].ShipRowCol.BodyRow; k++){
 						if (ship[i].rotation)
-							player_ships[k][j] = ship[i].shipLength.width;
+							player.setShipCell(k, j, ship[i].shipLength.width);
 						else
-							player_ships[k][j] = ship[i].shipLength.height;
+							player.setShipCell(k, j, ship[i].shipLength.height);
 						ship[i].ready = true;
 					}
 			}
@@ -518,8 +502,7 @@ void Init_two(){
 	glutSwapBuffers();
 }
 
-void Init_three()
-{
+void Init_three(){
 	Image(sea);
 	Image_Size(0, 0, windowX, windowY);
 
@@ -557,19 +540,19 @@ void Init_three()
 		glutTimerFunc(1, player_computer_sleep_Timer, 2);
 
 	if (player_computer_flag && player_computer_sleep && palyer_down && palyer_init){
-		check_shot(computer_row, computer_column, computer_shot, computer_ships, computer_board, computer_hits);
+		computer.checkShots();
 		glutTimerFunc(500, player_computer_flag_Timer, 3);
 		palyer_down = false;
 		palyer_init = false;
 	}
 	else if (player_computer_flag == false && player_computer_sleep){
-		check_shot(player_row, player_column, player_shot, player_ships, player_board, player_hits);
+		player.checkShots();
 		palyer_down = true;
 		palyer_init = true;
 	}
 
-	showBoard(player_board, 140, 310, fire, wave);
-	showBoard(computer_board, 800, 310, fire, wave);
+	player.showBoard(140, 310, fire, wave);
+	computer.showBoard(800, 310, fire, wave);
 
 	Sleep(100);
 
@@ -579,14 +562,14 @@ void Init_three()
 
 	/*result( computer_hits );
 	result( player_hits );*/
-	if (computer_hits[0] == 14 || computer_hits[1] == 40 || player_hits[0] == 14 || player_hits[1] == 40){
-		if (computer_hits[0] == 14)
+	if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
+		if (computer.getHitCell(0) == 14)
 			Print_Font("You win the game");
-		else if (computer_hits[1] == 40)
+		else if (computer.getHitCell(1) == 40)
 			Print_Font("You are garbage");
-		if (player_hits[0] == 14)
+		if (player.getHitCell(0) == 14)
 			Print_Font("You lose the game");
-		else if (player_hits[1] == 40)
+		else if (player.getHitCell(1) == 40)
 			Print_Font("You are garbage");
 		palyer_down = false;
 	}
@@ -603,16 +586,6 @@ void glint_START_Timer(int id){
 
 	if (frame == 1)
 		glutTimerFunc(200, glint_START_Timer, id);
-}
-
-void check_shot(int row, int column, int shot[][table], int ships[][table], int board[][table], int hits[]){
-	if (giveShot(row, column, shot, board)){
-		changeBoard(row, column, shot, ships, board);
-		if (board[row][column] == 1)
-			hits[0]++;
-		else if (board[row][column] == 0)
-			hits[1]++;
-	}
 }
 
 void transWidthHeight(){
@@ -653,9 +626,9 @@ void player_computer_flag_Timer(int id){
 	if (player_computer_flag){
 		player_computer_flag = false;
 		do{
-			player_row = rand() % 8;
-			player_column = rand() % 8;
-		} while (player_board[player_row][player_column] != -1);
+			player.setRow(rand() % 8);
+			player.setColumn(rand() % 8);
+		} while (player.getBoardCell() != -1);
 	}
 	else if (player_computer_sleep == false)
 		player_computer_flag = true;

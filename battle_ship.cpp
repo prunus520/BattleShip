@@ -1,7 +1,7 @@
 //			battle_ship.cpp
 
 #include "battle_ship_function.h"
-
+ //OK
 void startBoard(int board[][table], int shot[][table]){
 	for (int i = 0; i < table; i++){
 		for (int j = 0; j < table; j++){
@@ -10,14 +10,14 @@ void startBoard(int board[][table], int shot[][table]){
 		}
 	}
 }
-
+ //OK
 void initShip(int ships[][table]){
 	for (int i = 0; i < table; i++)
 		for (int j = 0; j < table; j++)
 			ships[i][j] = 0;
 }
-
-void startShips(int ships[][table]){
+ //OK
+void randomShips(int ships[][table]){
 	int r_row, r_col;
 	initShip(ships);
 	for (int r_ship = 1; r_ship <= 6; r_ship++){
@@ -110,7 +110,7 @@ void startShips(int ships[][table]){
 		}
 	}
 }
-
+ //OK
 void showBoard(int board[][table], int x, int y, IplImage *hit, IplImage *nohit){
 	for (int i = 0; i < table; i++){
 		for (int j = 0; j < table; j++){
@@ -125,7 +125,7 @@ void showBoard(int board[][table], int x, int y, IplImage *hit, IplImage *nohit)
 		}
 	}
 }
-
+ //OK
 bool giveShot(int row, int column, int shot[][table], int board[][table]){
 	if (board[row][column] == 0 || board[row][column] == 1){
 		return false;
@@ -135,7 +135,7 @@ bool giveShot(int row, int column, int shot[][table], int board[][table]){
 		return true;
 	}
 }
-
+ //OK
 int hitShip(int row, int column, int shot[][table], int ships[][table]){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glColor3f(0, 0, 0);
@@ -172,7 +172,7 @@ int hitShip(int row, int column, int shot[][table], int ships[][table]){
 	}
 	return 1;
 }
-
+ //OK
 void changeBoard(int row, int column, int shot[][table], int ships[][table], int board[][table]){
 	if (hitShip(row, column, shot, ships) == 1)
 		board[row][column] = 1;

@@ -1,4 +1,6 @@
 //			battle_ship.h
+#ifndef BATTLE_SHIP_FUNCTION_H
+#define BATTLE_SHIP_FUNCTION_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -78,15 +80,6 @@ struct Ship{
 	bool ready;
 };
 
-//			Battle Ship Main
-void startBoard(int board[][table], int shot[][table]);
-void startShips(int ships[][table]);
-void showBoard(int board[][table], int x, int y, IplImage *hit, IplImage *nohit);
-bool giveShot(int row, int column, int shot[][table], int board[][table]);
-int hitShip(int row, int column, int shot[][table], int ships[][table]);
-void changeBoard(int row, int column, int shot[][table], int ships[][table], int board[][table]);
-void initShip(int ships[][table]);
-
 //			font.cpp
 int Print_Font(const char *format, ...);
 void setFontHeight(int Height);
@@ -105,3 +98,5 @@ void Hollow_Square(GLfloat x1, GLfloat y1, GLfloat width, GLfloat height, GLfloa
 void Solid_Square(GLfloat x1, GLfloat y1, GLfloat width, GLfloat height);
 void checkerboard(GLfloat x, GLfloat y, GLfloat width, GLfloat height, int width_cell, int height_cell, GLfloat LineWidth = 1);
 void Counterclockwise_Degree_Rotation(GLfloat x, GLfloat y);
+
+#endif
