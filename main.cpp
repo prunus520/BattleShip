@@ -2,6 +2,7 @@
 
 #include "battle_ship_function.h"
 #include "battleship.h"
+#include "ship.h"
 
 void shipInit();
 void WindowSize(int w, int h);
@@ -45,7 +46,6 @@ IplImage *back = cvLoadImage("img//back.png");
 IplImage *wave = cvLoadImage("img//wave.jpg");
 IplImage *fire = cvLoadImage("img//fire.png");
 int mouse_down;
-Ship ship[6];
 int shipMOVE = -1;
 bool player_computer_flag = true;
 bool player_computer_sleep = false;
@@ -54,6 +54,7 @@ bool palyer_down = true;
 uchar alpha = 0;
 
 Battleship computer, player;
+Ship ship[6];
 
 FILE *pFile;
 char buffer[1024];
@@ -111,74 +112,35 @@ int main() {
 }
 
 void shipInit(){
-	for (int i = 0; i < 6; i++){
-		ship[i].ID = i;
-	}
-	ship[0].imagePath = ship0;
-	ship[0].XY = {1108, 186};
-	ship[0].shipSize = {16, 67.2};
-	ship[0].real_shipSize = ship[0].shipSize;
-	ship[0].oldXY = ship[0].XY;
-	ship[0].newXY = ship[0].XY;
-	ship[0].ShipRowCol = {0};
-	ship[0].shipLength = {1, 1};
-	ship[0].rotation = false;
-	ship[0].ready = false;
+	ship[0].setImage(ship0);
+	ship[0].setCoordinate(1108, 186);
+	ship[0].setSize(16, 67.2);
+	ship[0].setLength(1, 1);
 
-	ship[1].imagePath = ship1;
-	ship[1].XY = {1161, 186};
-	ship[1].shipSize = {24, 65.6};
-	ship[1].real_shipSize = ship[1].shipSize;
-	ship[1].oldXY = ship[1].XY;
-	ship[1].newXY = ship[1].XY;
-	ship[1].ShipRowCol = {0};
-	ship[1].shipLength = {1, 1};
-	ship[1].rotation = false;
-	ship[1].ready = false;
-
-	ship[2].imagePath = ship2;
-	ship[2].XY = {1228, 186};
-	ship[2].shipSize = {16, 67.2};
-	ship[2].real_shipSize = ship[2].shipSize;
-	ship[2].oldXY = ship[2].XY;
-	ship[2].newXY = ship[2].XY;
-	ship[2].ShipRowCol = {0};
-	ship[2].shipLength = {1, 1};
-	ship[2].rotation = false;
-	ship[2].ready = false;
-
-	ship[3].imagePath = ship3;
-	ship[3].XY = {1100, 280};
-	ship[3].shipSize = {65, 212.5};
-	ship[3].real_shipSize = ship[3].shipSize;
-	ship[3].oldXY = ship[3].XY;
-	ship[3].newXY = ship[3].XY;
-	ship[3].ShipRowCol = {0};
-	ship[3].shipLength = {1, 3};
-	ship[3].rotation = false;
-	ship[3].ready = false;
-
-	ship[4].imagePath = ship4;
-	ship[4].XY = {1202, 280};
-	ship[4].shipSize = {50, 212.5};
-	ship[4].real_shipSize = ship[4].shipSize;
-	ship[4].oldXY = ship[4].XY;
-	ship[4].newXY = ship[4].XY;
-	ship[4].ShipRowCol = {0};
-	ship[4].shipLength = {1, 3};
-	ship[4].rotation = false;
-	ship[4].ready = false;
-
-	ship[5].imagePath = ship5;
-	ship[5].XY = {1010, 170};
-	ship[5].shipSize = {54, 336};
-	ship[5].real_shipSize = ship[5].shipSize;
-	ship[5].oldXY = ship[5].XY;
-	ship[5].newXY = ship[5].XY;
-	ship[5].ShipRowCol = {0};
-	ship[5].shipLength = {1, 5};
-	ship[5].rotation = false;
-	ship[5].ready = false;
+	ship[1].setImage(ship1);
+	ship[1].setCoordinate(1161, 186);
+	ship[1].setSize(24, 65.6);
+	ship[1].setLength(1, 1);
+	
+	ship[2].setImage(ship2);
+	ship[2].setCoordinate(1228, 186);
+	ship[2].setSize(16, 67.2);
+	ship[2].setLength(1, 1);
+	
+	ship[3].setImage(ship3);
+	ship[3].setCoordinate(1100, 280);
+	ship[3].setSize(65, 212.5);
+	ship[3].setLength(1, 3);
+	
+	ship[4].setImage(ship4);
+	ship[4].setCoordinate(1202, 280);
+	ship[4].setSize(50, 212.5);
+	ship[4].setLength(1, 3);
+	
+	ship[5].setImage(ship5);
+	ship[5].setCoordinate(1010, 170);
+	ship[5].setSize(54, 336);
+	ship[5].setLength(1, 5);
 }
 
 void WindowSize(int w, int h){
@@ -217,30 +179,30 @@ void MouseButton(int button, int state, int x, int y){
 				break;
 			case 2:
 				for (int i = 0; i < 6; i++){
-					if (state == 0 && x >= ship[i].newXY.x && x <= ship[i].newXY.x + ship[i].real_shipSize.width &&
-							y >= ship[i].newXY.y && y <= ship[i].newXY.y + ship[i].real_shipSize.height){
-						shipMOVE = ship[i].ID;
+					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
+							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
+						shipMOVE = ship[i].getID();
 						break;
 					}
 				}
 				if (shipMOVE != -1){
-					if (state == 1 && (ship[shipMOVE].newXY.x < 123 || ship[shipMOVE].newXY.x + ship[shipMOVE].real_shipSize.width > 701 ||
-														 ship[shipMOVE].newXY.y < 167 || ship[shipMOVE].newXY.y + ship[shipMOVE].real_shipSize.height > 745)){
+					if (state == 1 && (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
+														 ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745)){
 						initShipXY();
 					}
-					else if (state == 1 && x >= ship[shipMOVE].newXY.x && x <= ship[shipMOVE].newXY.x + ship[shipMOVE].real_shipSize.width &&
-									 y >= ship[shipMOVE].newXY.y && y <= ship[shipMOVE].newXY.y + ship[shipMOVE].real_shipSize.height){
+					else if (state == 1 && x >= ship[shipMOVE].getNewX() && x <= ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() &&
+									 y >= ship[shipMOVE].getNewY() && y <= ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight()){
 						shipXY(123, 167, 578, 578);
-						for (int i = ship[shipMOVE].ShipRowCol.HeadColumn; i <= ship[shipMOVE].ShipRowCol.BodyColumn; i++)
-							for (int j = ship[shipMOVE].ShipRowCol.HeadRow; j <= ship[shipMOVE].ShipRowCol.BodyRow; j++)
+						for (int i = ship[shipMOVE].getHeadColumn(); i <= ship[shipMOVE].getBodyColumn(); i++)
+							for (int j = ship[shipMOVE].getHeadRow(); j <= ship[shipMOVE].getBodyRow(); j++)
 								if (player.getShipCell(j, i) != 0)
 									initShipXY();
 								else{
-									if (ship[i].rotation)
-										player.setShipCell(j, i, ship[shipMOVE].shipLength.width);
+									if (ship[i].getRotation())
+										player.setShipCell(j, i, ship[shipMOVE].getLengthWidth());
 									else
-										player.setShipCell(j, i, ship[shipMOVE].shipLength.height);
-									ship[i].ready = true;
+										player.setShipCell(j, i, ship[shipMOVE].getLengthHeight());
+									ship[i].setReady(true);
 								}
 					}
 				}
@@ -252,7 +214,7 @@ void MouseButton(int button, int state, int x, int y){
 				else if (x >= 1165 && x <= 1315 && y >= 620 && y <= 770){
 					int i;
 					for (i = 0; i < 6; i++){
-						if (ship[i].ready == false)
+						if (ship[i].getReady() == false)
 							break;
 					}
 					if (i == 6){
@@ -267,13 +229,13 @@ void MouseButton(int button, int state, int x, int y){
 					player.initShips();
 				}
 				if (state == 0){
-					for (int j = ship[shipMOVE].ShipRowCol.HeadColumn; j <= ship[shipMOVE].ShipRowCol.BodyColumn; j++)
-						for (int k = ship[shipMOVE].ShipRowCol.HeadRow; k <= ship[shipMOVE].ShipRowCol.BodyRow; k++){
-							if (ship[shipMOVE].rotation)
+					for (int j = ship[shipMOVE].getHeadColumn(); j <= ship[shipMOVE].getBodyColumn(); j++)
+						for (int k = ship[shipMOVE].getHeadRow(); k <= ship[shipMOVE].getBodyRow(); k++){
+							if (ship[shipMOVE].getRotation())
 								player.setShipCell(k, j, 0);
 							else
 								player.setShipCell(k, j, 0);
-							ship[shipMOVE].ready = false;
+							ship[shipMOVE].setReady(false);
 						}
 				}
 				break;
@@ -291,54 +253,54 @@ void MouseButton(int button, int state, int x, int y){
 		case GLUT_RIGHT_BUTTON:
 			if (frame == 2){
 				for (int i = 0; i < 6; i++){
-					if (state == 0 && x >= ship[i].newXY.x && x <= ship[i].newXY.x + ship[i].real_shipSize.width &&
-							y >= ship[i].newXY.y && y <= ship[i].newXY.y + ship[i].real_shipSize.height){
-						shipMOVE = ship[i].ID;
+					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
+							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
+						shipMOVE = ship[i].getID();
 						break;
 					}
 				}
 				for (int i = 0; i < 6; i++){
-					if (state == 0 && x >= ship[i].newXY.x && x <= ship[i].newXY.x + ship[i].real_shipSize.width &&
-							y >= ship[i].newXY.y && y <= ship[i].newXY.y + ship[i].real_shipSize.height){
-						if (ship[i].XY.x != ship[i].newXY.x && ship[i].XY.x != ship[i].newXY.x &&
-								ship[i].XY.y != ship[i].newXY.y && ship[i].XY.y != ship[i].newXY.y)
-							shipMOVE = ship[i].ID;
-						for (int i = ship[shipMOVE].ShipRowCol.HeadColumn; i <= ship[shipMOVE].ShipRowCol.BodyColumn; i++)
-							for (int j = ship[shipMOVE].ShipRowCol.HeadRow; j <= ship[shipMOVE].ShipRowCol.BodyRow; j++){
-								if (ship[shipMOVE].rotation)
+					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
+							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
+						if (ship[i].getX() != ship[i].getNewX() && ship[i].getX() != ship[i].getNewX() &&
+								ship[i].getY() != ship[i].getNewY() && ship[i].getY() != ship[i].getNewY())
+							shipMOVE = ship[i].getID();
+						for (int i = ship[shipMOVE].getHeadColumn(); i <= ship[shipMOVE].getBodyColumn(); i++)
+							for (int j = ship[shipMOVE].getHeadRow(); j <= ship[shipMOVE].getBodyRow(); j++){
+								if (ship[shipMOVE].getRotation())
 									player.setShipCell(j, i, 0);
 								else
 									player.setShipCell(j, i, 0);
-								ship[shipMOVE].ready = false;
+								ship[shipMOVE].setReady(false);
 								if (player.getShipCell(i, j) == 0){
-									if (ship[shipMOVE].rotation){
-										ship[shipMOVE].rotation = false;
+									if (ship[shipMOVE].getRotation()){
+										ship[shipMOVE].setRotation(false);
 										transWidthHeight();
-										if (ship[shipMOVE].newXY.x < 123 || ship[shipMOVE].newXY.x + ship[shipMOVE].real_shipSize.width > 701 ||
-												ship[shipMOVE].newXY.y < 167 || ship[shipMOVE].newXY.y + ship[shipMOVE].real_shipSize.height > 745){
-											ship[shipMOVE].rotation = true;
+										if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
+												ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745){
+											ship[shipMOVE].setRotation(true);
 											transWidthHeight();
 										}
 									}
 									else{
-										ship[shipMOVE].rotation = true;
+										ship[shipMOVE].setRotation(true);
 										transWidthHeight();
-										if (ship[shipMOVE].newXY.x < 123 || ship[shipMOVE].newXY.x + ship[shipMOVE].real_shipSize.width > 701 ||
-												ship[shipMOVE].newXY.y < 167 || ship[shipMOVE].newXY.y + ship[shipMOVE].real_shipSize.height > 745){
-											ship[shipMOVE].rotation = false;
+										if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
+												ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745){
+											ship[shipMOVE].setRotation(false);
 											transWidthHeight();
 										}
 									}
-									if (ship[shipMOVE].rotation)
-										player.setShipCell(j, i, ship[shipMOVE].shipLength.width);
+									if (ship[shipMOVE].getRotation())
+										player.setShipCell(j, i, ship[shipMOVE].getLengthWidth());
 									else
-										player.setShipCell(j, i, ship[shipMOVE].shipLength.height);
-									ship[shipMOVE].ready = true;
+										player.setShipCell(j, i, ship[shipMOVE].getLengthHeight());
+									ship[shipMOVE].setReady(true);
 								}
 							}
-						ship[shipMOVE].ShipRowCol = {(int)((ship[shipMOVE].newXY.y - 167) / 72.25), (int)((ship[shipMOVE].newXY.x - 123) / 72.25),
-																				 ship[shipMOVE].ShipRowCol.HeadRow + ship[shipMOVE].shipLength.height - 1,
-																				 ship[shipMOVE].ShipRowCol.HeadColumn + ship[shipMOVE].shipLength.width - 1};
+						ship[shipMOVE].setField((int)((ship[shipMOVE].getNewY() - 167) / 72.25), (int)((ship[shipMOVE].getNewX() - 123) / 72.25),
+																					 ship[shipMOVE].getHeadRow() + ship[shipMOVE].getLengthHeight() - 1,
+																					 ship[shipMOVE].getHeadColumn() + ship[shipMOVE].getLengthWidth() - 1);
 						shipXY(123, 167, 578, 578);
 						shipMOVE = -1;
 						break;
@@ -355,11 +317,11 @@ void MouseMove(int x, int y){
 	move_mouseY = y;
 	if (frame == 2){
 		if (shipMOVE != -1 && mouse_down == 0){
-			ship[shipMOVE].newXY = {ship[shipMOVE].oldXY.x - button_mouseX + move_mouseX,
-															ship[shipMOVE].oldXY.y - button_mouseY + move_mouseY};
-			ship[shipMOVE].ShipRowCol = {(int)((ship[shipMOVE].newXY.y - 167) / 72.25), (int)((ship[shipMOVE].newXY.x - 123) / 72.25),
-																	 ship[shipMOVE].ShipRowCol.HeadRow + ship[shipMOVE].shipLength.height - 1,
-																	 ship[shipMOVE].ShipRowCol.HeadColumn + ship[shipMOVE].shipLength.width - 1};
+			ship[shipMOVE].setNewCoordinate(ship[shipMOVE].getOldX() - button_mouseX + move_mouseX,
+																			ship[shipMOVE].getOldY() - button_mouseY + move_mouseY);
+			ship[shipMOVE].setField((int)((ship[shipMOVE].getNewY() - 167) / 72.25), (int)((ship[shipMOVE].getNewX() - 123) / 72.25),
+																	 ship[shipMOVE].getHeadRow() + ship[shipMOVE].getLengthHeight() - 1,
+																	 ship[shipMOVE].getHeadColumn() + ship[shipMOVE].getLengthWidth() - 1);
 		}
 	}
 	glutPostRedisplay();
@@ -369,7 +331,7 @@ void MousePassiveMotion(int x, int y){
 	mouseX = x;
 	mouseY = y;
 	if (frame == 2){
-		ship[shipMOVE].oldXY = ship[shipMOVE].newXY;
+		ship[shipMOVE].setOldCoordinate(ship[shipMOVE].getNewX(), ship[shipMOVE].getNewY());
 		shipMOVE = -1;
 	}
 	glutPostRedisplay();
@@ -453,12 +415,12 @@ void Init_two(){
 	checkerboard(123, 167, 578, 578, table, table, 2);
 
 	for (int i = 5; i >= 0; i--){
-		Image_Transparent(ship[i].imagePath);
-		Image_Size(ship[i].XY.x, ship[i].XY.y, ship[i].shipSize.width, ship[i].shipSize.height, 0, 0, 0);
-		if (ship[i].rotation)
-			Counterclockwise_Degree_Rotation(ship[i].newXY.x, ship[i].newXY.y);
+		Image_Transparent(ship[i].getImage());
+		Image_Size(ship[i].getX(), ship[i].getY(), ship[i].getWidth(), ship[i].getHeight(), 0, 0, 0);
+		if (ship[i].getRotation())
+			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
 
-		Image_Size(ship[i].newXY.x, ship[i].newXY.y, ship[i].shipSize.width, ship[i].shipSize.height, 0, 1, 0);
+		Image_Size(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 0, 1, 0);
 		glLoadIdentity();
 		gluOrtho2D(0, windowX, windowY, 0);
 	}
@@ -470,17 +432,17 @@ void Init_two(){
 	if (mouse_down){
 		player.initShips();
 		for (int i = 0; i < 6; i++)
-			if (123 > ship[i].newXY.x || 701 < ship[i].newXY.x || 167 > ship[i].newXY.y || 745 < ship[i].newXY.y){
-				ship[i].ready = false;
+			if (123 > ship[i].getNewX() || 701 < ship[i].getNewX() || 167 > ship[i].getNewY() || 745 < ship[i].getNewY()){
+				ship[i].setReady(false);
 			}
 			else{
-				for (int j = ship[i].ShipRowCol.HeadColumn; j <= ship[i].ShipRowCol.BodyColumn; j++)
-					for (int k = ship[i].ShipRowCol.HeadRow; k <= ship[i].ShipRowCol.BodyRow; k++){
-						if (ship[i].rotation)
-							player.setShipCell(k, j, ship[i].shipLength.width);
+				for (int j = ship[i].getHeadColumn(); j <= ship[i].getBodyColumn(); j++)
+					for (int k = ship[i].getHeadRow(); k <= ship[i].getBodyRow(); k++){
+						if (ship[i].getRotation())
+							player.setShipCell(k, j, ship[i].getLengthWidth());
 						else
-							player.setShipCell(k, j, ship[i].shipLength.height);
-						ship[i].ready = true;
+							player.setShipCell(k, j, ship[i].getLengthHeight());
+						ship[i].setReady(true);
 					}
 			}
 	}
@@ -517,10 +479,10 @@ void Init_three(){
 	for (int i = 5; i >= 0; i--){
 		shipMOVE = i;
 		shipXY(140, 310, 540, 540);
-		Image_Transparent(ship[i].imagePath);
-		if (ship[shipMOVE].real_shipSize.width > ship[shipMOVE].real_shipSize.height || ship[i].rotation)
-			Counterclockwise_Degree_Rotation(ship[i].newXY.x, ship[i].newXY.y);
-		Image_Size(ship[i].newXY.x, ship[i].newXY.y, ship[i].shipSize.width, ship[i].shipSize.height, 1, 1, 1);
+		Image_Transparent(ship[i].getImage());
+		if (ship[shipMOVE].getRealWidth() > ship[shipMOVE].getRealHeight() || ship[i].getRotation())
+			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
+		Image_Size(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
 		glLoadIdentity();
 		gluOrtho2D(0, windowX, windowY, 0);
 	}
@@ -579,28 +541,28 @@ void glint_START_Timer(int id){
 
 void transWidthHeight(){
 	GLfloat tempf;
-	tempf = ship[shipMOVE].real_shipSize.width;
-	ship[shipMOVE].real_shipSize.width = ship[shipMOVE].real_shipSize.height;
-	ship[shipMOVE].real_shipSize.height = tempf;
+	tempf = ship[shipMOVE].getRealWidth();
+	ship[shipMOVE].setRealWidth(ship[shipMOVE].getRealHeight());
+	ship[shipMOVE].setRealHeight(tempf);
 	int tempi;
-	tempi = ship[shipMOVE].shipLength.width;
-	ship[shipMOVE].shipLength.width = ship[shipMOVE].shipLength.height;
-	ship[shipMOVE].shipLength.height = tempi;
+	tempi = ship[shipMOVE].getLengthWidth();
+	ship[shipMOVE].setLengthWidth(ship[shipMOVE].getLengthHeight());
+	ship[shipMOVE].setLengthHeight(tempi);
 }
 
 void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
-	ship[shipMOVE].newXY = {x + ship[shipMOVE].ShipRowCol.HeadColumn * width / 8 + (ship[shipMOVE].shipLength.width * width / 8 - ship[shipMOVE].real_shipSize.width) / 2,
-													y + ship[shipMOVE].ShipRowCol.HeadRow * height / 8 + (ship[shipMOVE].shipLength.height * height / 8 - ship[shipMOVE].real_shipSize.height) / 2};
+	ship[shipMOVE].setNewCoordinate(x + ship[shipMOVE].getHeadColumn() * width / 8 + (ship[shipMOVE].getLengthWidth() * width / 8 - ship[shipMOVE].getRealWidth()) / 2,
+																	y + ship[shipMOVE].getHeadRow() * height / 8 + (ship[shipMOVE].getLengthHeight() * height / 8 - ship[shipMOVE].getRealHeight()) / 2);
 }
 
 void initShipXY(){
-	ship[shipMOVE].oldXY = ship[shipMOVE].XY;
-	ship[shipMOVE].newXY = ship[shipMOVE].XY;
-	if (ship[shipMOVE].rotation){
+	ship[shipMOVE].setOldCoordinate(ship[shipMOVE].getX(), ship[shipMOVE].getY());
+	ship[shipMOVE].setNewCoordinate(ship[shipMOVE].getX(), ship[shipMOVE].getY());
+	if (ship[shipMOVE].getRotation()){
 		transWidthHeight();
-		ship[shipMOVE].rotation = false;
+		ship[shipMOVE].setRotation(false);
 	}
-	ship[shipMOVE].ready == false;
+	ship[shipMOVE].setReady(false);
 	shipMOVE = -1;
 }
 

@@ -44,42 +44,6 @@
 #define battle_ship_green glColor3f(0.0941, 0.5372, 0.0313)
 #define battle_ship_blue glColor3f(0, 0, 1)
 
-struct Coordinate{
-	GLfloat x;
-	GLfloat y;
-};
-
-struct ShipSize{
-	GLfloat width;
-	GLfloat height;
-};
-
-struct ShipCoordinate{
-	int HeadRow;
-	int HeadColumn;
-	int BodyRow;
-	int BodyColumn;
-};
-
-struct ShipLength{
-	int width;
-	int height;
-};
-
-struct Ship{
-	int ID;
-	IplImage *imagePath;
-	ShipSize shipSize;
-	ShipSize real_shipSize;
-	ShipLength shipLength;
-	Coordinate XY;
-	Coordinate oldXY;
-	Coordinate newXY;
-	ShipCoordinate ShipRowCol;
-	bool rotation;
-	bool ready;
-};
-
 //			font.cpp
 int Print_Font(const char *format, ...);
 void setFontHeight(int Height);

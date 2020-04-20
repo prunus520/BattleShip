@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
 CompilerSettings=0000000100000000000000000
-UnitCount=7
+UnitCount=9
 
 [VersionInfo]
 Major=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=battleship.h
+FileName=ship.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -121,7 +121,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit8]
-FileName=battleship.cpp
+FileName=ship.cpp
 CompileCpp=1
 Folder=
 Compile=1
