@@ -158,3 +158,15 @@ int Battleship::hitShips(){
 	}
 	return 1;
 }
+
+void Battleship::testShipTable(int x, int y){
+	glColor3f(1, 1, 0);
+	setFontHeight(20);
+	setFontXY(x, y);
+	for (int i = 0; i < table; i++){
+		for (int j = 0; j < table; j++){
+			Print_Font("%d ", getShipCell(i, j));
+		}
+		Print_Font("\n");
+	}
+}

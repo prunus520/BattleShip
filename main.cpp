@@ -58,18 +58,6 @@ Battleship computer, player;
 FILE *pFile;
 char buffer[1024];
 
-void testtable(){
-	glColor3f(1, 1, 0);
-	setFontHeight(20);
-	setFontXY(0, 200);
-	for (int i = 0; i < table; i++){
-		for (int j = 0; j < table; j++){
-			Print_Font("%d ", computer.getShipCell(i, j));
-		}
-		Print_Font("\n");
-	}
-}
-
 int main() {
 	srand(time(NULL));
 	
@@ -497,7 +485,8 @@ void Init_two(){
 			}
 	}
 
-	testtable();
+	player.testShipTable(0, 200);
+	computer.testShipTable(200, 200);
 
 	glutSwapBuffers();
 }

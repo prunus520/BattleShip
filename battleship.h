@@ -17,6 +17,7 @@ class Battleship{
 		void randomShips();
 		void showBoard(int, int, IplImage *, IplImage *);
 		void checkShots();
+		void testShipTable(int, int);
 	private:
 		int row = 0, column = 0;
 		int board[8][8] = {{0}};
