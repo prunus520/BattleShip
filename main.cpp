@@ -3,6 +3,8 @@
 #include "battle_ship_function.h"
 #include "battleship.h"
 #include "ship.h"
+#include "image.h"
+#include "imageTool.h"
 
 void shipInit();
 void WindowSize(int w, int h);
@@ -31,20 +33,22 @@ int mouseX, mouseY;
 int button_mouseX, button_mouseY;
 int move_mouseX, move_mouseY;
 int pointX = windowX, pointY = 0;
-IplImage *battle_ship = cvLoadImage("img//battle_ship.jpg");
-IplImage *battleship = cvLoadImage("img//battleship.png");
-IplImage *reel = cvLoadImage("img//reel.png");
-IplImage *sea = cvLoadImage("img//sea.jpg");
-IplImage *radar_board = cvLoadImage("img//radar_board.jpg");
-IplImage *ship0 = cvLoadImage("img//ship0.png");
-IplImage *ship1 = cvLoadImage("img//ship1.png");
-IplImage *ship2 = cvLoadImage("img//ship2.png");
-IplImage *ship3 = cvLoadImage("img//ship3.png");
-IplImage *ship4 = cvLoadImage("img//ship4.png");
-IplImage *ship5 = cvLoadImage("img//ship5.png");
-IplImage *back = cvLoadImage("img//back.png");
-IplImage *wave = cvLoadImage("img//wave.jpg");
-IplImage *fire = cvLoadImage("img//fire.png");
+
+Image battle_ship = "img//battle_ship.jpg";
+Image battleship = "img//battleship.png";
+Image reel = "img//reel.png";
+Image sea = "img//sea.jpg";
+Image radar_board = "img//radar_board.jpg";
+Image ship0 = "img//ship0.png";
+Image ship1 = "img//ship1.png";
+Image ship2 = "img//ship2.png";
+Image ship3 = "img//ship3.png";
+Image ship4 = "img//ship4.png";
+Image ship5 = "img//ship5.png";
+Image back = "img//back.png";
+Image wave = "img//wave.jpg";
+Image fire = "img//fire.png";
+
 int mouse_down;
 int shipMOVE = -1;
 bool player_computer_flag = true;
@@ -71,19 +75,7 @@ int main() {
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Battle Ship");
 
-	cvCvtColor(battle_ship, battle_ship, CV_BGR2RGB);
-	cvCvtColor(battleship, battleship, CV_BGR2RGB);
-	cvCvtColor(reel, reel, CV_BGR2RGB);
-	cvCvtColor(sea, sea, CV_BGR2RGB);
-	cvCvtColor(ship0, ship0, CV_BGR2RGB);
-	cvCvtColor(ship1, ship1, CV_BGR2RGB);
-	cvCvtColor(ship2, ship2, CV_BGR2RGB);
-	cvCvtColor(ship3, ship3, CV_BGR2RGB);
-	cvCvtColor(ship4, ship4, CV_BGR2RGB);
-	cvCvtColor(ship5, ship5, CV_BGR2RGB);
-	cvCvtColor(wave, wave, CV_BGR2RGB);
-	cvCvtColor(fire, fire, CV_BGR2RGB);
-	//	cvCvtColor( back, back, CV_BGR2RGB );
+	back.toBGR();
 
 	glutReshapeFunc(WindowSize);
 	glutKeyboardFunc(Keyboard);
@@ -95,49 +87,35 @@ int main() {
 	glutTimerFunc(200, glint_START_Timer, 1);
 
 	glutMainLoop();
-
-	cvReleaseImage(&battle_ship);
-	cvReleaseImage(&battleship);
-	cvReleaseImage(&reel);
-	cvReleaseImage(&sea);
-	cvReleaseImage(&radar_board);
-	cvReleaseImage(&ship0);
-	cvReleaseImage(&ship1);
-	cvReleaseImage(&ship2);
-	cvReleaseImage(&ship3);
-	cvReleaseImage(&ship4);
-	cvReleaseImage(&ship5);
-	cvReleaseImage(&wave);
-	cvReleaseImage(&back);
 }
 
 void shipInit(){
-	ship[0].setImage(ship0);
+	ship[0].setImage(ship0.getImage());
 	ship[0].setCoordinate(1108, 186);
 	ship[0].setSize(16, 67.2);
 	ship[0].setLength(1, 1);
 
-	ship[1].setImage(ship1);
+	ship[1].setImage(ship1.getImage());
 	ship[1].setCoordinate(1161, 186);
 	ship[1].setSize(24, 65.6);
 	ship[1].setLength(1, 1);
 	
-	ship[2].setImage(ship2);
+	ship[2].setImage(ship2.getImage());
 	ship[2].setCoordinate(1228, 186);
 	ship[2].setSize(16, 67.2);
 	ship[2].setLength(1, 1);
 	
-	ship[3].setImage(ship3);
+	ship[3].setImage(ship3.getImage());
 	ship[3].setCoordinate(1100, 280);
 	ship[3].setSize(65, 212.5);
 	ship[3].setLength(1, 3);
 	
-	ship[4].setImage(ship4);
+	ship[4].setImage(ship4.getImage());
 	ship[4].setCoordinate(1202, 280);
 	ship[4].setSize(50, 212.5);
 	ship[4].setLength(1, 3);
 	
-	ship[5].setImage(ship5);
+	ship[5].setImage(ship5.getImage());
 	ship[5].setCoordinate(1010, 170);
 	ship[5].setSize(54, 336);
 	ship[5].setLength(1, 5);
@@ -357,10 +335,10 @@ void Display(){
 }
 
 void Init_one(){
-	Image(battle_ship);
-	Image_Size(0, 0, windowX, windowY);
-	Image_Transparent(battleship, 0, 0, 0, alpha);
-	Image_Size(windowX / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
+	battle_ship.show();
+	setImageSize(0, 0, windowX, windowY);
+	battleship.toTransparent(0, 0, 0, alpha);
+	setImageSize(windowX / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
 	if (alpha < 255)
 		alpha++;
 	glDisable(GL_TEXTURE_2D);
@@ -376,8 +354,9 @@ void Init_one(){
 	}
 
 	if (frame == 0){
-		Image_Transparent(reel);
-		Image_Size(420, 20, 644, 824.6);
+//		toTransparentImage(reel);
+		reel.toTransparent();
+		setImageSize(420, 20, 644, 824.6);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); //�C��[�G
 		glColor3f(0, 0, 0);
 		setFontHeight(45);
@@ -405,22 +384,22 @@ void Init_one(){
 }
 
 void Init_two(){
-	Image(radar_board);
-	Image_Size(0, 0, windowX, windowY);
-	Image_Transparent(back);
-	Image_Size(0, 0, 100, 100);
+	radar_board.show();
+	setImageSize(0, 0, windowX, windowY);
+	back.toTransparent();
+	setImageSize(0, 0, 100, 100);
 	glDisable(GL_TEXTURE_2D);
 
 	battle_ship_green;
 	checkerboard(123, 167, 578, 578, table, table, 2);
 
 	for (int i = 5; i >= 0; i--){
-		Image_Transparent(ship[i].getImage());
-		Image_Size(ship[i].getX(), ship[i].getY(), ship[i].getWidth(), ship[i].getHeight(), 0, 0, 0);
+		toTransparentImage(ship[i].getImage());
+		setImageSize(ship[i].getX(), ship[i].getY(), ship[i].getWidth(), ship[i].getHeight(), 0, 0, 0);
 		if (ship[i].getRotation())
 			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
 
-		Image_Size(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 0, 1, 0);
+		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 0, 1, 0);
 		glLoadIdentity();
 		gluOrtho2D(0, windowX, windowY, 0);
 	}
@@ -454,8 +433,8 @@ void Init_two(){
 }
 
 void Init_three(){
-	Image(sea);
-	Image_Size(0, 0, windowX, windowY);
+	sea.show();
+	setImageSize(0, 0, windowX, windowY);
 
 	battle_ship_blue;
 	setFontHeight(67);
@@ -479,10 +458,10 @@ void Init_three(){
 	for (int i = 5; i >= 0; i--){
 		shipMOVE = i;
 		shipXY(140, 310, 540, 540);
-		Image_Transparent(ship[i].getImage());
+		toTransparentImage(ship[i].getImage());
 		if (ship[shipMOVE].getRealWidth() > ship[shipMOVE].getRealHeight() || ship[i].getRotation())
 			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
-		Image_Size(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
+		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
 		glLoadIdentity();
 		gluOrtho2D(0, windowX, windowY, 0);
 	}
@@ -502,8 +481,8 @@ void Init_three(){
 		palyer_init = true;
 	}
 
-	player.showBoard(140, 310, fire, wave);
-	computer.showBoard(800, 310, fire, wave);
+	player.showBoard(140, 310, fire.getImage(), wave.getImage());
+	computer.showBoard(800, 310, fire.getImage(), wave.getImage());
 
 	Sleep(100);
 

@@ -1,6 +1,11 @@
 #ifndef BATTLESHIP_H
 #define BATTLESHIP_H
- 
+
+#include <algorithm>
+#include <opencv/cv.h>
+#include "battle_ship_function.h"
+#include "imageTool.h"
+
 class Battleship{
 	public:
 		Battleship();

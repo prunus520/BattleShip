@@ -9,7 +9,6 @@
 #include <windows.h>
 #include <GL/glut.h>
 #include <opencv/cv.h>
-#include <opencv/highgui.h>
 
 #define table 8
 
@@ -50,11 +49,6 @@ void setFontHeight(int Height);
 void setCreateFont();
 void setFontXY(GLfloat x, GLfloat y);
 void setFontFace(const char *FaceName);
-
-//			image.cpp
-void Image(IplImage *img);
-void Image_Transparent(IplImage *img, uchar red = 255, uchar green = 255, uchar blue = 255, uchar alpha = 255);
-void Image_Size(GLfloat x1, GLfloat y1, GLfloat width, GLfloat height, GLfloat red = 1, GLfloat green = 1, GLfloat blue = 1);
 
 //			draw.cpp
 void line(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat LineWidth = 1);

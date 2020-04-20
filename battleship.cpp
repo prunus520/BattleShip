@@ -1,7 +1,4 @@
-#include <algorithm>
-#include <opencv/cv.h>
 #include "battleship.h"
-#include "battle_ship_function.h"
 
 Battleship::Battleship(){
 	initBoard();
@@ -84,12 +81,12 @@ void Battleship::showBoard(int x, int y, IplImage *hit, IplImage *nohit){
 	for (int i = 0; i < 8; i++){
 		for (int j = 0; j < 8; j++){
 			if (board[i][j] == 0){
-				Image(nohit);
-				Image_Size(x + 1.5 + j * 67.5, y + 1.5 + i * 67.5, 64.5, 64.5);
+				showImage(nohit);
+				setImageSize(x + 1.5 + j * 67.5, y + 1.5 + i * 67.5, 64.5, 64.5);
 			}
 			else if (board[i][j] == 1){
-				Image_Transparent(hit);
-				Image_Size(x + 1.5 + j * 67.5, y + 1.5 + i * 67.5, 64.5, 64.5);
+				toTransparentImage(hit);
+				setImageSize(x + 1.5 + j * 67.5, y + 1.5 + i * 67.5, 64.5, 64.5);
 			}
 		}
 	}
