@@ -11,7 +11,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
-Linker=-mwindows -lglut32 -lglu32 -lopengl32 -lwinmm -lgdi32 -m32 -lcv -lcxcore -lhighgui_@@_
+Linker="C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libopengl32.a"_@@_"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libglu32.a"_@@_"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/GL/libglut32.a"_@@_"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/opencv/libcv.a"_@@_"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/opencv/libhighgui.a"_@@_-mwindows -lglut32 -lglu32 -lopengl32 -lwinmm -lgdi32 -m32 -lcv -lcxcore -lhighgui_@@_
 IsCpp=1
 Icon=
 ExeOutput=
@@ -28,8 +28,8 @@ Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
-CompilerSettings=0000000100000000001000000
-UnitCount=12
+CompilerSettings=0000000100000000101000000
+UnitCount=14
 
 [VersionInfo]
 Major=1
@@ -162,6 +162,26 @@ BuildCmd=
 
 [Unit12]
 FileName=imageTool.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit14]
+FileName=glutwindow.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit13]
+FileName=glutwindow.cpp
 CompileCpp=1
 Folder=
 Compile=1

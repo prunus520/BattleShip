@@ -18,7 +18,6 @@ void Init_one();
 void Init_two();
 void Init_three();
 void glint_START_Timer(int id);
-void check_shot(int row, int column, int shot[][table], int ships[][table], int board[][table], int hits[]);
 void transWidthHeight();
 void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
 void initShipXY();
@@ -34,20 +33,20 @@ int button_mouseX, button_mouseY;
 int move_mouseX, move_mouseY;
 int pointX = windowX, pointY = 0;
 
-Image battle_ship = "img//battle_ship.jpg";
-Image battleship = "img//battleship.png";
-Image reel = "img//reel.png";
-Image sea = "img//sea.jpg";
-Image radar_board = "img//radar_board.jpg";
-Image ship0 = "img//ship0.png";
-Image ship1 = "img//ship1.png";
-Image ship2 = "img//ship2.png";
-Image ship3 = "img//ship3.png";
-Image ship4 = "img//ship4.png";
-Image ship5 = "img//ship5.png";
-Image back = "img//back.png";
-Image wave = "img//wave.jpg";
-Image fire = "img//fire.png";
+Image battle_ship("img//battle_ship.jpg");
+Image battleship("img//battleship.png");
+Image reel("img//reel.png");
+Image sea("img//sea.jpg");
+Image radar_board("img//radar_board.jpg");
+Image ship0("img//ship0.png");
+Image ship1("img//ship1.png");
+Image ship2("img//ship2.png");
+Image ship3("img//ship3.png");
+Image ship4("img//ship4.png");
+Image ship5("img//ship5.png");
+Image back("img//back.png");
+Image wave("img//wave.jpg");
+Image fire("img//fire.png");
 
 int mouse_down;
 int shipMOVE = -1;
@@ -66,16 +65,31 @@ char buffer[1024];
 int main() {
 	srand(time(NULL));
 	
+	battle_ship.load();
+	battleship.load();
+	reel.load();
+	sea.load();
+	radar_board.load();
+	ship0.load();
+	ship1.load();
+	ship2.load();
+	ship3.load();
+	ship4.load();
+	ship5.load();
+	back.load();
+	wave.load();
+	fire.load();
+
 	computer.randomShips();
 	
 	shipInit();
+
+	back.toBGR();
 
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
 	glutInitWindowSize(windowX, windowY);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Battle Ship");
-
-	back.toBGR();
 
 	glutReshapeFunc(WindowSize);
 	glutKeyboardFunc(Keyboard);
@@ -316,9 +330,9 @@ void MousePassiveMotion(int x, int y){
 }
 
 void Display(){
-	glLoadIdentity();																		//��_��l���Шt ( ���߬� 0 , 0 )
-	gluOrtho2D(0, windowX, windowY, 0);									//�]�w2D���Шt ( ���W�� 0 , 0 )
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //�M���w�s
+	glLoadIdentity();
+	gluOrtho2D(0, windowX, windowY, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (frame){
 	case 0:
@@ -343,7 +357,6 @@ void Init_one(){
 		alpha++;
 	glDisable(GL_TEXTURE_2D);
 
-	//�{�{�� START �r��
 	if (glint_START){
 		glColor3f(1, 1, 0);
 		setFontHeight(55);
@@ -354,10 +367,9 @@ void Init_one(){
 	}
 
 	if (frame == 0){
-//		toTransparentImage(reel);
 		reel.toTransparent();
 		setImageSize(420, 20, 644, 824.6);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); //�C��[�G
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glColor3f(0, 0, 0);
 		setFontHeight(45);
 		setFontXY(650, 190);
@@ -379,8 +391,8 @@ void Init_one(){
 		Print_Font("X");
 	}
 
-	glutPostRedisplay(); //���sø�s
-	glutSwapBuffers();	 //�洫��ӽw�İϫ��w
+	glutPostRedisplay();
+	glutSwapBuffers();
 }
 
 void Init_two(){
@@ -490,8 +502,6 @@ void Init_three(){
 	setFontHeight(55);
 	setFontXY(windowX / 2 - 260, windowY / 2);
 
-	/*result( computer_hits );
-	result( player_hits );*/
 	if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
 		if (computer.getHitCell(0) == 14)
 			Print_Font("You win the game");

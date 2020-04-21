@@ -1,12 +1,16 @@
 #include "image.h"
 
 Image::Image(const char *imagePath){
-	image = cvLoadImage(imagePath);
-	cvCvtColor(image, image, CV_BGR2RGB);
+	title = imagePath;
 }
 
 Image::~Image(){
 	cvReleaseImage(&image);
+}
+
+void Image::load(){
+	image = cvLoadImage(title);
+	cvCvtColor(image, image, CV_BGR2RGB);
 }
 
 void Image::toBGR(){
