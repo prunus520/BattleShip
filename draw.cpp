@@ -1,6 +1,4 @@
-//			draw.cpp
-
-#include "battle_ship_function.h"
+#include "draw.h"
 
 void line(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2, GLfloat LineWidth){
 	glLineWidth(LineWidth);

@@ -1,8 +1,3 @@
-#include "battle_ship_function.h"
-#include "battleship.h"
-#include "ship.h"
-#include "image.h"
-#include "imageTool.h"
 #include "main.h"
 
 int main() {

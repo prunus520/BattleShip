@@ -3,8 +3,10 @@
 
 #include <algorithm>
 #include <opencv/cv.h>
-#include "battle_ship_function.h"
+#include "font.h"
 #include "imageTool.h"
+
+#define table 8
 
 class Battleship{
 	public:

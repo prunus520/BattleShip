@@ -2,11 +2,16 @@
 #define MAIN_H
 
 #include <stdio.h>
+#include <time.h>
 #include <windows.h>
 #include <GL/glut.h>
 #include "image.h"
 #include "ship.h"
 #include "battleship.h"
+#include "font.h"
+#include "draw.h"
+
+#define table 8
 
 #define ESC 27
 

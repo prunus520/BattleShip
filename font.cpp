@@ -1,6 +1,4 @@
-//			font.cpp
-
-#include "battle_ship_function.h"
+#include "font.h"
 
 DWORD fdwCharSet = CHINESEBIG5_CHARSET;
 const char *pszFaceName = "Courier New";
