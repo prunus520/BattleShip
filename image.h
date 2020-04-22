@@ -10,8 +10,7 @@ class Image{
 	public:
 		Image(const char*);
 		~Image();
-		void load();
-		void toBGR();
+		void toRGB();
 		IplImage *getImage();
 		void show();
 		void toTransparent(uchar = 255, uchar = 255, uchar = 255, uchar = 255);

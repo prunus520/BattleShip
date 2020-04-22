@@ -2,18 +2,14 @@
 
 Image::Image(const char *imagePath){
 	title = imagePath;
+	image = cvLoadImage(title);
 }
 
 Image::~Image(){
 	cvReleaseImage(&image);
 }
 
-void Image::load(){
-	image = cvLoadImage(title);
-	cvCvtColor(image, image, CV_BGR2RGB);
-}
-
-void Image::toBGR(){
+void Image::toRGB(){
 	cvCvtColor(image, image, CV_BGR2RGB);
 }
 
