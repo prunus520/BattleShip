@@ -72,7 +72,7 @@ void Display(){
 			shipPositionFrame();
 			break;
 		case BATTLE_FRAME:
-			Init_three();
+			battleFrame();
 			break;
 	}
 	updateFrame();
@@ -194,38 +194,52 @@ void drawTestTable(){
 	computer.testShipTable(200, 200);
 }
 
-void Init_three(){
-	if(fire.isEmpty()){
-		fire.load();
-	}
-	if(wave.isEmpty()){
-		wave.load();
-	}
+void battleFrame(){
+	loadSeaImage();
+	drawPlayerCheckerBoard();
+	drawComputerCheckerBoard();
+	loadPlayerShipGroupImage();
+	judgePlayerOrComputer();
+	judgeToHit();
+	Sleep(100);
+	drawWinOrLoseFont();
+}
+
+void loadSeaImage(){
 	if(sea.isEmpty()){
 		sea.load();
 	}
 	sea.show();
 	sea.setSize(0, 0, windowWidth, windowHeight);
+}
 
-	battle_ship_blue;
+void drawPlayerCheckerBoard(){
+	glColor3f(0, 0, 1);
 	setFontHeight(67);
+	
 	setFontXY(85, 314);
-	for (int i = 65; i < 65 + table; i++)
-		Print_Font("%c\n", i);
-	setFontXY(745, 314);
 	for (int i = 65; i < 65 + table; i++)
 		Print_Font("%c\n", i);
 	setFontXY(140, 247);
 	for (int i = 1; i < 1 + table; i++)
 		Print_Font("% d ", i);
+	checkerboard(140, 310, 540, 540, table, table, 5);
+}
+
+void drawComputerCheckerBoard(){
+	glColor3f(0, 0, 1);
+	setFontHeight(67);
+	
+	setFontXY(745, 314);
+	for (int i = 65; i < 65 + table; i++)
+		Print_Font("%c\n", i);
 	setFontXY(800, 247);
 	for (int i = 1; i < 1 + table; i++)
 		Print_Font("% d ", i);
-
-	battle_ship_blue;
-	checkerboard(140, 310, 540, 540, table, table, 5);
 	checkerboard(800, 310, 540, 540, table, table, 5);
+}
 
+void loadPlayerShipGroupImage(){
 	for (int i = 5; i >= 0; i--){
 		shipMOVE = i;
 		shipXY(140, 310, 540, 540);
@@ -236,7 +250,9 @@ void Init_three(){
 		glLoadIdentity();
 		gluOrtho2D(0, windowWidth, windowHeight, 0);
 	}
+}
 
+void judgePlayerOrComputer(){
 	if (player_computer_flag && player_computer_sleep == false)
 		glutTimerFunc(1, player_computer_sleep_Timer, 2);
 
@@ -251,12 +267,20 @@ void Init_three(){
 		palyer_down = true;
 		palyer_init = true;
 	}
+}
 
+void judgeToHit(){
+	if(fire.isEmpty()){
+		fire.load();
+	}
+	if(wave.isEmpty()){
+		wave.load();
+	}
 	player.showBoard(140, 310, fire.getImage(), wave.getImage());
 	computer.showBoard(800, 310, fire.getImage(), wave.getImage());
+}
 
-	Sleep(100);
-
+void drawWinOrLoseFont(){
 	glColor3f(0, 0, 0);
 	setFontHeight(55);
 	setFontXY(windowWidth / 2 - 260, windowHeight / 2);
