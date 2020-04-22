@@ -19,14 +19,14 @@
 #define battle_ship_green glColor3f(0.0941, 0.5372, 0.0313)
 #define battle_ship_blue glColor3f(0, 0, 1)
 
-float windowX = 1196 * 1.2, windowY = 720 * 1.2;
+float windowWidth = 1196 * 1.2, windowHeight = 720 * 1.2;
 float sizeMagn = 1;
 bool glint_START = true;
 int frame = 1;
 int mouseX, mouseY;
 int button_mouseX, button_mouseY;
 int move_mouseX, move_mouseY;
-int pointX = windowX, pointY = 0;
+int pointX = windowWidth, pointY = 0;
 
 Image background("img//background.jpg");
 Image title("img//title.png");
@@ -57,6 +57,7 @@ Ship ship[6];
 FILE *pFile;
 char buffer[1024];
 
+void windowSet();
 void shipInit();
 void WindowSize(int w, int h);
 void MouseButton(int button, int state, int x, int y);

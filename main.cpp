@@ -24,10 +24,7 @@ int main() {
 
 	back.toBGR();
 
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
-	glutInitWindowSize(windowX, windowY);
-	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Battle Ship");
+	windowSet();
 
 	glutReshapeFunc(WindowSize);
 	glutDisplayFunc(Display);
@@ -52,10 +49,21 @@ void shipInit(){
 	}
 }
 
+void windowSet(){
+	int screenWidth = GetSystemMetrics(SM_CXSCREEN),
+			screenHeight = GetSystemMetrics(SM_CYSCREEN),
+			centerPositionX = (screenWidth - windowWidth) / 2,
+			centerPositionY = (screenHeight - windowHeight) / 2;
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
+	glutInitWindowSize(windowWidth, windowHeight);
+	glutInitWindowPosition(centerPositionX, centerPositionY);
+	glutCreateWindow("Battle Ship");
+}
+
 void WindowSize(int w, int h){
-	sizeMagn *= h / windowY;
-	windowX = w;
-	windowY = h;
+	sizeMagn *= h / windowHeight;
+	windowWidth = w;
+	windowHeight = h;
 	glViewport(0, 0, w, h);
 }
 
@@ -240,7 +248,7 @@ void MousePassiveMotion(int x, int y){
 
 void Display(){
 	glLoadIdentity();
-	gluOrtho2D(0, windowX, windowY, 0);
+	gluOrtho2D(0, windowWidth, windowHeight, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (frame){
@@ -259,9 +267,9 @@ void Display(){
 
 void Init_one(){
 	background.show();
-	setImageSize(0, 0, windowX, windowY);
+	setImageSize(0, 0, windowWidth, windowHeight);
 	title.toTransparent(0, 0, 0, alpha);
-	setImageSize(windowX / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
+	setImageSize(windowWidth / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
 	if (alpha < 255)
 		alpha++;
 	glDisable(GL_TEXTURE_2D);
@@ -269,9 +277,9 @@ void Init_one(){
 	if (glint_START){
 		glColor3f(1, 1, 0);
 		setFontHeight(55);
-		setFontXY(windowX / 2 - 80, windowY - 190);
+		setFontXY(windowWidth / 2 - 80, windowHeight - 190);
 		Print_Font("START");
-		setFontXY(windowX / 2 - 74, windowY - 135);
+		setFontXY(windowWidth / 2 - 74, windowHeight - 135);
 		Print_Font("MENU");
 	}
 
@@ -306,7 +314,7 @@ void Init_one(){
 
 void Init_two(){
 	radarBoard.show();
-	setImageSize(0, 0, windowX, windowY);
+	setImageSize(0, 0, windowWidth, windowHeight);
 	back.toTransparent();
 	setImageSize(0, 0, 100, 100);
 	glDisable(GL_TEXTURE_2D);
@@ -322,7 +330,7 @@ void Init_two(){
 
 		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 0, 1, 0);
 		glLoadIdentity();
-		gluOrtho2D(0, windowX, windowY, 0);
+		gluOrtho2D(0, windowWidth, windowHeight, 0);
 	}
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -355,7 +363,7 @@ void Init_two(){
 
 void Init_three(){
 	sea.show();
-	setImageSize(0, 0, windowX, windowY);
+	setImageSize(0, 0, windowWidth, windowHeight);
 
 	battle_ship_blue;
 	setFontHeight(67);
@@ -384,7 +392,7 @@ void Init_three(){
 			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
 		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
 		glLoadIdentity();
-		gluOrtho2D(0, windowX, windowY, 0);
+		gluOrtho2D(0, windowWidth, windowHeight, 0);
 	}
 
 	if (player_computer_flag && player_computer_sleep == false)
@@ -409,7 +417,7 @@ void Init_three(){
 
 	glColor3f(0, 0, 0);
 	setFontHeight(55);
-	setFontXY(windowX / 2 - 260, windowY / 2);
+	setFontXY(windowWidth / 2 - 260, windowHeight / 2);
 
 	if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
 		if (computer.getHitCell(0) == 14)
