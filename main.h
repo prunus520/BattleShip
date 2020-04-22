@@ -19,8 +19,8 @@
 #define battle_ship_green glColor3f(0.0941, 0.5372, 0.0313)
 #define battle_ship_blue glColor3f(0, 0, 1)
 
-enum Frame{START_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
-Frame frame = START_FRAME;
+enum Frame{MAIN_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
+Frame frame = MAIN_FRAME;
 
 float windowWidth = 1196 * 1.2, windowHeight = 720 * 1.2;
 float sizeMagn = 1;
@@ -60,7 +60,13 @@ void windowEvent();
 void shipInit();
 void WindowSize(int w, int h);
 void Display();
-void Init_one();
+void updateFrame();
+
+void mainFrame();
+void loadBackgroundImage();
+void loadTitleImage();
+void drawStartFont();
+
 void Init_two();
 void Init_three();
 void MouseButton(int button, int state, int x, int y);

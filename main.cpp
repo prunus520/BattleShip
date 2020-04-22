@@ -65,8 +65,8 @@ void Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (frame){
-		case START_FRAME:
-			Init_one();
+		case MAIN_FRAME:
+			mainFrame();
 			break;
 		case SHIP_POSITION_FRAME:
 			Init_two();
@@ -75,14 +75,29 @@ void Display(){
 			Init_three();
 			break;
 	}
+	updateFrame();
 }
 
-void Init_one(){
+void updateFrame(){
+	glutPostRedisplay();
+	glutSwapBuffers();
+}
+
+void mainFrame(){
+	loadBackgroundImage();
+	loadTitleImage();
+	drawStartFont();
+}
+
+void loadBackgroundImage(){
 	if(background.isEmpty()){
 		background.load();
 	}
 	background.show();
 	background.setSize(0, 0, windowWidth, windowHeight);
+}
+
+void loadTitleImage(){
 	if(title.isEmpty()){
 		title.load();
 	}
@@ -91,16 +106,15 @@ void Init_one(){
 	if (alpha < 255)
 		alpha++;
 	glDisable(GL_TEXTURE_2D);
+}
 
+void drawStartFont(){
 	if (glint_START){
 		glColor3f(1, 1, 0);
 		setFontHeight(55);
 		setFontXY(windowWidth / 2 - 80, windowHeight - 190);
 		Print_Font("START");
 	}
-
-	glutPostRedisplay();
-	glutSwapBuffers();
 }
 
 void Init_two(){
@@ -154,8 +168,6 @@ void Init_two(){
 
 	player.testShipTable(0, 200);
 	computer.testShipTable(200, 200);
-
-	glutSwapBuffers();
 }
 
 void Init_three(){
@@ -236,9 +248,6 @@ void Init_three(){
 			Print_Font("You are garbage");
 		palyer_down = false;
 	}
-
-	glutPostRedisplay();
-	glutSwapBuffers();
 }
 
 void MouseButton(int button, int state, int x, int y){
@@ -248,7 +257,7 @@ void MouseButton(int button, int state, int x, int y){
 	switch (button){
 	case GLUT_LEFT_BUTTON:
 		switch (frame){
-			case START_FRAME:
+			case MAIN_FRAME:
 				if (x >= 637.6 && x <= 807.6 && y >= 674 && y <= 729){
 					frame = SHIP_POSITION_FRAME;
 					background.release();
@@ -287,7 +296,7 @@ void MouseButton(int button, int state, int x, int y){
 				if (x >= 0 && x <= 100 && y >= 0 && y <= 100){
 					glutTimerFunc(200, glint_START_Timer, 1);
 					alpha = 0;
-					frame = START_FRAME;
+					frame = MAIN_FRAME;
 					back.release();
 					radarBoard.release();
 				}
@@ -425,7 +434,7 @@ void glint_START_Timer(int id){
 	else
 		glint_START = true;
 
-	if (frame == START_FRAME)
+	if (frame == MAIN_FRAME)
 		glutTimerFunc(200, glint_START_Timer, id);
 }
 
