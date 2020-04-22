@@ -5,11 +5,11 @@
 #include <time.h>
 #include <windows.h>
 #include <GL/glut.h>
-#include "image.h"
-#include "ship.h"
-#include "battleship.h"
-#include "font.h"
-#include "draw.h"
+#include "tool/image.h"
+#include "battleship/ship.h"
+#include "battleship/battleship.h"
+#include "tool/font.h"
+#include "tool/draw.h"
 
 #define table 8
 

@@ -1,7 +1,7 @@
 #ifndef SHIPPOSITIONFRAME_H
 #define SHIPPOSITIONFRAME_H
 
-#include "mainInit.h"
+#include "../mainInit.h"
 
 void shipPositionFrame();
 void loadRadarBoardImage();

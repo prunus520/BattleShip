@@ -3,8 +3,8 @@
 
 #include <algorithm>
 #include <opencv/cv.h>
-#include "font.h"
-#include "imageTool.h"
+#include "../tool/font.h"
+#include "../tool/imageTool.h"
 
 #define table 8
 

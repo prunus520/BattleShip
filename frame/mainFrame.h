@@ -1,7 +1,7 @@
 #ifndef MAINFRAME_H
 #define MAINFRAME_H
 
-#include "mainInit.h"
+#include "../mainInit.h"
 
 void mainFrame();
 void loadBackgroundImage();

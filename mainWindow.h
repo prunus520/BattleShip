@@ -1,9 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "mainFrame.h"
-#include "shipPositionFrame.h"
-#include "battleFrame.h"
+#include "frame/mainFrame.h"
+#include "frame/shipPositionFrame.h"
+#include "frame/battleFrame.h"
 
 void shipInit();
 

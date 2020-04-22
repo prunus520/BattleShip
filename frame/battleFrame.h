@@ -1,7 +1,7 @@
 #ifndef BATTLEFRAME_H
 #define BATTLEFRAME_H
 
-#include "mainInit.h"
+#include "../mainInit.h"
 
 void battleFrame();
 void loadSeaImage();
