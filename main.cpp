@@ -30,8 +30,6 @@ int main() {
 	glutCreateWindow("Battle Ship");
 
 	glutReshapeFunc(WindowSize);
-	glutKeyboardFunc(Keyboard);
-	glutSpecialFunc(KeyboardSpecial);
 	glutDisplayFunc(Display);
 	glutMouseFunc(MouseButton);
 	glutMotionFunc(MouseMove);
@@ -78,14 +76,6 @@ void WindowSize(int w, int h){
 	windowX = w;
 	windowY = h;
 	glViewport(0, 0, w, h);
-}
-
-void Keyboard(unsigned char key, int x, int y){
-	if (key == ESC)
-		exit(1);
-}
-
-void KeyboardSpecial(int key, int x, int y){
 }
 
 void MouseButton(int button, int state, int x, int y){
