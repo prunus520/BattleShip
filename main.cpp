@@ -12,6 +12,12 @@ int main() {
 }
 
 void shipInit(){
+	ship0.load();
+	ship1.load();
+	ship2.load();
+	ship3.load();
+	ship4.load();
+	ship5.load();
 	IplImage *image[6] = {ship0.getImage(), ship1.getImage(), ship2.getImage(), ship3.getImage(), ship4.getImage(), ship5.getImage()};
 	int coordinate[6][2] = {{1108, 186}, {1161, 186}, {1228, 186}, {1100, 280}, {1202, 280}, {1010, 170}};
 	float size[6][2] = {{16, 67.2}, {24, 65.6}, {16, 67.2}, {65, 212.5}, {50, 212.5}, {54, 336}};
@@ -59,21 +65,27 @@ void Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (frame){
-	case START_FRAME:
-		Init_one();
-		break;
-	case SHIP_POSITION_FRAME:
-		Init_two();
-		break;
-	case BATTLE_FRAME:
-		Init_three();
-		break;
+		case START_FRAME:
+			Init_one();
+			break;
+		case SHIP_POSITION_FRAME:
+			Init_two();
+			break;
+		case BATTLE_FRAME:
+			Init_three();
+			break;
 	}
 }
 
 void Init_one(){
+	if(background.isEmpty()){
+		background.load();
+	}
 	background.show();
 	background.setSize(0, 0, windowWidth, windowHeight);
+	if(title.isEmpty()){
+		title.load();
+	}
 	title.toTransparent(0, 0, 0, alpha);
 	title.setSize(windowWidth / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
 	if (alpha < 255)
@@ -92,8 +104,14 @@ void Init_one(){
 }
 
 void Init_two(){
+	if(radarBoard.isEmpty()){
+		radarBoard.load();
+	}
 	radarBoard.show();
 	radarBoard.setSize(0, 0, windowWidth, windowHeight);
+	if(back.isEmpty()){
+		back.load();
+	}
 	back.toTransparent();
 	back.setSize(0, 0, 100, 100);
 	glDisable(GL_TEXTURE_2D);
@@ -141,6 +159,15 @@ void Init_two(){
 }
 
 void Init_three(){
+	if(fire.isEmpty()){
+		fire.load();
+	}
+	if(wave.isEmpty()){
+		wave.load();
+	}
+	if(sea.isEmpty()){
+		sea.load();
+	}
 	sea.show();
 	sea.setSize(0, 0, windowWidth, windowHeight);
 
@@ -222,8 +249,11 @@ void MouseButton(int button, int state, int x, int y){
 	case GLUT_LEFT_BUTTON:
 		switch (frame){
 			case START_FRAME:
-				if (x >= 637.6 && x <= 807.6 && y >= 674 && y <= 729)
+				if (x >= 637.6 && x <= 807.6 && y >= 674 && y <= 729){
 					frame = SHIP_POSITION_FRAME;
+					background.release();
+					title.release();
+				}
 				break;
 			case SHIP_POSITION_FRAME:
 				for (int i = 0; i < 6; i++){
@@ -258,6 +288,8 @@ void MouseButton(int button, int state, int x, int y){
 					glutTimerFunc(200, glint_START_Timer, 1);
 					alpha = 0;
 					frame = START_FRAME;
+					back.release();
+					radarBoard.release();
 				}
 				else if (x >= 1165 && x <= 1315 && y >= 620 && y <= 770){
 					int i;
@@ -267,6 +299,8 @@ void MouseButton(int button, int state, int x, int y){
 					}
 					if (i == 6){
 						frame = BATTLE_FRAME;
+						back.release();
+						radarBoard.release();
 					}
 				}
 				else if (state == 0 && x >= 960 && x <= 1110 && y >= 620 && y <= 770){

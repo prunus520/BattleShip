@@ -2,12 +2,23 @@
 
 Image::Image(const char *imagePath){
 	title = imagePath;
+}
+
+Image::~Image(){
+	release();
+}
+
+void Image::load(){
 	image = cvLoadImage(title);
 	toRGB();
 }
 
-Image::~Image(){
+void Image::release(){
 	cvReleaseImage(&image);
+}
+
+bool Image::isEmpty(){
+	return image == nullptr;
 }
 
 void Image::toRGB(){
