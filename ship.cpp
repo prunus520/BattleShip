@@ -4,6 +4,10 @@ Ship::Ship(){
 	ID = IDCouter++;
 }
 
+Ship::~Ship(){
+	cvReleaseImage(&image);
+}
+
 void Ship::setImage(IplImage *srcImage){
 	image = srcImage;
 }

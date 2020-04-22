@@ -27,6 +27,7 @@ struct Length{
 class Ship{
 	public:
 		Ship();
+		~Ship();
 		void setImage(IplImage*);
 		void setCoordinate(GLfloat, GLfloat);
 		void setNewCoordinate(GLfloat, GLfloat);

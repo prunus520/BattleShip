@@ -40,35 +40,16 @@ int main() {
 }
 
 void shipInit(){
-	ship[0].setImage(ship0.getImage());
-	ship[0].setCoordinate(1108, 186);
-	ship[0].setSize(16, 67.2);
-	ship[0].setLength(1, 1);
-
-	ship[1].setImage(ship1.getImage());
-	ship[1].setCoordinate(1161, 186);
-	ship[1].setSize(24, 65.6);
-	ship[1].setLength(1, 1);
-	
-	ship[2].setImage(ship2.getImage());
-	ship[2].setCoordinate(1228, 186);
-	ship[2].setSize(16, 67.2);
-	ship[2].setLength(1, 1);
-	
-	ship[3].setImage(ship3.getImage());
-	ship[3].setCoordinate(1100, 280);
-	ship[3].setSize(65, 212.5);
-	ship[3].setLength(1, 3);
-	
-	ship[4].setImage(ship4.getImage());
-	ship[4].setCoordinate(1202, 280);
-	ship[4].setSize(50, 212.5);
-	ship[4].setLength(1, 3);
-	
-	ship[5].setImage(ship5.getImage());
-	ship[5].setCoordinate(1010, 170);
-	ship[5].setSize(54, 336);
-	ship[5].setLength(1, 5);
+	IplImage *image[6] = {ship0.getImage(), ship1.getImage(), ship2.getImage(), ship3.getImage(), ship4.getImage(), ship5.getImage()};
+	int coordinate[6][2] = {{1108, 186}, {1161, 186}, {1228, 186}, {1100, 280}, {1202, 280}, {1010, 170}};
+	float size[6][2] = {{16, 67.2}, {24, 65.6}, {16, 67.2}, {65, 212.5}, {50, 212.5}, {54, 336}};
+	int length[6][2] = {{1, 1}, {1, 1}, {1, 1}, {1, 3}, {1, 3}, {1, 5}};
+	for(int i = 0; i != 6; ++i){
+		ship[i].setImage(image[i]);
+		ship[i].setCoordinate(coordinate[i][0], coordinate[i][1]);
+		ship[i].setSize(size[i][0], size[i][1]);
+		ship[i].setLength(length[i][0], length[i][1]);
+	}
 }
 
 void WindowSize(int w, int h){
