@@ -56,5 +56,7 @@ extern Ship ship[6];
 void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
 void player_computer_sleep_Timer(int id);
 void player_computer_flag_Timer(int id);
+void glint_START_Timer(int id);
+void transWidthHeight();
 
 #endif

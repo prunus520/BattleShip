@@ -58,3 +58,24 @@ void player_computer_flag_Timer(int id){
 	else if (player_computer_sleep == false)
 		player_computer_flag = true;
 }
+
+void glint_START_Timer(int id){
+	if (glint_START)
+		glint_START = false;
+	else
+		glint_START = true;
+
+	if (frame == MAIN_FRAME)
+		glutTimerFunc(200, glint_START_Timer, id);
+}
+
+void transWidthHeight(){
+	GLfloat tempf;
+	tempf = ship[shipMOVE].getRealWidth();
+	ship[shipMOVE].setRealWidth(ship[shipMOVE].getRealHeight());
+	ship[shipMOVE].setRealHeight(tempf);
+	int tempi;
+	tempi = ship[shipMOVE].getLengthWidth();
+	ship[shipMOVE].setLengthWidth(ship[shipMOVE].getLengthHeight());
+	ship[shipMOVE].setLengthHeight(tempi);
+}

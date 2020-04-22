@@ -33,7 +33,7 @@ void windowSet(){
 void windowEvent(){
 	glutReshapeFunc(WindowSize);
 	glutDisplayFunc(Display);
-	glutMouseFunc(MouseButton);
+	glutMouseFunc(MouseClick);
 	glutMotionFunc(MouseMove);
 	glutPassiveMotionFunc(MousePassiveMotion);
 	glutTimerFunc(200, glint_START_Timer, 1);
@@ -72,7 +72,7 @@ void updateFrame(){
 	glutSwapBuffers();
 }
 
-void MouseButton(int button, int state, int x, int y){
+void MouseClick(int button, int state, int x, int y){
 	mouse_down = state;
 	button_mouseX = x;
 	button_mouseY = y;
@@ -80,146 +80,18 @@ void MouseButton(int button, int state, int x, int y){
 	case GLUT_LEFT_BUTTON:
 		switch (frame){
 			case MAIN_FRAME:
-				if (x >= 637.6 && x <= 807.6 && y >= 674 && y <= 729){
-					frame = SHIP_POSITION_FRAME;
-					background.release();
-					title.release();
-				}
+				mainFrameClick(x, y);
 				break;
 			case SHIP_POSITION_FRAME:
-				for (int i = 0; i < 6; i++){
-					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
-							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
-						shipMOVE = ship[i].getID();
-						break;
-					}
-				}
-				if (shipMOVE != -1){
-					if (state == 1 && (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
-														 ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745)){
-						initShipXY();
-					}
-					else if (state == 1 && x >= ship[shipMOVE].getNewX() && x <= ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() &&
-									 y >= ship[shipMOVE].getNewY() && y <= ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight()){
-						shipXY(123, 167, 578, 578);
-						for (int i = ship[shipMOVE].getHeadColumn(); i <= ship[shipMOVE].getBodyColumn(); i++)
-							for (int j = ship[shipMOVE].getHeadRow(); j <= ship[shipMOVE].getBodyRow(); j++)
-								if (player.getShipCell(j, i) != 0)
-									initShipXY();
-								else{
-									if (ship[i].getRotation())
-										player.setShipCell(j, i, ship[shipMOVE].getLengthWidth());
-									else
-										player.setShipCell(j, i, ship[shipMOVE].getLengthHeight());
-									ship[i].setReady(true);
-								}
-					}
-				}
-				if (x >= 0 && x <= 100 && y >= 0 && y <= 100){
-					glutTimerFunc(200, glint_START_Timer, 1);
-					alpha = 0;
-					frame = MAIN_FRAME;
-					back.release();
-					radarBoard.release();
-				}
-				else if (x >= 1165 && x <= 1315 && y >= 620 && y <= 770){
-					int i;
-					for (i = 0; i < 6; i++){
-						if (ship[i].getReady() == false)
-							break;
-					}
-					if (i == 6){
-						frame = BATTLE_FRAME;
-						back.release();
-						radarBoard.release();
-					}
-				}
-				else if (state == 0 && x >= 960 && x <= 1110 && y >= 620 && y <= 770){
-					for (int i = 5; i >= 0; i--){
-						shipMOVE = i;
-						initShipXY();
-					}
-					player.initShips();
-				}
-				if (state == 0){
-					for (int j = ship[shipMOVE].getHeadColumn(); j <= ship[shipMOVE].getBodyColumn(); j++)
-						for (int k = ship[shipMOVE].getHeadRow(); k <= ship[shipMOVE].getBodyRow(); k++){
-							if (ship[shipMOVE].getRotation())
-								player.setShipCell(k, j, 0);
-							else
-								player.setShipCell(k, j, 0);
-							ship[shipMOVE].setReady(false);
-						}
-				}
+				shipPositionFrameClick(state, x, y);
 				break;
 			case BATTLE_FRAME:
-				if (state == 1 && button_mouseX >= 800 && button_mouseX <= 1340 &&
-						button_mouseY >= 310 && button_mouseY <= 850 && player_computer_sleep && palyer_down){
-					computer.setRow((button_mouseY - 310) / 67.5);
-					computer.setColumn((button_mouseX - 800) / 67.5);
-					player_computer_flag = true;
-					palyer_init = true;
-				}
+				battleFrameClick(state, x, y);
 				break;
 			}
 			break;
 		case GLUT_RIGHT_BUTTON:
-			if (frame == SHIP_POSITION_FRAME){
-				for (int i = 0; i < 6; i++){
-					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
-							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
-						shipMOVE = ship[i].getID();
-						break;
-					}
-				}
-				for (int i = 0; i < 6; i++){
-					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
-							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
-						if (ship[i].getX() != ship[i].getNewX() && ship[i].getX() != ship[i].getNewX() &&
-								ship[i].getY() != ship[i].getNewY() && ship[i].getY() != ship[i].getNewY())
-							shipMOVE = ship[i].getID();
-						for (int i = ship[shipMOVE].getHeadColumn(); i <= ship[shipMOVE].getBodyColumn(); i++)
-							for (int j = ship[shipMOVE].getHeadRow(); j <= ship[shipMOVE].getBodyRow(); j++){
-								if (ship[shipMOVE].getRotation())
-									player.setShipCell(j, i, 0);
-								else
-									player.setShipCell(j, i, 0);
-								ship[shipMOVE].setReady(false);
-								if (player.getShipCell(i, j) == 0){
-									if (ship[shipMOVE].getRotation()){
-										ship[shipMOVE].setRotation(false);
-										transWidthHeight();
-										if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
-												ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745){
-											ship[shipMOVE].setRotation(true);
-											transWidthHeight();
-										}
-									}
-									else{
-										ship[shipMOVE].setRotation(true);
-										transWidthHeight();
-										if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
-												ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745){
-											ship[shipMOVE].setRotation(false);
-											transWidthHeight();
-										}
-									}
-									if (ship[shipMOVE].getRotation())
-										player.setShipCell(j, i, ship[shipMOVE].getLengthWidth());
-									else
-										player.setShipCell(j, i, ship[shipMOVE].getLengthHeight());
-									ship[shipMOVE].setReady(true);
-								}
-							}
-						ship[shipMOVE].setField((int)((ship[shipMOVE].getNewY() - 167) / 72.25), (int)((ship[shipMOVE].getNewX() - 123) / 72.25),
-																					 ship[shipMOVE].getHeadRow() + ship[shipMOVE].getLengthHeight() - 1,
-																					 ship[shipMOVE].getHeadColumn() + ship[shipMOVE].getLengthWidth() - 1);
-						shipXY(123, 167, 578, 578);
-						shipMOVE = -1;
-						break;
-					}
-				}
-			}
+			shipPositionFrameRightClick(state, x, y);
 			break;
 	}
 	glutPostRedisplay();
@@ -228,57 +100,13 @@ void MouseButton(int button, int state, int x, int y){
 void MouseMove(int x, int y){
 	move_mouseX = x;
 	move_mouseY = y;
-	if (frame == SHIP_POSITION_FRAME){
-		if (shipMOVE != -1 && mouse_down == 0){
-			ship[shipMOVE].setNewCoordinate(ship[shipMOVE].getOldX() - button_mouseX + move_mouseX,
-																			ship[shipMOVE].getOldY() - button_mouseY + move_mouseY);
-			ship[shipMOVE].setField((int)((ship[shipMOVE].getNewY() - 167) / 72.25), (int)((ship[shipMOVE].getNewX() - 123) / 72.25),
-																	 ship[shipMOVE].getHeadRow() + ship[shipMOVE].getLengthHeight() - 1,
-																	 ship[shipMOVE].getHeadColumn() + ship[shipMOVE].getLengthWidth() - 1);
-		}
-	}
+	shipPositionFrameMove(x, y);
 	glutPostRedisplay();
 }
 
 void MousePassiveMotion(int x, int y){
 	mouseX = x;
 	mouseY = y;
-	if (frame == SHIP_POSITION_FRAME){
-		ship[shipMOVE].setOldCoordinate(ship[shipMOVE].getNewX(), ship[shipMOVE].getNewY());
-		shipMOVE = -1;
-	}
+	shipPositionFrameMotion(x, y);
 	glutPostRedisplay();
 }
-
-void glint_START_Timer(int id){
-	if (glint_START)
-		glint_START = false;
-	else
-		glint_START = true;
-
-	if (frame == MAIN_FRAME)
-		glutTimerFunc(200, glint_START_Timer, id);
-}
-
-void transWidthHeight(){
-	GLfloat tempf;
-	tempf = ship[shipMOVE].getRealWidth();
-	ship[shipMOVE].setRealWidth(ship[shipMOVE].getRealHeight());
-	ship[shipMOVE].setRealHeight(tempf);
-	int tempi;
-	tempi = ship[shipMOVE].getLengthWidth();
-	ship[shipMOVE].setLengthWidth(ship[shipMOVE].getLengthHeight());
-	ship[shipMOVE].setLengthHeight(tempi);
-}
-
-void initShipXY(){
-	ship[shipMOVE].setOldCoordinate(ship[shipMOVE].getX(), ship[shipMOVE].getY());
-	ship[shipMOVE].setNewCoordinate(ship[shipMOVE].getX(), ship[shipMOVE].getY());
-	if (ship[shipMOVE].getRotation()){
-		transWidthHeight();
-		ship[shipMOVE].setRotation(false);
-	}
-	ship[shipMOVE].setReady(false);
-	shipMOVE = -1;
-}
-
