@@ -44,24 +44,6 @@
 #define battle_ship_green glColor3f(0.0941, 0.5372, 0.0313)
 #define battle_ship_blue glColor3f(0, 0, 1)
 
-void shipInit();
-void WindowSize(int w, int h);
-void Keyboard(unsigned char key, int x, int y);
-void KeyboardSpecial(int key, int x, int y);
-void MouseButton(int button, int state, int x, int y);
-void MouseMove(int x, int y);
-void MousePassiveMotion(int x, int y);
-void Display();
-void Init_one();
-void Init_two();
-void Init_three();
-void glint_START_Timer(int id);
-void transWidthHeight();
-void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
-void initShipXY();
-void player_computer_sleep_Timer(int id);
-void player_computer_flag_Timer(int id);
-
 float windowX = 1196 * 1.2, windowY = 720 * 1.2;
 float sizeMagn = 1;
 bool glint_START = true;
@@ -71,11 +53,11 @@ int button_mouseX, button_mouseY;
 int move_mouseX, move_mouseY;
 int pointX = windowX, pointY = 0;
 
-Image battle_ship("img//battle_ship.jpg");
-Image battleship("img//battleship.png");
+Image background("img//background.jpg");
+Image title("img//title.png");
 Image reel("img//reel.png");
 Image sea("img//sea.jpg");
-Image radar_board("img//radar_board.jpg");
+Image radarBoard("img//radarBoard.jpg");
 Image ship0("img//ship0.png");
 Image ship1("img//ship1.png");
 Image ship2("img//ship2.png");
@@ -99,5 +81,23 @@ Ship ship[6];
 
 FILE *pFile;
 char buffer[1024];
+
+void shipInit();
+void WindowSize(int w, int h);
+void Keyboard(unsigned char key, int x, int y);
+void KeyboardSpecial(int key, int x, int y);
+void MouseButton(int button, int state, int x, int y);
+void MouseMove(int x, int y);
+void MousePassiveMotion(int x, int y);
+void Display();
+void Init_one();
+void Init_two();
+void Init_three();
+void glint_START_Timer(int id);
+void transWidthHeight();
+void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
+void initShipXY();
+void player_computer_sleep_Timer(int id);
+void player_computer_flag_Timer(int id);
 
 #endif

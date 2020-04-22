@@ -3,11 +3,11 @@
 int main() {
 	srand(time(NULL));
 	
-	battle_ship.load();
-	battleship.load();
+	background.load();
+	title.load();
 	reel.load();
 	sea.load();
-	radar_board.load();
+	radarBoard.load();
 	ship0.load();
 	ship1.load();
 	ship2.load();
@@ -287,9 +287,9 @@ void Display(){
 }
 
 void Init_one(){
-	battle_ship.show();
+	background.show();
 	setImageSize(0, 0, windowX, windowY);
-	battleship.toTransparent(0, 0, 0, alpha);
+	title.toTransparent(0, 0, 0, alpha);
 	setImageSize(windowX / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
 	if (alpha < 255)
 		alpha++;
@@ -334,7 +334,7 @@ void Init_one(){
 }
 
 void Init_two(){
-	radar_board.show();
+	radarBoard.show();
 	setImageSize(0, 0, windowX, windowY);
 	back.toTransparent();
 	setImageSize(0, 0, 100, 100);
