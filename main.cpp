@@ -73,14 +73,14 @@ void Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (frame){
-	case 0:
-	case 1:
+	case MENU_FRAME:
+	case START_FRAME:
 		Init_one();
 		break;
-	case 2:
+	case SHIP_POSITION_FRAME:
 		Init_two();
 		break;
-	case 3:
+	case BATTLE_FRAME:
 		Init_three();
 		break;
 	}
@@ -104,7 +104,7 @@ void Init_one(){
 		Print_Font("MENU");
 	}
 
-	if (frame == 0){
+	if (frame == MENU_FRAME){
 		reel.toTransparent();
 		reel.setSize(420, 20, 644, 824.6);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -263,17 +263,17 @@ void MouseButton(int button, int state, int x, int y){
 	switch (button){
 	case GLUT_LEFT_BUTTON:
 		switch (frame){
-			case 0:
+			case MENU_FRAME:
 				if (x >= 923 && x <= 993 && y >= 643 && y <= 723){
 					glutTimerFunc(200, glint_START_Timer, 1);
-					frame++;
+					frame = START_FRAME;
 				}
 				break;
-			case 1:
+			case START_FRAME:
 				if (x >= 637.6 && x <= 807.6 && y >= 674 && y <= 729)
-					frame++;
+					frame = SHIP_POSITION_FRAME;
 				else if (x >= 643 && x <= 802 && y >= 729 && y <= 784)
-					frame--;
+					frame = MENU_FRAME;
 				break;
 			case 2:
 				for (int i = 0; i < 6; i++){
@@ -307,7 +307,7 @@ void MouseButton(int button, int state, int x, int y){
 				if (x >= 0 && x <= 100 && y >= 0 && y <= 100){
 					glutTimerFunc(200, glint_START_Timer, 1);
 					alpha = 0;
-					frame--;
+					frame = START_FRAME;
 				}
 				else if (x >= 1165 && x <= 1315 && y >= 620 && y <= 770){
 					int i;
@@ -316,7 +316,7 @@ void MouseButton(int button, int state, int x, int y){
 							break;
 					}
 					if (i == 6){
-						frame++;
+						frame = BATTLE_FRAME;
 					}
 				}
 				else if (state == 0 && x >= 960 && x <= 1110 && y >= 620 && y <= 770){
@@ -349,7 +349,7 @@ void MouseButton(int button, int state, int x, int y){
 			}
 			break;
 		case GLUT_RIGHT_BUTTON:
-			if (frame == 2){
+			if (frame == SHIP_POSITION_FRAME){
 				for (int i = 0; i < 6; i++){
 					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
 							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
@@ -413,7 +413,7 @@ void MouseButton(int button, int state, int x, int y){
 void MouseMove(int x, int y){
 	move_mouseX = x;
 	move_mouseY = y;
-	if (frame == 2){
+	if (frame == SHIP_POSITION_FRAME){
 		if (shipMOVE != -1 && mouse_down == 0){
 			ship[shipMOVE].setNewCoordinate(ship[shipMOVE].getOldX() - button_mouseX + move_mouseX,
 																			ship[shipMOVE].getOldY() - button_mouseY + move_mouseY);
@@ -428,7 +428,7 @@ void MouseMove(int x, int y){
 void MousePassiveMotion(int x, int y){
 	mouseX = x;
 	mouseY = y;
-	if (frame == 2){
+	if (frame == SHIP_POSITION_FRAME){
 		ship[shipMOVE].setOldCoordinate(ship[shipMOVE].getNewX(), ship[shipMOVE].getNewY());
 		shipMOVE = -1;
 	}
@@ -441,7 +441,7 @@ void glint_START_Timer(int id){
 	else
 		glint_START = true;
 
-	if (frame == 1)
+	if (frame == START_FRAME)
 		glutTimerFunc(200, glint_START_Timer, id);
 }
 

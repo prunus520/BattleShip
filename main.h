@@ -19,10 +19,12 @@
 #define battle_ship_green glColor3f(0.0941, 0.5372, 0.0313)
 #define battle_ship_blue glColor3f(0, 0, 1)
 
+enum Frame{MENU_FRAME, START_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
+Frame frame = START_FRAME;
+
 float windowWidth = 1196 * 1.2, windowHeight = 720 * 1.2;
 float sizeMagn = 1;
 bool glint_START = true;
-int frame = 1;
 int mouseX, mouseY;
 int button_mouseX, button_mouseY;
 int move_mouseX, move_mouseY;
