@@ -16,7 +16,6 @@
 //			battle_ship_color
 #define battle_ship_alarm_red glColor3f(0.4372, 0.0313, 0.0941)
 #define battle_ship_alarm_green glColor3f(0.0941, 0.4372, 0.0313)
-#define battle_ship_green glColor3f(0.0941, 0.5372, 0.0313)
 #define battle_ship_blue glColor3f(0, 0, 1)
 
 enum Frame{MAIN_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
@@ -67,7 +66,15 @@ void loadBackgroundImage();
 void loadTitleImage();
 void drawStartFont();
 
-void Init_two();
+void shipPositionFrame();
+void loadRadarBoardImage();
+void loadBackImage();
+void useGreenPaint();
+void drawCheckerBoard();
+void loadShipGroupImage();
+void moveShipByMouse();
+void drawTestTable();
+
 void Init_three();
 void MouseButton(int button, int state, int x, int y);
 void MouseMove(int x, int y);

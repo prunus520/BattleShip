@@ -69,7 +69,7 @@ void Display(){
 			mainFrame();
 			break;
 		case SHIP_POSITION_FRAME:
-			Init_two();
+			shipPositionFrame();
 			break;
 		case BATTLE_FRAME:
 			Init_three();
@@ -117,22 +117,42 @@ void drawStartFont(){
 	}
 }
 
-void Init_two(){
+void shipPositionFrame(){
+	loadRadarBoardImage();
+	loadBackImage();
+	useGreenPaint();
+	drawCheckerBoard();
+	loadShipGroupImage();
+	moveShipByMouse();
+	drawTestTable();
+}
+
+void loadRadarBoardImage(){
 	if(radarBoard.isEmpty()){
 		radarBoard.load();
 	}
 	radarBoard.show();
 	radarBoard.setSize(0, 0, windowWidth, windowHeight);
+}
+
+void loadBackImage(){
 	if(back.isEmpty()){
 		back.load();
 	}
 	back.toTransparent();
 	back.setSize(0, 0, 100, 100);
 	glDisable(GL_TEXTURE_2D);
+}
 
-	battle_ship_green;
+void useGreenPaint(){
+	glColor3f(0.0941, 0.5372, 0.0313);
+}
+
+void drawCheckerBoard(){
 	checkerboard(123, 167, 578, 578, table, table, 2);
+}
 
+void loadShipGroupImage(){
 	for (int i = 5; i >= 0; i--){
 		toTransparentImage(ship[i].getImage());
 		setImageSize(ship[i].getX(), ship[i].getY(), ship[i].getWidth(), ship[i].getHeight(), 0, 0, 0);
@@ -143,11 +163,9 @@ void Init_two(){
 		glLoadIdentity();
 		gluOrtho2D(0, windowWidth, windowHeight, 0);
 	}
+}
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	setFontHeight(50);
-	setFontXY(0, 0);
-
+void moveShipByMouse(){
 	if (mouse_down){
 		player.initShips();
 		for (int i = 0; i < 6; i++)
@@ -165,6 +183,12 @@ void Init_two(){
 					}
 			}
 	}
+}
+
+void drawTestTable(){
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	setFontHeight(50);
+	setFontXY(0, 0);
 
 	player.testShipTable(0, 200);
 	computer.testShipTable(200, 200);
