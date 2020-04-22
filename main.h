@@ -19,7 +19,7 @@
 #define battle_ship_green glColor3f(0.0941, 0.5372, 0.0313)
 #define battle_ship_blue glColor3f(0, 0, 1)
 
-enum Frame{MENU_FRAME, START_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
+enum Frame{START_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
 Frame frame = START_FRAME;
 
 float windowWidth = 1196 * 1.2, windowHeight = 720 * 1.2;
@@ -32,7 +32,6 @@ int pointX = windowWidth, pointY = 0;
 
 Image background("img//background.jpg");
 Image title("img//title.png");
-Image reel("img//reel.png");
 Image sea("img//sea.jpg");
 Image radarBoard("img//radarBoard.jpg");
 Image ship0("img//ship0.png");
@@ -55,9 +54,6 @@ uchar alpha = 0;
 
 Battleship computer, player;
 Ship ship[6];
-
-FILE *pFile;
-char buffer[1024];
 
 void windowSet();
 void windowEvent();

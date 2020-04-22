@@ -59,7 +59,6 @@ void Display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (frame){
-	case MENU_FRAME:
 	case START_FRAME:
 		Init_one();
 		break;
@@ -86,33 +85,6 @@ void Init_one(){
 		setFontHeight(55);
 		setFontXY(windowWidth / 2 - 80, windowHeight - 190);
 		Print_Font("START");
-		setFontXY(windowWidth / 2 - 74, windowHeight - 135);
-		Print_Font("MENU");
-	}
-
-	if (frame == MENU_FRAME){
-		reel.toTransparent();
-		reel.setSize(420, 20, 644, 824.6);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glColor3f(0, 0, 0);
-		setFontHeight(45);
-		setFontXY(650, 190);
-		Print_Font("Battle Ship");
-		setFontHeight(25);
-		setFontXY(480, 190);
-		pFile = fopen("rule.txt", "r");
-		if (NULL == pFile){
-			Print_Font("Open failure");
-		}
-		else{
-			fread(buffer, 1024, 1, pFile);
-			Print_Font("%s", buffer);
-		}
-
-		glColor3f(1, 0, 0);
-		setFontHeight(100);
-		setFontXY(925, 635);
-		Print_Font("X");
 	}
 
 	glutPostRedisplay();
@@ -249,19 +221,11 @@ void MouseButton(int button, int state, int x, int y){
 	switch (button){
 	case GLUT_LEFT_BUTTON:
 		switch (frame){
-			case MENU_FRAME:
-				if (x >= 923 && x <= 993 && y >= 643 && y <= 723){
-					glutTimerFunc(200, glint_START_Timer, 1);
-					frame = START_FRAME;
-				}
-				break;
 			case START_FRAME:
 				if (x >= 637.6 && x <= 807.6 && y >= 674 && y <= 729)
 					frame = SHIP_POSITION_FRAME;
-				else if (x >= 643 && x <= 802 && y >= 729 && y <= 784)
-					frame = MENU_FRAME;
 				break;
-			case 2:
+			case SHIP_POSITION_FRAME:
 				for (int i = 0; i < 6; i++){
 					if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
 							y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
@@ -323,7 +287,7 @@ void MouseButton(int button, int state, int x, int y){
 						}
 				}
 				break;
-			case 3:
+			case BATTLE_FRAME:
 				if (state == 1 && button_mouseX >= 800 && button_mouseX <= 1340 &&
 						button_mouseY >= 310 && button_mouseY <= 850 && player_computer_sleep && palyer_down){
 					computer.setRow((button_mouseY - 310) / 67.5);
