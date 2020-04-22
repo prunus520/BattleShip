@@ -38,18 +38,18 @@ void toTransparentImage(IplImage *img, uchar red, uchar green, uchar blue, uchar
 	cvReleaseImage(&dst);
 }
 
-void setImageSize(GLfloat x1, GLfloat y1, GLfloat width, GLfloat height, GLfloat red, GLfloat green, GLfloat blue){
-	GLfloat x2 = x1 + width;
-	GLfloat y2 = y1 + height;
+void setImageSize(GLfloat x, GLfloat y, GLfloat width, GLfloat height, GLfloat red, GLfloat green, GLfloat blue){
+	GLfloat x2 = x + width;
+	GLfloat y2 = y + height;
 	glColor3f(red, green, blue);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0);
-	glVertex2f(x1, y1);
+	glVertex2f(x, y);
 	glTexCoord2f(0, 1);
-	glVertex2f(x1, y2);
+	glVertex2f(x, y2);
 	glTexCoord2f(1, 1);
 	glVertex2f(x2, y2);
 	glTexCoord2f(1, 0);
-	glVertex2f(x2, y1);
+	glVertex2f(x2, y);
 	glEnd();
 }

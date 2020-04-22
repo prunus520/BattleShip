@@ -70,6 +70,195 @@ void WindowSize(int w, int h){
 	glViewport(0, 0, w, h);
 }
 
+void Display(){
+	glLoadIdentity();
+	gluOrtho2D(0, windowWidth, windowHeight, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	switch (frame){
+	case 0:
+	case 1:
+		Init_one();
+		break;
+	case 2:
+		Init_two();
+		break;
+	case 3:
+		Init_three();
+		break;
+	}
+}
+
+void Init_one(){
+	background.show();
+	background.setSize(0, 0, windowWidth, windowHeight);
+	title.toTransparent(0, 0, 0, alpha);
+	title.setSize(windowWidth / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
+	if (alpha < 255)
+		alpha++;
+	glDisable(GL_TEXTURE_2D);
+
+	if (glint_START){
+		glColor3f(1, 1, 0);
+		setFontHeight(55);
+		setFontXY(windowWidth / 2 - 80, windowHeight - 190);
+		Print_Font("START");
+		setFontXY(windowWidth / 2 - 74, windowHeight - 135);
+		Print_Font("MENU");
+	}
+
+	if (frame == 0){
+		reel.toTransparent();
+		reel.setSize(420, 20, 644, 824.6);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glColor3f(0, 0, 0);
+		setFontHeight(45);
+		setFontXY(650, 190);
+		Print_Font("Battle Ship");
+		setFontHeight(25);
+		setFontXY(480, 190);
+		pFile = fopen("rule.txt", "r");
+		if (NULL == pFile){
+			Print_Font("Open failure");
+		}
+		else{
+			fread(buffer, 1024, 1, pFile);
+			Print_Font("%s", buffer);
+		}
+
+		glColor3f(1, 0, 0);
+		setFontHeight(100);
+		setFontXY(925, 635);
+		Print_Font("X");
+	}
+
+	glutPostRedisplay();
+	glutSwapBuffers();
+}
+
+void Init_two(){
+	radarBoard.show();
+	radarBoard.setSize(0, 0, windowWidth, windowHeight);
+	back.toTransparent();
+	back.setSize(0, 0, 100, 100);
+	glDisable(GL_TEXTURE_2D);
+
+	battle_ship_green;
+	checkerboard(123, 167, 578, 578, table, table, 2);
+
+	for (int i = 5; i >= 0; i--){
+		toTransparentImage(ship[i].getImage());
+		setImageSize(ship[i].getX(), ship[i].getY(), ship[i].getWidth(), ship[i].getHeight(), 0, 0, 0);
+		if (ship[i].getRotation())
+			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
+
+		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 0, 1, 0);
+		glLoadIdentity();
+		gluOrtho2D(0, windowWidth, windowHeight, 0);
+	}
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	setFontHeight(50);
+	setFontXY(0, 0);
+
+	if (mouse_down){
+		player.initShips();
+		for (int i = 0; i < 6; i++)
+			if (123 > ship[i].getNewX() || 701 < ship[i].getNewX() || 167 > ship[i].getNewY() || 745 < ship[i].getNewY()){
+				ship[i].setReady(false);
+			}
+			else{
+				for (int j = ship[i].getHeadColumn(); j <= ship[i].getBodyColumn(); j++)
+					for (int k = ship[i].getHeadRow(); k <= ship[i].getBodyRow(); k++){
+						if (ship[i].getRotation())
+							player.setShipCell(k, j, ship[i].getLengthWidth());
+						else
+							player.setShipCell(k, j, ship[i].getLengthHeight());
+						ship[i].setReady(true);
+					}
+			}
+	}
+
+	player.testShipTable(0, 200);
+	computer.testShipTable(200, 200);
+
+	glutSwapBuffers();
+}
+
+void Init_three(){
+	sea.show();
+	sea.setSize(0, 0, windowWidth, windowHeight);
+
+	battle_ship_blue;
+	setFontHeight(67);
+	setFontXY(85, 314);
+	for (int i = 65; i < 65 + table; i++)
+		Print_Font("%c\n", i);
+	setFontXY(745, 314);
+	for (int i = 65; i < 65 + table; i++)
+		Print_Font("%c\n", i);
+	setFontXY(140, 247);
+	for (int i = 1; i < 1 + table; i++)
+		Print_Font("% d ", i);
+	setFontXY(800, 247);
+	for (int i = 1; i < 1 + table; i++)
+		Print_Font("% d ", i);
+
+	battle_ship_blue;
+	checkerboard(140, 310, 540, 540, table, table, 5);
+	checkerboard(800, 310, 540, 540, table, table, 5);
+
+	for (int i = 5; i >= 0; i--){
+		shipMOVE = i;
+		shipXY(140, 310, 540, 540);
+		toTransparentImage(ship[i].getImage());
+		if (ship[shipMOVE].getRealWidth() > ship[shipMOVE].getRealHeight() || ship[i].getRotation())
+			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
+		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
+		glLoadIdentity();
+		gluOrtho2D(0, windowWidth, windowHeight, 0);
+	}
+
+	if (player_computer_flag && player_computer_sleep == false)
+		glutTimerFunc(1, player_computer_sleep_Timer, 2);
+
+	if (player_computer_flag && player_computer_sleep && palyer_down && palyer_init){
+		computer.checkShots();
+		glutTimerFunc(500, player_computer_flag_Timer, 3);
+		palyer_down = false;
+		palyer_init = false;
+	}
+	else if (player_computer_flag == false && player_computer_sleep){
+		player.checkShots();
+		palyer_down = true;
+		palyer_init = true;
+	}
+
+	player.showBoard(140, 310, fire.getImage(), wave.getImage());
+	computer.showBoard(800, 310, fire.getImage(), wave.getImage());
+
+	Sleep(100);
+
+	glColor3f(0, 0, 0);
+	setFontHeight(55);
+	setFontXY(windowWidth / 2 - 260, windowHeight / 2);
+
+	if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
+		if (computer.getHitCell(0) == 14)
+			Print_Font("You win the game");
+		else if (computer.getHitCell(1) == 40)
+			Print_Font("You are garbage");
+		if (player.getHitCell(0) == 14)
+			Print_Font("You lose the game");
+		else if (player.getHitCell(1) == 40)
+			Print_Font("You are garbage");
+		palyer_down = false;
+	}
+
+	glutPostRedisplay();
+	glutSwapBuffers();
+}
+
 void MouseButton(int button, int state, int x, int y){
 	mouse_down = state;
 	button_mouseX = x;
@@ -247,195 +436,6 @@ void MousePassiveMotion(int x, int y){
 		shipMOVE = -1;
 	}
 	glutPostRedisplay();
-}
-
-void Display(){
-	glLoadIdentity();
-	gluOrtho2D(0, windowWidth, windowHeight, 0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	switch (frame){
-	case 0:
-	case 1:
-		Init_one();
-		break;
-	case 2:
-		Init_two();
-		break;
-	case 3:
-		Init_three();
-		break;
-	}
-}
-
-void Init_one(){
-	background.show();
-	setImageSize(0, 0, windowWidth, windowHeight);
-	title.toTransparent(0, 0, 0, alpha);
-	setImageSize(windowWidth / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
-	if (alpha < 255)
-		alpha++;
-	glDisable(GL_TEXTURE_2D);
-
-	if (glint_START){
-		glColor3f(1, 1, 0);
-		setFontHeight(55);
-		setFontXY(windowWidth / 2 - 80, windowHeight - 190);
-		Print_Font("START");
-		setFontXY(windowWidth / 2 - 74, windowHeight - 135);
-		Print_Font("MENU");
-	}
-
-	if (frame == 0){
-		reel.toTransparent();
-		setImageSize(420, 20, 644, 824.6);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glColor3f(0, 0, 0);
-		setFontHeight(45);
-		setFontXY(650, 190);
-		Print_Font("Battle Ship");
-		setFontHeight(25);
-		setFontXY(480, 190);
-		pFile = fopen("rule.txt", "r");
-		if (NULL == pFile){
-			Print_Font("Open failure");
-		}
-		else{
-			fread(buffer, 1024, 1, pFile);
-			Print_Font("%s", buffer);
-		}
-
-		glColor3f(1, 0, 0);
-		setFontHeight(100);
-		setFontXY(925, 635);
-		Print_Font("X");
-	}
-
-	glutPostRedisplay();
-	glutSwapBuffers();
-}
-
-void Init_two(){
-	radarBoard.show();
-	setImageSize(0, 0, windowWidth, windowHeight);
-	back.toTransparent();
-	setImageSize(0, 0, 100, 100);
-	glDisable(GL_TEXTURE_2D);
-
-	battle_ship_green;
-	checkerboard(123, 167, 578, 578, table, table, 2);
-
-	for (int i = 5; i >= 0; i--){
-		toTransparentImage(ship[i].getImage());
-		setImageSize(ship[i].getX(), ship[i].getY(), ship[i].getWidth(), ship[i].getHeight(), 0, 0, 0);
-		if (ship[i].getRotation())
-			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
-
-		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 0, 1, 0);
-		glLoadIdentity();
-		gluOrtho2D(0, windowWidth, windowHeight, 0);
-	}
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	setFontHeight(50);
-	setFontXY(0, 0);
-
-	if (mouse_down){
-		player.initShips();
-		for (int i = 0; i < 6; i++)
-			if (123 > ship[i].getNewX() || 701 < ship[i].getNewX() || 167 > ship[i].getNewY() || 745 < ship[i].getNewY()){
-				ship[i].setReady(false);
-			}
-			else{
-				for (int j = ship[i].getHeadColumn(); j <= ship[i].getBodyColumn(); j++)
-					for (int k = ship[i].getHeadRow(); k <= ship[i].getBodyRow(); k++){
-						if (ship[i].getRotation())
-							player.setShipCell(k, j, ship[i].getLengthWidth());
-						else
-							player.setShipCell(k, j, ship[i].getLengthHeight());
-						ship[i].setReady(true);
-					}
-			}
-	}
-
-	player.testShipTable(0, 200);
-	computer.testShipTable(200, 200);
-
-	glutSwapBuffers();
-}
-
-void Init_three(){
-	sea.show();
-	setImageSize(0, 0, windowWidth, windowHeight);
-
-	battle_ship_blue;
-	setFontHeight(67);
-	setFontXY(85, 314);
-	for (int i = 65; i < 65 + table; i++)
-		Print_Font("%c\n", i);
-	setFontXY(745, 314);
-	for (int i = 65; i < 65 + table; i++)
-		Print_Font("%c\n", i);
-	setFontXY(140, 247);
-	for (int i = 1; i < 1 + table; i++)
-		Print_Font("% d ", i);
-	setFontXY(800, 247);
-	for (int i = 1; i < 1 + table; i++)
-		Print_Font("% d ", i);
-
-	battle_ship_blue;
-	checkerboard(140, 310, 540, 540, table, table, 5);
-	checkerboard(800, 310, 540, 540, table, table, 5);
-
-	for (int i = 5; i >= 0; i--){
-		shipMOVE = i;
-		shipXY(140, 310, 540, 540);
-		toTransparentImage(ship[i].getImage());
-		if (ship[shipMOVE].getRealWidth() > ship[shipMOVE].getRealHeight() || ship[i].getRotation())
-			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
-		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
-		glLoadIdentity();
-		gluOrtho2D(0, windowWidth, windowHeight, 0);
-	}
-
-	if (player_computer_flag && player_computer_sleep == false)
-		glutTimerFunc(1, player_computer_sleep_Timer, 2);
-
-	if (player_computer_flag && player_computer_sleep && palyer_down && palyer_init){
-		computer.checkShots();
-		glutTimerFunc(500, player_computer_flag_Timer, 3);
-		palyer_down = false;
-		palyer_init = false;
-	}
-	else if (player_computer_flag == false && player_computer_sleep){
-		player.checkShots();
-		palyer_down = true;
-		palyer_init = true;
-	}
-
-	player.showBoard(140, 310, fire.getImage(), wave.getImage());
-	computer.showBoard(800, 310, fire.getImage(), wave.getImage());
-
-	Sleep(100);
-
-	glColor3f(0, 0, 0);
-	setFontHeight(55);
-	setFontXY(windowWidth / 2 - 260, windowHeight / 2);
-
-	if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
-		if (computer.getHitCell(0) == 14)
-			Print_Font("You win the game");
-		else if (computer.getHitCell(1) == 40)
-			Print_Font("You are garbage");
-		if (player.getHitCell(0) == 14)
-			Print_Font("You lose the game");
-		else if (player.getHitCell(1) == 40)
-			Print_Font("You are garbage");
-		palyer_down = false;
-	}
-
-	glutPostRedisplay();
-	glutSwapBuffers();
 }
 
 void glint_START_Timer(int id){

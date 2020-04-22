@@ -29,3 +29,6 @@ void Image::toTransparent(uchar red, uchar green, uchar blue, uchar alpha){
 	toTransparentImage(image, red, green, blue, alpha);
 }
 
+void Image::setSize(GLfloat x, GLfloat y, GLfloat width, GLfloat height, GLfloat red, GLfloat green, GLfloat blue){
+	setImageSize(x, y, width, height, red, green, blue);
+}
