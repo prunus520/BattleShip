@@ -25,15 +25,7 @@ int main() {
 	back.toBGR();
 
 	windowSet();
-
-	glutReshapeFunc(WindowSize);
-	glutDisplayFunc(Display);
-	glutMouseFunc(MouseButton);
-	glutMotionFunc(MouseMove);
-	glutPassiveMotionFunc(MousePassiveMotion);
-	glutTimerFunc(200, glint_START_Timer, 1);
-
-	glutMainLoop();
+	windowEvent();
 }
 
 void shipInit(){
@@ -58,6 +50,17 @@ void windowSet(){
 	glutInitWindowSize(windowWidth, windowHeight);
 	glutInitWindowPosition(centerPositionX, centerPositionY);
 	glutCreateWindow("Battle Ship");
+}
+
+void windowEvent(){
+	glutReshapeFunc(WindowSize);
+	glutDisplayFunc(Display);
+	glutMouseFunc(MouseButton);
+	glutMotionFunc(MouseMove);
+	glutPassiveMotionFunc(MousePassiveMotion);
+	glutTimerFunc(200, glint_START_Timer, 1);
+
+	glutMainLoop();
 }
 
 void WindowSize(int w, int h){

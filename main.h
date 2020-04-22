@@ -58,6 +58,7 @@ FILE *pFile;
 char buffer[1024];
 
 void windowSet();
+void windowEvent();
 void shipInit();
 void WindowSize(int w, int h);
 void MouseButton(int button, int state, int x, int y);
