@@ -3,20 +3,6 @@
 int main() {
 	srand(time(NULL));
 	
-	background.toRGB();
-	title.toRGB();
-	reel.toRGB();
-	sea.toRGB();
-	radarBoard.toRGB();
-	ship0.toRGB();
-	ship1.toRGB();
-	ship2.toRGB();
-	ship3.toRGB();
-	ship4.toRGB();
-	ship5.toRGB();
-	wave.toRGB();
-	fire.toRGB();
-
 	computer.randomShips();
 	
 	shipInit();

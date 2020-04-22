@@ -3,6 +3,7 @@
 Image::Image(const char *imagePath){
 	title = imagePath;
 	image = cvLoadImage(title);
+	toRGB();
 }
 
 Image::~Image(){
