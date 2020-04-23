@@ -98,9 +98,8 @@ void catchMouseClick(int button, int state, int x, int y){
 }
 
 void setMouseClickCoordinates(int state, int x, int y){
-	mouse.clicked = state;
-	mouse.click.x = x;
-	mouse.click.y = y;
+	mouse.setClicked(state);
+	mouse.setClickCoordinate(x, y);
 }
 
 void catchMouseButton(int button, int state, int x, int y){
@@ -135,8 +134,7 @@ void catchMouseMove(int x, int y){
 }
 
 void setMouseMoveCoordinates(int x, int y){
-	mouse.move.x = x;
-	mouse.move.y = y;
+	mouse.setMoveCoordinate(x, y);
 }
 
 void catchMousePassiveMotion(int x, int y){
@@ -146,8 +144,7 @@ void catchMousePassiveMotion(int x, int y){
 }
 
 void setMouseMotionCoordinates(int x, int y){
-	mouse.motion.x = x;
-	mouse.motion.y = y;
+	mouse.setMotionCoordinate(x, y);
 }
 
 void catchTimerEvent(){

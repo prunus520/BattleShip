@@ -10,6 +10,7 @@
 #include "battleship/battleship.h"
 #include "tool/font.h"
 #include "tool/draw.h"
+#include "tool/mouse.h"
 
 #define table 8
 
@@ -24,17 +25,6 @@ extern float windowWidth, windowHeight;
 extern float scaleX, scaleY;
 extern bool glint_START;
 
-struct Coordinate{
-	int x;
-	int y;
-};
-
-struct Mouse{
-	Coordinate motion;
-	Coordinate click;
-	Coordinate move;
-	int clicked;
-};
 extern Mouse mouse;
 
 extern Image background;

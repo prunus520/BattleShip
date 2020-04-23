@@ -77,7 +77,7 @@ void loadShipGroupImage(){
 }
 
 void moveShipByMouse(){
-	if (mouse.clicked){
+	if (mouse.getClicked()){
 		player.initShips();
 		for (int i = 0; i < 6; i++)
 			if (123 > ship[i].getNewX() || 701 < ship[i].getNewX() || 167 > ship[i].getNewY() || 745 < ship[i].getNewY()){
