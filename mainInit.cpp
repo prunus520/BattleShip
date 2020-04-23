@@ -5,10 +5,8 @@ Frame frame = MAIN_FRAME;
 float windowWidth = 1196 * 1.2, windowHeight = 720 * 1.2;
 float scaleX = 1, scaleY = 1;
 bool glint_START = true;
-int mouseX, mouseY;
-int mouseClickX, mouseClickY;
-int mouseMoveX, mouseMoveY;
-int pointX = windowWidth, pointY = 0;
+
+Mouse mouse;
 
 Image background("image/background.jpg");
 Image title("image/title.png");
@@ -24,7 +22,6 @@ Image back("image/back.png");
 Image wave("image/wave.jpg");
 Image fire("image/fire.png");
 
-int mouseDown;
 int shipMOVE = -1;
 bool player_computer_flag = true;
 bool player_computer_sleep = false;

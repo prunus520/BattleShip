@@ -23,10 +23,19 @@ extern Frame frame;
 extern float windowWidth, windowHeight;
 extern float scaleX, scaleY;
 extern bool glint_START;
-extern int mouseX, mouseY;
-extern int mouseClickX, mouseClickY;
-extern int mouseMoveX, mouseMoveY;
-extern int pointX, pointY;
+
+struct Coordinate{
+	int x;
+	int y;
+};
+
+struct Mouse{
+	Coordinate motion;
+	Coordinate click;
+	Coordinate move;
+	int clicked;
+};
+extern Mouse mouse;
 
 extern Image background;
 extern Image title;
@@ -42,7 +51,6 @@ extern Image back;
 extern Image wave;
 extern Image fire;
 
-extern int mouseDown;
 extern int shipMOVE;
 extern bool player_computer_flag;
 extern bool player_computer_sleep;

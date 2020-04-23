@@ -4,7 +4,7 @@
 #include <GL/glut.h>
 #include <opencv/cv.h>
 
-struct Coordinate{
+struct CoordinateGL{
 	GLfloat x;
 	GLfloat y;
 };
@@ -68,9 +68,9 @@ class Ship{
 		Size size;
 		Size realSize;
 		Length length;
-		Coordinate coordinate;
-		Coordinate oldCoordinate;
-		Coordinate newCoordinate;
+		CoordinateGL coordinate;
+		CoordinateGL oldCoordinate;
+		CoordinateGL newCoordinate;
 		Field head = {0, 0};
 		Field body = {0, 0};
 		bool rotation = false;
