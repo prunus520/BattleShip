@@ -7,15 +7,15 @@ void shipPositionFrameRightClick(int state, int x, int y){
 void rotateShip(int state, int x, int y){
 	if (frame == SHIP_POSITION_FRAME){
 		for (int i = 0; i < 6; i++){
-			if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
-					y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
+			if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealSizeWidth() &&
+					y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealSizeHeight()){
 				shipMOVE = ship[i].getID();
 				break;
 			}
 		}
 		for (int i = 0; i < 6; i++){
-			if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
-					y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
+			if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealSizeWidth() &&
+					y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealSizeHeight()){
 				if (ship[i].getX() != ship[i].getNewX() && ship[i].getX() != ship[i].getNewX() &&
 						ship[i].getY() != ship[i].getNewY() && ship[i].getY() != ship[i].getNewY())
 					shipMOVE = ship[i].getID();
@@ -30,8 +30,8 @@ void rotateShip(int state, int x, int y){
 							if (ship[shipMOVE].getRotation()){
 								ship[shipMOVE].setRotation(false);
 								transWidthHeight();
-								if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
-										ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745){
+								if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealSizeWidth() > 701 ||
+										ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealSizeHeight() > 745){
 									ship[shipMOVE].setRotation(true);
 									transWidthHeight();
 								}
@@ -39,8 +39,8 @@ void rotateShip(int state, int x, int y){
 							else{
 								ship[shipMOVE].setRotation(true);
 								transWidthHeight();
-								if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
-										ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745){
+								if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealSizeWidth() > 701 ||
+										ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealSizeHeight() > 745){
 									ship[shipMOVE].setRotation(false);
 									transWidthHeight();
 								}

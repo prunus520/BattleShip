@@ -54,6 +54,7 @@ void catchDisplay(){
 	resetCoordinates();
 	clearCanvas();
 	switchFrame();
+	drawTest();
 	updateCanvas();
 }
 
@@ -80,6 +81,23 @@ void switchFrame(){
 	}
 }
 
+void drawTest(){
+	glColor3f(1, 1, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	setFontHeight(30);
+	setFontXY(0, 0);
+	printFont(" clicked: %d\n clickX: %d\n clickY: %d\n moveX: %d\n moveY: %d\n motionX: %d\n motionY: %d",
+						mouse.getClicked(), mouse.getClickX(), mouse.getClickY(),
+						mouse.getMoveX(), mouse.getMoveY(),
+						mouse.getMotionX(), mouse.getMotionY());
+
+	player.testBoardTable(300, 0);
+	computer.testBoardTable(500, 0);
+	player.testShipTable(700, 0);
+	computer.testShipTable(900, 0);
+	player.testHitTable(1100, 0);
+	computer.testHitTable(1200, 0);
+}
 void updateCanvas(){
 	glutPostRedisplay();
 	glutSwapBuffers();

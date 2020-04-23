@@ -18,6 +18,8 @@
 #define battle_ship_alarm_red glColor3f(0.4372, 0.0313, 0.0941)
 #define battle_ship_alarm_green glColor3f(0.0941, 0.4372, 0.0313)
 
+#define TRANSPARENT_BACKGROUND true
+
 enum Frame{MAIN_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
 extern Frame frame;
 
@@ -31,12 +33,7 @@ extern Image background;
 extern Image title;
 extern Image sea;
 extern Image radarBoard;
-extern Image ship0;
-extern Image ship1;
-extern Image ship2;
-extern Image ship3;
-extern Image ship4;
-extern Image ship5;
+extern Ship ship[6];
 extern Image back;
 extern Image wave;
 extern Image fire;
@@ -49,7 +46,6 @@ extern bool palyer_down;
 extern uchar alpha;
 
 extern Battleship computer, player;
-extern Ship ship[6];
 
 void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
 void player_computer_sleep_Timer(int id);

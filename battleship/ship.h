@@ -3,6 +3,7 @@
 
 #include <GL/glut.h>
 #include <opencv/cv.h>
+#include "../tool/image.h"
 
 struct CoordinateGL{
 	GLfloat x;
@@ -24,15 +25,13 @@ struct Length{
 	int height;
 };
 
-class Ship{
+class Ship:public Image{
 	public:
-		Ship();
-		~Ship();
-		void setImage(IplImage*);
-		void setCoordinate(GLfloat, GLfloat);
-		void setNewCoordinate(GLfloat, GLfloat);
-		void setOldCoordinate(GLfloat, GLfloat);
-		void setSize(GLfloat, GLfloat);
+		Ship(const char*);
+		void setPosition(GLfloat, GLfloat);
+		void setNewPosition(GLfloat, GLfloat);
+		void setOldPosition(GLfloat, GLfloat);
+		void setSizes(GLfloat, GLfloat);
 		void setLength(int, int);
 		void setLengthWidth(int);
 		void setLengthHeight(int);
@@ -42,10 +41,10 @@ class Ship{
 		GLfloat getNewY();
 		GLfloat getOldX();
 		GLfloat getOldY();
-		GLfloat getWidth();
-		GLfloat getHeight();
-		GLfloat getRealWidth();
-		GLfloat getRealHeight();
+		GLfloat getSizeWidth();
+		GLfloat getSizeHeight();
+		GLfloat getRealSizeWidth();
+		GLfloat getRealSizeHeight();
 		int getHeadRow();
 		int getHeadColumn();
 		int getBodyRow();
@@ -58,19 +57,17 @@ class Ship{
 		int getID();
 		bool getReady();
 		void setField(int, int, int, int);
-		IplImage *getImage();
-		void setRealWidth(GLfloat);
-		void setRealHeight(GLfloat);
+		void setRealSizeWidth(GLfloat);
+		void setRealSizeHeight(GLfloat);
 	private:
 		static int IDCouter;
 		int ID;
-		IplImage *image = nullptr;
 		Size size;
 		Size realSize;
 		Length length;
-		CoordinateGL coordinate;
-		CoordinateGL oldCoordinate;
-		CoordinateGL newCoordinate;
+		CoordinateGL position;
+		CoordinateGL oldPosition;
+		CoordinateGL newPosition;
 		Field head = {0, 0};
 		Field body = {0, 0};
 		bool rotation = false;

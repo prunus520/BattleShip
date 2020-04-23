@@ -29,8 +29,12 @@ IplImage *Image::getImage(){
 	return image;
 }
 
-void Image::show(){
-	showImage(image);
+void Image::show(bool isTransparentBackground){
+	if(isTransparentBackground){
+		toTransparentImage(image);
+	}else{
+		showImage(image);
+	}
 }
 
 void Image::toTransparent(uchar red, uchar green, uchar blue, uchar alpha){

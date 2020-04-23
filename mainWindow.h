@@ -27,6 +27,7 @@ void catchDisplay();
 void resetCoordinates();
 void clearCanvas();
 void switchFrame();
+void drawTest();
 void updateCanvas();
 
 void catchMouseEvent();

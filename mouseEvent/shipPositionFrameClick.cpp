@@ -9,8 +9,8 @@ void shipPositionFrameClick(int state, int x, int y){
 
 void moveShip(int state, int x, int y){
 	for (int i = 0; i < 6; i++){
-		if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealWidth() &&
-				y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealHeight()){
+		if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealSizeWidth() &&
+				y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealSizeHeight()){
 			shipMOVE = ship[i].getID();
 			break;
 		}
@@ -19,12 +19,12 @@ void moveShip(int state, int x, int y){
 
 void placeShip(int state, int x, int y){
 	if (shipMOVE != -1){
-		if (state == 1 && (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() > 701 ||
-											 ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight() > 745)){
+		if (state == 1 && (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealSizeWidth() > 701 ||
+											 ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealSizeHeight() > 745)){
 			initShipXY();
 		}
-		else if (state == 1 && x >= ship[shipMOVE].getNewX() && x <= ship[shipMOVE].getNewX() + ship[shipMOVE].getRealWidth() &&
-						 y >= ship[shipMOVE].getNewY() && y <= ship[shipMOVE].getNewY() + ship[shipMOVE].getRealHeight()){
+		else if (state == 1 && x >= ship[shipMOVE].getNewX() && x <= ship[shipMOVE].getNewX() + ship[shipMOVE].getRealSizeWidth() &&
+						 y >= ship[shipMOVE].getNewY() && y <= ship[shipMOVE].getNewY() + ship[shipMOVE].getRealSizeHeight()){
 			shipXY(123, 167, 578, 578);
 			for (int i = ship[shipMOVE].getHeadColumn(); i <= ship[shipMOVE].getBodyColumn(); i++)
 				for (int j = ship[shipMOVE].getHeadRow(); j <= ship[shipMOVE].getBodyRow(); j++)
@@ -42,8 +42,8 @@ void placeShip(int state, int x, int y){
 }
 
 void initShipXY(){
-	ship[shipMOVE].setOldCoordinate(ship[shipMOVE].getX(), ship[shipMOVE].getY());
-	ship[shipMOVE].setNewCoordinate(ship[shipMOVE].getX(), ship[shipMOVE].getY());
+	ship[shipMOVE].setOldPosition(ship[shipMOVE].getX(), ship[shipMOVE].getY());
+	ship[shipMOVE].setNewPosition(ship[shipMOVE].getX(), ship[shipMOVE].getY());
 	if (ship[shipMOVE].getRotation()){
 		transWidthHeight();
 		ship[shipMOVE].setRotation(false);

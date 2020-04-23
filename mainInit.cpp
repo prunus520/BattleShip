@@ -12,12 +12,9 @@ Image background("image/background.jpg");
 Image title("image/title.png");
 Image sea("image/sea.jpg");
 Image radarBoard("image/radarBoard.jpg");
-Image ship0("image/ship0.png");
-Image ship1("image/ship1.png");
-Image ship2("image/ship2.png");
-Image ship3("image/ship3.png");
-Image ship4("image/ship4.png");
-Image ship5("image/ship5.png");
+Ship ship[6] = {"image/ship0.png", "image/ship1.png",
+									"image/ship2.png", "image/ship3.png",
+									"image/ship4.png", "image/ship5.png"};
 Image back("image/back.png");
 Image wave("image/wave.jpg");
 Image fire("image/fire.png");
@@ -30,11 +27,10 @@ bool palyer_down = true;
 uchar alpha = 0;
 
 Battleship computer, player;
-Ship ship[6];
 
 void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
-	ship[shipMOVE].setNewCoordinate(x + ship[shipMOVE].getHeadColumn() * width / 8 + (ship[shipMOVE].getLengthWidth() * width / 8 - ship[shipMOVE].getRealWidth()) / 2,
-																	y + ship[shipMOVE].getHeadRow() * height / 8 + (ship[shipMOVE].getLengthHeight() * height / 8 - ship[shipMOVE].getRealHeight()) / 2);
+	ship[shipMOVE].setNewPosition(x + ship[shipMOVE].getHeadColumn() * width / 8 + (ship[shipMOVE].getLengthWidth() * width / 8 - ship[shipMOVE].getRealSizeWidth()) / 2,
+																	y + ship[shipMOVE].getHeadRow() * height / 8 + (ship[shipMOVE].getLengthHeight() * height / 8 - ship[shipMOVE].getRealSizeHeight()) / 2);
 }
 
 void player_computer_sleep_Timer(int id){
@@ -68,9 +64,9 @@ void glint_START_Timer(int id){
 
 void transWidthHeight(){
 	GLfloat tempf;
-	tempf = ship[shipMOVE].getRealWidth();
-	ship[shipMOVE].setRealWidth(ship[shipMOVE].getRealHeight());
-	ship[shipMOVE].setRealHeight(tempf);
+	tempf = ship[shipMOVE].getRealSizeWidth();
+	ship[shipMOVE].setRealSizeWidth(ship[shipMOVE].getRealSizeHeight());
+	ship[shipMOVE].setRealSizeHeight(tempf);
 	int tempi;
 	tempi = ship[shipMOVE].getLengthWidth();
 	ship[shipMOVE].setLengthWidth(ship[shipMOVE].getLengthHeight());

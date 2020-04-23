@@ -1,37 +1,29 @@
 #include "ship.h"
 
-Ship::Ship(){
+Ship::Ship(const char *imagePath):Image(imagePath){
 	ID = IDCouter++;
 }
 
-Ship::~Ship(){
-	cvReleaseImage(&image);
+void Ship::setPosition(GLfloat x, GLfloat y){
+	position.x = x;
+	position.y = y;
+	oldPosition.x = x;
+	oldPosition.y = y;
+	newPosition.x = x;
+	newPosition.y = y;
 }
 
-void Ship::setImage(IplImage *srcImage){
-	image = srcImage;
+void Ship::setNewPosition(GLfloat x, GLfloat y){
+	newPosition.x = x;
+	newPosition.y = y;
 }
 
-void Ship::setCoordinate(GLfloat x, GLfloat y){
-	coordinate.x = x;
-	coordinate.y = y;
-	oldCoordinate.x = x;
-	oldCoordinate.y = y;
-	newCoordinate.x = x;
-	newCoordinate.y = y;
+void Ship::setOldPosition(GLfloat x, GLfloat y){
+	oldPosition.x = x;
+	oldPosition.y = y;
 }
 
-void Ship::setNewCoordinate(GLfloat x, GLfloat y){
-	newCoordinate.x = x;
-	newCoordinate.y = y;
-}
-
-void Ship::setOldCoordinate(GLfloat x, GLfloat y){
-	oldCoordinate.x = x;
-	oldCoordinate.y = y;
-}
-
-void Ship::setSize(GLfloat width, GLfloat height){
+void Ship::setSizes(GLfloat width, GLfloat height){
 	size.width = width;
 	size.height = height;
 	realSize.width = width;
@@ -52,42 +44,42 @@ void Ship::setLengthHeight(int height){
 }
 
 GLfloat Ship::getX(){
-	return coordinate.x;
+	return position.x;
 }
 
 GLfloat Ship::getY(){
-	return coordinate.y;
+	return position.y;
 }
 
 GLfloat Ship::getNewX(){
-	return newCoordinate.x;
+	return newPosition.x;
 }
 
 GLfloat Ship::getNewY(){
-	return newCoordinate.y;
+	return newPosition.y;
 }
 
 GLfloat Ship::getOldX(){
-	return oldCoordinate.x;
+	return oldPosition.x;
 }
 
 GLfloat Ship::getOldY(){
-	return oldCoordinate.y;
+	return oldPosition.y;
 }
 
-GLfloat Ship::getWidth(){
+GLfloat Ship::getSizeWidth(){
 	return size.width;
 }
 
-GLfloat Ship::getHeight(){
+GLfloat Ship::getSizeHeight(){
 	return size.height;
 }
 
-GLfloat Ship::getRealWidth(){
+GLfloat Ship::getRealSizeWidth(){
 	return realSize.width;
 }
 
-GLfloat Ship::getRealHeight(){
+GLfloat Ship::getRealSizeHeight(){
 	return realSize.height;
 }
 
@@ -142,15 +134,11 @@ void Ship::setField(int headRow, int headColumn, int bodyRow, int bodyColumn){
 	body.column = bodyColumn;
 }
 
-IplImage *Ship::getImage(){
-	return image;
-}
-
-void Ship::setRealWidth(GLfloat width){
+void Ship::setRealSizeWidth(GLfloat width){
 	realSize.width = width;
 }
 
-void Ship::setRealHeight(GLfloat height){
+void Ship::setRealSizeHeight(GLfloat height){
 	realSize.height = height;
 }
 

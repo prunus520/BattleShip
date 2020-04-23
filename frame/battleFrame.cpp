@@ -50,7 +50,7 @@ void loadPlayerShipGroupImage(){
 		shipMOVE = i;
 		shipXY(140, 310, 540, 540);
 		toTransparentImage(ship[i].getImage());
-		if (ship[shipMOVE].getRealWidth() > ship[shipMOVE].getRealHeight() || ship[i].getRotation())
+		if (ship[shipMOVE].getRealSizeWidth() > ship[shipMOVE].getRealSizeHeight() || ship[i].getRotation())
 			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
 		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
 		glLoadIdentity();

@@ -160,9 +160,34 @@ void Battleship::testShipTable(int x, int y){
 	glColor3f(1, 1, 0);
 	setFontHeight(20);
 	setFontXY(x, y);
+	printFont("ship:\n");
 	for (int i = 0; i < table; i++){
 		for (int j = 0; j < table; j++){
 			printFont("%d ", getShipCell(i, j));
+		}
+		printFont("\n");
+	}
+}
+
+void Battleship::testHitTable(int x, int y){
+	glColor3f(1, 1, 0);
+	setFontHeight(20);
+	setFontXY(x, y);
+	printFont("hit:\n");
+	for (int i = 0; i < 2; i++){
+			printFont("%d ", getHitCell(i));
+		printFont("\n");
+	}
+}
+
+void Battleship::testBoardTable(int x, int y){
+	glColor3f(1, 1, 0);
+	setFontHeight(20);
+	setFontXY(x, y);
+	printFont("board:\n");
+	for (int i = 0; i < table; i++){
+		for (int j = 0; j < table; j++){
+			printFont("%d ", board[i][j]);
 		}
 		printFont("\n");
 	}

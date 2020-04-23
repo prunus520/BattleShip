@@ -14,7 +14,7 @@ class Image{
 		void load();
 		void release();
 		bool isEmpty();
-		void show();
+		void show(bool = false);
 		void toTransparent(uchar = 255, uchar = 255, uchar = 255, uchar = 255);
 		void setSize(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1, GLfloat = 1, GLfloat = 1);
 		int getWidth();
