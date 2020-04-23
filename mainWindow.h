@@ -11,14 +11,34 @@
 #include "mouseEvent/shipPositionFrameMove.h"
 #include "mouseEvent/shipPositionFrameMotion.h"
 
-void windowSet();
-void windowEvent();
-void WindowSize(int w, int h);
-void Display();
-void updateFrame();
+void createGlutWindow();
+int centerWindowX();
+int centerWindowY();
 
-void MouseClick(int button, int state, int x, int y);
-void MouseMove(int x, int y);
-void MousePassiveMotion(int x, int y);
+void catchGlutEvent();
+
+void catchWindowSizeEvent();
+void catchWindowSize(int, int);
+void setScale(int, int);
+void changeWindowSize(int, int);
+
+void catchDisplayEvent();
+void catchDisplay();
+void resetCoordinates();
+void clearCanvas();
+void switchFrame();
+void updateCanvas();
+
+void catchMouseEvent();
+void catchMouseClick(int, int, int, int);
+void setMouseClickCoordinates(int, int, int);
+void catchMouseButton(int, int, int, int);
+void switchFrameClick(int, int, int);
+void catchMouseMove(int, int);
+void setMouseMoveCoordinates(int, int);
+void catchMousePassiveMotion(int, int);
+void setMouseMotionCoordinates(int, int);
+
+void catchTimerEvent();
 
 #endif

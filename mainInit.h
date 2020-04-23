@@ -21,11 +21,11 @@ enum Frame{MAIN_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
 extern Frame frame;
 
 extern float windowWidth, windowHeight;
-extern float sizeMagn;
+extern float scaleX, scaleY;
 extern bool glint_START;
 extern int mouseX, mouseY;
-extern int button_mouseX, button_mouseY;
-extern int move_mouseX, move_mouseY;
+extern int mouseClickX, mouseClickY;
+extern int mouseMoveX, mouseMoveY;
 extern int pointX, pointY;
 
 extern Image background;
@@ -42,7 +42,7 @@ extern Image back;
 extern Image wave;
 extern Image fire;
 
-extern int mouse_down;
+extern int mouseDown;
 extern int shipMOVE;
 extern bool player_computer_flag;
 extern bool player_computer_sleep;

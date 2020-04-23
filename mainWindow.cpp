@@ -1,39 +1,72 @@
 #include "mainWindow.h"
 
-void windowSet(){
-	int screenWidth = GetSystemMetrics(SM_CXSCREEN),
-			screenHeight = GetSystemMetrics(SM_CYSCREEN),
-			centerPositionX = (screenWidth - windowWidth) / 2,
-			centerPositionY = (screenHeight - windowHeight) / 2;
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
+void createGlutWindow(){
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
+	glutInitWindowPosition(centerWindowX(), centerWindowY());
 	glutInitWindowSize(windowWidth, windowHeight);
-	glutInitWindowPosition(centerPositionX, centerPositionY);
 	glutCreateWindow("Battle Ship");
 }
 
-void windowEvent(){
-	glutReshapeFunc(WindowSize);
-	glutDisplayFunc(Display);
-	glutMouseFunc(MouseClick);
-	glutMotionFunc(MouseMove);
-	glutPassiveMotionFunc(MousePassiveMotion);
-	glutTimerFunc(200, glint_START_Timer, 1);
+int centerWindowX(){
+	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+	return (screenWidth - windowWidth) / 2;
+}
+
+int centerWindowY(){
+	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+	return (screenHeight - windowHeight) / 2;
+}
+
+void catchGlutEvent(){
+	catchWindowSizeEvent();
+	catchDisplayEvent();
+	catchMouseEvent();
+	catchTimerEvent();
 
 	glutMainLoop();
 }
 
-void WindowSize(int w, int h){
-	sizeMagn *= h / windowHeight;
-	windowWidth = w;
-	windowHeight = h;
-	glViewport(0, 0, w, h);
+void catchWindowSizeEvent(){
+	glutReshapeFunc(catchWindowSize);
 }
 
-void Display(){
+void catchWindowSize(int width, int height){
+	setScale(width, height);
+	changeWindowSize(width, height);
+}
+
+void setScale(int width, int height){
+	scaleX *= width / windowWidth;
+	scaleY *= height / windowHeight;
+}
+
+void changeWindowSize(int width, int height){
+	windowWidth = width;
+	windowHeight = height;
+	glViewport(0, 0, windowWidth, windowHeight);
+}
+
+void catchDisplayEvent(){
+	glutDisplayFunc(catchDisplay);
+}
+
+void catchDisplay(){
+	resetCoordinates();
+	clearCanvas();
+	switchFrame();
+	updateCanvas();
+}
+
+void resetCoordinates(){
 	glLoadIdentity();
 	gluOrtho2D(0, windowWidth, windowHeight, 0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
+void clearCanvas(){
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void switchFrame(){
 	switch (frame){
 		case MAIN_FRAME:
 			mainFrame();
@@ -45,49 +78,78 @@ void Display(){
 			battleFrame();
 			break;
 	}
-	updateFrame();
 }
 
-void updateFrame(){
+void updateCanvas(){
 	glutPostRedisplay();
 	glutSwapBuffers();
 }
 
-void MouseClick(int button, int state, int x, int y){
-	mouse_down = state;
-	button_mouseX = x;
-	button_mouseY = y;
+void catchMouseEvent(){
+	glutMouseFunc(catchMouseClick);
+	glutMotionFunc(catchMouseMove);
+	glutPassiveMotionFunc(catchMousePassiveMotion);
+}
+
+void catchMouseClick(int button, int state, int x, int y){
+	setMouseClickCoordinates(state, x, y);
+	catchMouseButton(button, state, x, y);
+	glutPostRedisplay();
+}
+
+void setMouseClickCoordinates(int state, int x, int y){
+	mouseDown = state;
+	mouseClickX = x;
+	mouseClickY = y;
+}
+
+void catchMouseButton(int button, int state, int x, int y){
 	switch (button){
-	case GLUT_LEFT_BUTTON:
-		switch (frame){
-			case MAIN_FRAME:
-				mainFrameClick(x, y);
-				break;
-			case SHIP_POSITION_FRAME:
-				shipPositionFrameClick(state, x, y);
-				break;
-			case BATTLE_FRAME:
-				battleFrameClick(state, x, y);
-				break;
-			}
+		case GLUT_LEFT_BUTTON:
+			switchFrameClick(state, x, y);
 			break;
 		case GLUT_RIGHT_BUTTON:
 			shipPositionFrameRightClick(state, x, y);
 			break;
 	}
-	glutPostRedisplay();
 }
 
-void MouseMove(int x, int y){
-	move_mouseX = x;
-	move_mouseY = y;
+void switchFrameClick(int state, int x, int y){
+	switch (frame){
+		case MAIN_FRAME:
+			mainFrameClick(x, y);
+			break;
+		case SHIP_POSITION_FRAME:
+			shipPositionFrameClick(state, x, y);
+			break;
+		case BATTLE_FRAME:
+			battleFrameClick(state, x, y);
+			break;
+	}
+}
+
+void catchMouseMove(int x, int y){
+	setMouseMoveCoordinates(x, y);
 	shipPositionFrameMove(x, y);
 	glutPostRedisplay();
 }
 
-void MousePassiveMotion(int x, int y){
-	mouseX = x;
-	mouseY = y;
+void setMouseMoveCoordinates(int x, int y){
+	mouseMoveX = x;
+	mouseMoveY = y;
+}
+
+void catchMousePassiveMotion(int x, int y){
+	setMouseMotionCoordinates(x, y);
 	shipPositionFrameMotion(x, y);
 	glutPostRedisplay();
+}
+
+void setMouseMotionCoordinates(int x, int y){
+	mouseX = x;
+	mouseY = y;
+}
+
+void catchTimerEvent(){
+	glutTimerFunc(200, glint_START_Timer, 1);
 }
