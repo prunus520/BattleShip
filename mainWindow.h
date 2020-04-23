@@ -11,8 +11,6 @@
 #include "mouseEvent/shipPositionFrameMove.h"
 #include "mouseEvent/shipPositionFrameMotion.h"
 
-void shipInit();
-
 void windowSet();
 void windowEvent();
 void WindowSize(int w, int h);

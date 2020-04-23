@@ -1,24 +1,5 @@
 #include "mainWindow.h"
 
-void shipInit(){
-	ship0.load();
-	ship1.load();
-	ship2.load();
-	ship3.load();
-	ship4.load();
-	ship5.load();
-	IplImage *image[6] = {ship0.getImage(), ship1.getImage(), ship2.getImage(), ship3.getImage(), ship4.getImage(), ship5.getImage()};
-	int coordinate[6][2] = {{1108, 186}, {1161, 186}, {1228, 186}, {1100, 280}, {1202, 280}, {1010, 170}};
-	float size[6][2] = {{16, 67.2}, {24, 65.6}, {16, 67.2}, {65, 212.5}, {50, 212.5}, {54, 336}};
-	int length[6][2] = {{1, 1}, {1, 1}, {1, 1}, {1, 3}, {1, 3}, {1, 5}};
-	for(int i = 0; i != 6; ++i){
-		ship[i].setImage(image[i]);
-		ship[i].setCoordinate(coordinate[i][0], coordinate[i][1]);
-		ship[i].setSize(size[i][0], size[i][1]);
-		ship[i].setLength(length[i][0], length[i][1]);
-	}
-}
-
 void windowSet(){
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN),
 			screenHeight = GetSystemMetrics(SM_CYSCREEN),

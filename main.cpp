@@ -5,8 +5,6 @@ int main() {
 	
 	computer.randomShips();
 	
-	shipInit();
-
 	windowSet();
 	windowEvent();
 }

@@ -4,6 +4,7 @@
 #include "../mainInit.h"
 
 void shipPositionFrame();
+void loadShipImage();
 void loadRadarBoardImage();
 void loadBackImage();
 void useGreenPaint();
