@@ -5,9 +5,13 @@ void mainFrameClick(int x, int y){
 }
 
 void startTheGame(int x, int y){
-	if (x >= 637.6 && x <= 807.6 && y >= 674 && y <= 729){
+	if (checkRangeX(x, 637.6, 807.6) && checkRangeY(y, 674, 729)){
 		frame = SHIP_POSITION_FRAME;
-		background.release();
-		title.release();
+		releaseMainImage();
 	}
+}
+
+void releaseMainImage(){
+	background.release();
+	title.release();
 }

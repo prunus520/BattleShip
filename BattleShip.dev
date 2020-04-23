@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
 CompilerSettings=0000000100000000101000000
-UnitCount=35
+UnitCount=37
 
 [VersionInfo]
 Major=1
@@ -394,6 +394,26 @@ BuildCmd=
 FileName=mouseEvent\shipPositionFrameRightClick.cpp
 CompileCpp=1
 Folder=mouseEvent
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit36]
+FileName=tool\mouse.cpp
+CompileCpp=1
+Folder=tool
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit37]
+FileName=tool\mouse.h
+CompileCpp=1
+Folder=tool
 Compile=1
 Link=1
 Priority=1000

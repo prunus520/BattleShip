@@ -19,17 +19,29 @@ void loadTitleImage(){
 		title.load();
 	}
 	title.toTransparent(0, 0, 0, alpha);
-	title.setSize(windowWidth / 2 - 360, 20, 508 * 1.5, 105 * 1.5);
+	title.setSize(centerTitleX(), 20, drawTitleWidth(), drawTitleHight());
 	if (alpha < 255)
 		alpha++;
-	glDisable(GL_TEXTURE_2D);
+}
+
+GLfloat centerTitleX(){
+	return (windowWidth - drawTitleWidth()) / 2;
+}
+
+GLfloat drawTitleWidth(){
+	return title.getWidth() * 1.5;
+}
+
+GLfloat drawTitleHight(){
+	return title.getHeight() * 1.5;
 }
 
 void drawStartFont(){
+	glDisable(GL_TEXTURE_2D);
 	if (glint_START){
 		glColor3f(1, 1, 0);
 		setFontHeight(55);
 		setFontXY(windowWidth / 2 - 80, windowHeight - 190);
-		Print_Font("START");
+		printFont("START");
 	}
 }

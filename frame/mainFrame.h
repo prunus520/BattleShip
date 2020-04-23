@@ -6,6 +6,9 @@
 void mainFrame();
 void loadBackgroundImage();
 void loadTitleImage();
+GLfloat centerTitleX();
+GLfloat drawTitleWidth();
+GLfloat drawTitleHight();
 void drawStartFont();
 
 #endif

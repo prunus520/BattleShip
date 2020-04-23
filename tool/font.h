@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <GL/glut.h>
 
-int Print_Font(const char *format, ...);
+int printFont(const char *format, ...);
 void setFontHeight(int Height);
 void setCreateFont();
 void setFontXY(GLfloat x, GLfloat y);

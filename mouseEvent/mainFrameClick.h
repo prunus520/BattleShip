@@ -5,5 +5,6 @@
 
 void mainFrameClick(int x, int y);
 void startTheGame(int x, int y);
+void releaseMainImage();
 
 #endif

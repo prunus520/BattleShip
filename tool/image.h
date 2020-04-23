@@ -17,6 +17,8 @@ class Image{
 		void show();
 		void toTransparent(uchar = 255, uchar = 255, uchar = 255, uchar = 255);
 		void setSize(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1, GLfloat = 1, GLfloat = 1);
+		int getWidth();
+		int getHeight();
 	private:
 		IplImage *image = nullptr;
 		const char *title;

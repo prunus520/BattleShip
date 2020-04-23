@@ -25,10 +25,10 @@ void drawPlayerCheckerBoard(){
 	
 	setFontXY(85, 314);
 	for (int i = 65; i < 65 + table; i++)
-		Print_Font("%c\n", i);
+		printFont("%c\n", i);
 	setFontXY(140, 247);
 	for (int i = 1; i < 1 + table; i++)
-		Print_Font("% d ", i);
+		printFont("% d ", i);
 	checkerboard(140, 310, 540, 540, table, table, 5);
 }
 
@@ -38,10 +38,10 @@ void drawComputerCheckerBoard(){
 	
 	setFontXY(745, 314);
 	for (int i = 65; i < 65 + table; i++)
-		Print_Font("%c\n", i);
+		printFont("%c\n", i);
 	setFontXY(800, 247);
 	for (int i = 1; i < 1 + table; i++)
-		Print_Font("% d ", i);
+		printFont("% d ", i);
 	checkerboard(800, 310, 540, 540, table, table, 5);
 }
 
@@ -93,13 +93,13 @@ void drawWinOrLoseFont(){
 
 	if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
 		if (computer.getHitCell(0) == 14)
-			Print_Font("You win the game");
+			printFont("You win the game");
 		else if (computer.getHitCell(1) == 40)
-			Print_Font("You are garbage");
+			printFont("You are garbage");
 		if (player.getHitCell(0) == 14)
-			Print_Font("You lose the game");
+			printFont("You lose the game");
 		else if (player.getHitCell(1) == 40)
-			Print_Font("You are garbage");
+			printFont("You are garbage");
 		palyer_down = false;
 	}
 }

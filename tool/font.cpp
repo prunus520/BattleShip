@@ -10,7 +10,7 @@ HFONT hFont = CreateFont(cHeight, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, fdwChar
 GLfloat FontX = 4, FontY = 0;
 bool fontxy = false;
 
-int Print_Font(const char *format, ...){
+int printFont(const char *format, ...){
 	char buffer[65536];
 	va_list args;
 	va_start(args, format);
@@ -83,7 +83,7 @@ void setFontXY(GLfloat x, GLfloat y){
 	FontX = x;
 	FontY = y;
 	fontxy = true;
-	Print_Font("");
+	printFont("");
 }
 
 void setFontHeight(int Height){

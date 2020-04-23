@@ -126,30 +126,30 @@ int Battleship::hitShips(){
 	setFontXY(270, 100);
 	if (shots[row][column] == ships[row][column]){
 		if (row >= 800)
-			Print_Font("You hit a small ship with the shot ( %d , %d )", row + 1, column + 1);
+			printFont("You hit a small ship with the shot ( %d , %d )", row + 1, column + 1);
 		else
-			Print_Font("Hit a small ship with the shot ( %d , %d )", row + 1, column + 1);
+			printFont("Hit a small ship with the shot ( %d , %d )", row + 1, column + 1);
 	}
 	else if (shots[row][column] + 2 == ships[row][column]){
 		if (row >= 800)
-			Print_Font("You hit a medium ship with the shot (%d , %d )", row + 1, column + 1);
+			printFont("You hit a medium ship with the shot (%d , %d )", row + 1, column + 1);
 		else
-			Print_Font("Hit a medium ship with the shot (%d , %d )", row + 1, column + 1);
+			printFont("Hit a medium ship with the shot (%d , %d )", row + 1, column + 1);
 	}
 	else if (shots[row][column] + 4 == ships[row][column]){
 		if (row >= 800)
-			Print_Font("You hit a large ship with the shot ( %d , %d )", row + 1, column + 1);
+			printFont("You hit a large ship with the shot ( %d , %d )", row + 1, column + 1);
 		else
-			Print_Font("Hit a large ship with the shot ( %d , %d )", row + 1, column + 1);
+			printFont("Hit a large ship with the shot ( %d , %d )", row + 1, column + 1);
 	}
 	else{
 		if (row >= 800){
 			setFontXY(600, 100);
-			Print_Font("Oops !");
+			printFont("Oops !");
 		}
 		else{
 			setFontXY(350, 100);
-			Print_Font("Where did you shoot ? Noob !");
+			printFont("Where did you shoot ? Noob !");
 		}
 		return 0;
 	}
@@ -162,8 +162,8 @@ void Battleship::testShipTable(int x, int y){
 	setFontXY(x, y);
 	for (int i = 0; i < table; i++){
 		for (int j = 0; j < table; j++){
-			Print_Font("%d ", getShipCell(i, j));
+			printFont("%d ", getShipCell(i, j));
 		}
-		Print_Font("\n");
+		printFont("\n");
 	}
 }
