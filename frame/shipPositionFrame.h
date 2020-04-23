@@ -5,6 +5,7 @@
 
 void shipPositionFrame();
 void loadShipImage();
+void randomComputerShips();
 void loadRadarBoardImage();
 void loadBackImage();
 void useGreenPaint();

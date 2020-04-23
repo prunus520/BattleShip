@@ -29,7 +29,13 @@ void loadShipImage(){
 			ship[i].setSize(size[i][0], size[i][1]);
 			ship[i].setLength(length[i][0], length[i][1]);
 		}
+		randomComputerShips();
 	}
+}
+
+void randomComputerShips(){
+	srand(time(NULL));
+	computer.randomShips();
 }
 
 void loadRadarBoardImage(){
