@@ -29,15 +29,15 @@ int Battleship::getBoardCell(){
 }
 
 void Battleship::initBoard(){
-	std::fill(&board[0][0], &board[8][8], -1);
+	std::fill(&board[0][0], &board[8][0], -1);
 }
 
 void Battleship::initShips(){
-	std::fill(&ships[0][0], &ships[8][8], 0);
+	std::fill(&ships[0][0], &ships[8][0], 0);
 }
 
 void Battleship::initShots(){
-	std::fill(&shots[0][0], &shots[8][8], 0);
+	std::fill(&shots[0][0], &shots[8][0], 0);
 }
 
 void Battleship::initHits(){
