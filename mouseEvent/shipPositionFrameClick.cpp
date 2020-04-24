@@ -4,14 +4,12 @@ void shipPositionFrameClick(int state, int x, int y){
 	moveShip(state, x, y);
 	placeShip(state, x, y);
 	clickButton(state, x, y);
-//	·Æ¹«ÂIÀ»¾É­Pµøµ¡±Y¼ì 
 	checkShipState(state, x, y);
 }
 
 void moveShip(int state, int x, int y){
 	for (int i = 0; i < 6; i++){
-		if (state == 0 && x >= ship[i].getNewShipPositionX() && x <= ship[i].getNewShipPositionX() + ship[i].getShipRealSizeWidth() &&
-				y >= ship[i].getNewShipPositionY() && y <= ship[i].getNewShipPositionY() + ship[i].getShipRealSizeHeight()){
+		if (state == 0 && ship[i].isShipPositionWithinRange(x, y)){
 			shipMOVE = ship[i].getID();
 			break;
 		}
@@ -20,17 +18,17 @@ void moveShip(int state, int x, int y){
 
 void placeShip(int state, int x, int y){
 	if (shipMOVE != -1){
-		if (state == 1 && ship[shipMOVE].isNewShipPositionWithinRange(123, 701, 167, 745)){
+		if (state == 1 && ship[shipMOVE].isNewShipPositionWithoutRange(123, 701, 167, 745)){
 			initShipXY();
 		}
-		else if (state == 1 && x >= ship[shipMOVE].getNewShipPositionX() && x <= ship[shipMOVE].getNewShipPositionX() + ship[shipMOVE].getShipRealSizeWidth() &&
-						 y >= ship[shipMOVE].getNewShipPositionY() && y <= ship[shipMOVE].getNewShipPositionY() + ship[shipMOVE].getShipRealSizeHeight()){
+		else if (state == 1 && ship[shipMOVE].isShipPositionWithinRange(x, y)){
 			shipXY(123, 167, 578, 578);
 			for (int i = ship[shipMOVE].getShipHeadColumn(); i <= ship[shipMOVE].getShipBodyColumn(); i++)
 				for (int j = ship[shipMOVE].getShipHeadRow(); j <= ship[shipMOVE].getShipBodyRow(); j++)
 					if (player.getShipCell(j, i) != 0)
 						initShipXY();
 					else{
+//						width&height
 						if (ship[i].getShipRotation())
 							player.setShipCell(j, i, ship[shipMOVE].getShipLengthWidth());
 						else

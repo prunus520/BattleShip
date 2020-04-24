@@ -59,9 +59,11 @@ class ShipImage:public Image{
 		GLfloat getOldShipPositionY();
 		
 		void changeOldShipPositionByNewShipPosition();
-		bool isNewShipPositionWithinRange(int, int, int, int);
+		bool isShipPositionWithinRange(int, int);
+		bool isNewShipPositionWithoutRange(int, int, int, int);
 		
 		void setShipField(int, int, int, int);
+		void resetField();
 		int getShipHeadRow();
 		int getShipHeadColumn();
 		int getShipBodyRow();
@@ -69,9 +71,12 @@ class ShipImage:public Image{
 		
 		void setShipRotation(bool);
 		bool getShipRotation();
+		void notShipRotate();
+		bool checkRotationLengthSuccess();
 		
 		void setShipReady(bool);
 		bool getShipReady();
+		void notShipReady();
 		
 	private:
 		static int IDCouter;

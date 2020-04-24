@@ -78,6 +78,7 @@ void moveShipByMouse(){
 			else{
 				for (int j = ship[i].getShipHeadColumn(); j <= ship[i].getShipBodyColumn(); j++)
 					for (int k = ship[i].getShipHeadRow(); k <= ship[i].getShipBodyRow(); k++){
+//						width&height
 						player.setShipCell(k, j, ship[i].getShipRotation() ? ship[i].getShipLengthWidth() : ship[i].getShipLengthHeight());
 						ship[i].setShipReady(true);
 					}

@@ -50,6 +50,7 @@ void loadPlayerShipGroupImage(){
 		shipMOVE = i;
 		shipXY(140, 310, 540, 540);
 		toTransparentImage(ship[i].getImage());
+//		width&height
 		if (ship[shipMOVE].getShipRealSizeWidth() > ship[shipMOVE].getShipRealSizeHeight() || ship[i].getShipRotation())
 			Counterclockwise_Degree_Rotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
 		setImageSize(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY(), ship[i].getImageWidth(), ship[i].getImageHeight(), 1, 1, 1);
