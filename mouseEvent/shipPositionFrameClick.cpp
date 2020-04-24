@@ -20,8 +20,7 @@ void moveShip(int state, int x, int y){
 
 void placeShip(int state, int x, int y){
 	if (shipMOVE != -1){
-		if (state == 1 && (ship[shipMOVE].getNewShipPositionX() < 123 || ship[shipMOVE].getNewShipPositionX() + ship[shipMOVE].getShipRealSizeWidth() > 701 ||
-											 ship[shipMOVE].getNewShipPositionY() < 167 || ship[shipMOVE].getNewShipPositionY() + ship[shipMOVE].getShipRealSizeHeight() > 745)){
+		if (state == 1 && ship[shipMOVE].isNewShipPositionWithinRange(123, 701, 167, 745)){
 			initShipXY();
 		}
 		else if (state == 1 && x >= ship[shipMOVE].getNewShipPositionX() && x <= ship[shipMOVE].getNewShipPositionX() + ship[shipMOVE].getShipRealSizeWidth() &&

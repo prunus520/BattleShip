@@ -6,7 +6,7 @@ void shipPositionFrameMotion(){
 }
 
 void motionShip(){
-	if (frame == SHIP_POSITION_FRAME){
+	if (frame == SHIP_POSITION_FRAME && mouse.getMouseClicked() == 1){
 		ship[shipMOVE].changeOldShipPositionByNewShipPosition();
 		shipMOVE = -1;
 	}
