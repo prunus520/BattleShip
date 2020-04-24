@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <GL/glut.h>
 #include "tool/image.h"
-#include "battleship/ship.h"
+#include "battleship/shipimage.h"
 #include "battleship/battleship.h"
 #include "tool/font.h"
 #include "tool/draw.h"
@@ -31,7 +31,7 @@ extern Image background;
 extern Image title;
 extern Image sea;
 extern Image radarBoard;
-extern Ship ship[6];
+extern ShipImage ship[6];
 extern Image back;
 extern Image wave;
 extern Image fire;

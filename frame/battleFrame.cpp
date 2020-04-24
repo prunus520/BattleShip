@@ -50,9 +50,9 @@ void loadPlayerShipGroupImage(){
 		shipMOVE = i;
 		shipXY(140, 310, 540, 540);
 		toTransparentImage(ship[i].getImage());
-		if (ship[shipMOVE].getRealSizeWidth() > ship[shipMOVE].getRealSizeHeight() || ship[i].getRotation())
-			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
-		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getImageWidth(), ship[i].getImageHeight(), 1, 1, 1);
+		if (ship[shipMOVE].getShipRealSizeWidth() > ship[shipMOVE].getShipRealSizeHeight() || ship[i].getShipRotation())
+			Counterclockwise_Degree_Rotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
+		setImageSize(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY(), ship[i].getImageWidth(), ship[i].getImageHeight(), 1, 1, 1);
 		glLoadIdentity();
 		gluOrtho2D(0, windowWidth, windowHeight, 0);
 	}

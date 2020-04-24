@@ -2,12 +2,12 @@
 
 void shipPositionFrameMotion(){
 //	¾É­Pclicked¼Æ­È²§±` 
-//	motionShip();
+	motionShip();
 }
 
 void motionShip(){
 	if (frame == SHIP_POSITION_FRAME){
-		ship[shipMOVE].setOldPosition(ship[shipMOVE].getNewX(), ship[shipMOVE].getNewY());
+		ship[shipMOVE].setOldShipPosition(ship[shipMOVE].getNewShipPositionX(), ship[shipMOVE].getNewShipPositionY());
 		shipMOVE = -1;
 	}
 }

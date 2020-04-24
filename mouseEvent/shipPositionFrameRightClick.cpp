@@ -7,54 +7,54 @@ void shipPositionFrameRightClick(int state, int x, int y){
 void rotateShip(int state, int x, int y){
 	if (frame == SHIP_POSITION_FRAME){
 		for (int i = 0; i < 6; i++){
-			if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealSizeWidth() &&
-					y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealSizeHeight()){
+			if (state == 0 && x >= ship[i].getNewShipPositionX() && x <= ship[i].getNewShipPositionX() + ship[i].getShipRealSizeWidth() &&
+					y >= ship[i].getNewShipPositionY() && y <= ship[i].getNewShipPositionY() + ship[i].getShipRealSizeHeight()){
 				shipMOVE = ship[i].getID();
 				break;
 			}
 		}
 		for (int i = 0; i < 6; i++){
-			if (state == 0 && x >= ship[i].getNewX() && x <= ship[i].getNewX() + ship[i].getRealSizeWidth() &&
-					y >= ship[i].getNewY() && y <= ship[i].getNewY() + ship[i].getRealSizeHeight()){
-				if (ship[i].getX() != ship[i].getNewX() && ship[i].getX() != ship[i].getNewX() &&
-						ship[i].getY() != ship[i].getNewY() && ship[i].getY() != ship[i].getNewY())
+			if (state == 0 && x >= ship[i].getNewShipPositionX() && x <= ship[i].getNewShipPositionX() + ship[i].getShipRealSizeWidth() &&
+					y >= ship[i].getNewShipPositionY() && y <= ship[i].getNewShipPositionY() + ship[i].getShipRealSizeHeight()){
+				if (ship[i].getShipPositionX() != ship[i].getNewShipPositionX() && ship[i].getShipPositionX() != ship[i].getNewShipPositionX() &&
+						ship[i].getShipPositionY() != ship[i].getNewShipPositionY() && ship[i].getShipPositionY() != ship[i].getNewShipPositionY())
 					shipMOVE = ship[i].getID();
-				for (int i = ship[shipMOVE].getHeadColumn(); i <= ship[shipMOVE].getBodyColumn(); i++)
-					for (int j = ship[shipMOVE].getHeadRow(); j <= ship[shipMOVE].getBodyRow(); j++){
-						if (ship[shipMOVE].getRotation())
+				for (int i = ship[shipMOVE].getShipHeadColumn(); i <= ship[shipMOVE].getShipBodyColumn(); i++)
+					for (int j = ship[shipMOVE].getShipHeadRow(); j <= ship[shipMOVE].getShipBodyRow(); j++){
+						if (ship[shipMOVE].getShipRotation())
 							player.setShipCell(j, i, 0);
 						else
 							player.setShipCell(j, i, 0);
-						ship[shipMOVE].setReady(false);
+						ship[shipMOVE].setShipReady(false);
 						if (player.getShipCell(i, j) == 0){
-							if (ship[shipMOVE].getRotation()){
-								ship[shipMOVE].setRotation(false);
+							if (ship[shipMOVE].getShipRotation()){
+								ship[shipMOVE].setShipRotation(false);
 								transWidthHeight();
-								if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealSizeWidth() > 701 ||
-										ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealSizeHeight() > 745){
-									ship[shipMOVE].setRotation(true);
+								if (ship[shipMOVE].getNewShipPositionX() < 123 || ship[shipMOVE].getNewShipPositionX() + ship[shipMOVE].getShipRealSizeWidth() > 701 ||
+										ship[shipMOVE].getNewShipPositionY() < 167 || ship[shipMOVE].getNewShipPositionY() + ship[shipMOVE].getShipRealSizeHeight() > 745){
+									ship[shipMOVE].setShipRotation(true);
 									transWidthHeight();
 								}
 							}
 							else{
-								ship[shipMOVE].setRotation(true);
+								ship[shipMOVE].setShipRotation(true);
 								transWidthHeight();
-								if (ship[shipMOVE].getNewX() < 123 || ship[shipMOVE].getNewX() + ship[shipMOVE].getRealSizeWidth() > 701 ||
-										ship[shipMOVE].getNewY() < 167 || ship[shipMOVE].getNewY() + ship[shipMOVE].getRealSizeHeight() > 745){
-									ship[shipMOVE].setRotation(false);
+								if (ship[shipMOVE].getNewShipPositionX() < 123 || ship[shipMOVE].getNewShipPositionX() + ship[shipMOVE].getShipRealSizeWidth() > 701 ||
+										ship[shipMOVE].getNewShipPositionY() < 167 || ship[shipMOVE].getNewShipPositionY() + ship[shipMOVE].getShipRealSizeHeight() > 745){
+									ship[shipMOVE].setShipRotation(false);
 									transWidthHeight();
 								}
 							}
-							if (ship[shipMOVE].getRotation())
-								player.setShipCell(j, i, ship[shipMOVE].getLengthWidth());
+							if (ship[shipMOVE].getShipRotation())
+								player.setShipCell(j, i, ship[shipMOVE].getShipLengthWidth());
 							else
-								player.setShipCell(j, i, ship[shipMOVE].getLengthHeight());
-							ship[shipMOVE].setReady(true);
+								player.setShipCell(j, i, ship[shipMOVE].getShipLengthHeight());
+							ship[shipMOVE].setShipReady(true);
 						}
 					}
-				ship[shipMOVE].setField((int)((ship[shipMOVE].getNewY() - 167) / 72.25), (int)((ship[shipMOVE].getNewX() - 123) / 72.25),
-																			 ship[shipMOVE].getHeadRow() + ship[shipMOVE].getLengthHeight() - 1,
-																			 ship[shipMOVE].getHeadColumn() + ship[shipMOVE].getLengthWidth() - 1);
+				ship[shipMOVE].setShipField((int)((ship[shipMOVE].getNewShipPositionY() - 167) / 72.25), (int)((ship[shipMOVE].getNewShipPositionX() - 123) / 72.25),
+																			 ship[shipMOVE].getShipHeadRow() + ship[shipMOVE].getShipLengthHeight() - 1,
+																			 ship[shipMOVE].getShipHeadColumn() + ship[shipMOVE].getShipLengthWidth() - 1);
 				shipXY(123, 167, 578, 578);
 				shipMOVE = -1;
 				break;

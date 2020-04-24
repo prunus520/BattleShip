@@ -12,7 +12,7 @@ Image background("image/background.jpg");
 Image title("image/title.png");
 Image sea("image/sea.jpg");
 Image radarBoard("image/radarBoard.jpg");
-Ship ship[6] = {"image/ship0.png", "image/ship1.png",
+ShipImage ship[6] = {"image/ship0.png", "image/ship1.png",
 									"image/ship2.png", "image/ship3.png",
 									"image/ship4.png", "image/ship5.png"};
 Image back("image/back.png");
@@ -29,8 +29,8 @@ uchar alpha = 0;
 Battleship computer, player;
 
 void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
-	ship[shipMOVE].setNewPosition(x + ship[shipMOVE].getHeadColumn() * width / 8 + (ship[shipMOVE].getLengthWidth() * width / 8 - ship[shipMOVE].getRealSizeWidth()) / 2,
-																	y + ship[shipMOVE].getHeadRow() * height / 8 + (ship[shipMOVE].getLengthHeight() * height / 8 - ship[shipMOVE].getRealSizeHeight()) / 2);
+	ship[shipMOVE].setNewShipPosition(x + ship[shipMOVE].getShipHeadColumn() * width / 8 + (ship[shipMOVE].getShipLengthWidth() * width / 8 - ship[shipMOVE].getShipRealSizeWidth()) / 2,
+																	y + ship[shipMOVE].getShipHeadRow() * height / 8 + (ship[shipMOVE].getShipLengthHeight() * height / 8 - ship[shipMOVE].getShipRealSizeHeight()) / 2);
 }
 
 void player_computer_sleep_Timer(int id){
@@ -64,13 +64,13 @@ void glint_START_Timer(int id){
 
 void transWidthHeight(){
 	GLfloat tempf;
-	tempf = ship[shipMOVE].getRealSizeWidth();
-	ship[shipMOVE].setRealSizeWidth(ship[shipMOVE].getRealSizeHeight());
-	ship[shipMOVE].setRealSizeHeight(tempf);
+	tempf = ship[shipMOVE].getShipRealSizeWidth();
+	ship[shipMOVE].setShipRealSizeWidth(ship[shipMOVE].getShipRealSizeHeight());
+	ship[shipMOVE].setShipRealSizeHeight(tempf);
 	int tempi;
-	tempi = ship[shipMOVE].getLengthWidth();
-	ship[shipMOVE].setLengthWidth(ship[shipMOVE].getLengthHeight());
-	ship[shipMOVE].setLengthHeight(tempi);
+	tempi = ship[shipMOVE].getShipLengthWidth();
+	ship[shipMOVE].setShipLengthWidth(ship[shipMOVE].getShipLengthHeight());
+	ship[shipMOVE].setShipLengthHeight(tempi);
 }
 
 bool checkRangeX(int x, int min, int max){
