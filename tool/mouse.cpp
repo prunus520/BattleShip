@@ -1,48 +1,48 @@
 #include "mouse.h"
 
-void Mouse::setMotionCoordinate(int x, int y){
+void Mouse::setMouseMotionCoordinate(int x, int y){
 	motion.x = x;
 	motion.y = y;
 }
 
-int Mouse::getMotionX(){
+int Mouse::getMouseMotionX(){
 	return motion.x;
 }
 
-int Mouse::getMotionY(){
+int Mouse::getMouseMotionY(){
 	return motion.y;
 }
 
-void Mouse::setClickCoordinate(int x, int y){
-	click.x = x;
-	click.y = y;
-}
-
-int Mouse::getClickX(){
-	return click.x;
-}
-
-int Mouse::getClickY(){
-	return click.y;
-}
-
-void Mouse::setMoveCoordinate(int x, int y){
+void Mouse::setMouseMoveCoordinate(int x, int y){
 	move.x = x;
 	move.y = y;
 }
 
-int Mouse::getMoveX(){
+int Mouse::getMouseMoveX(){
 	return move.x;
 }
 
-int Mouse::getMoveY(){
+int Mouse::getMouseMoveY(){
 	return move.y;
 }
 
-void Mouse::setClicked(int state){
+void Mouse::setMouseClickCoordinate(int x, int y){
+	click.x = x;
+	click.y = y;
+}
+
+int Mouse::getMouseClickX(){
+	return click.x;
+}
+
+int Mouse::getMouseClickY(){
+	return click.y;
+}
+
+void Mouse::setMouseClicked(int state){
 	clicked = state;
 }
 
-int Mouse::getClicked(){
+int Mouse::getMouseClicked(){
 	return clicked;
 }

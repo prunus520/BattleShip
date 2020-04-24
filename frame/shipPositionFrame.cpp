@@ -69,7 +69,7 @@ void loadShipGroupImage(){
 }
 
 void moveShipByMouse(){
-	if (mouse.getClicked()){
+	if (mouse.getMouseClicked()){
 		player.initShips();
 		for (int i = 0; i < 6; i++){
 			if (123 > ship[i].getNewShipPositionX() || 701 < ship[i].getNewShipPositionX() || 167 > ship[i].getNewShipPositionY() || 745 < ship[i].getNewShipPositionY()){

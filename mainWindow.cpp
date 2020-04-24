@@ -87,9 +87,9 @@ void drawTest(){
 	setFontHeight(30);
 	setFontXY(0, 0);
 	printFont(" clicked: %d\n clickX: %d\n clickY: %d\n moveX: %d\n moveY: %d\n motionX: %d\n motionY: %d",
-						mouse.getClicked(), mouse.getClickX(), mouse.getClickY(),
-						mouse.getMoveX(), mouse.getMoveY(),
-						mouse.getMotionX(), mouse.getMotionY());
+						mouse.getMouseClicked(), mouse.getMouseClickX(), mouse.getMouseClickY(),
+						mouse.getMouseMoveX(), mouse.getMouseMoveY(),
+						mouse.getMouseMotionX(), mouse.getMouseMotionY());
 
 //	player.testBoardTable(300, 0);
 //	computer.testBoardTable(500, 0);
@@ -116,8 +116,8 @@ void catchMouseClick(int button, int state, int x, int y){
 }
 
 void setMouseClickCoordinates(int state, int x, int y){
-	mouse.setClicked(state);
-	mouse.setClickCoordinate(x, y);
+	mouse.setMouseClicked(state);
+	mouse.setMouseClickCoordinate(x, y);
 }
 
 void catchMouseButton(int button, int state, int x, int y){
@@ -152,7 +152,7 @@ void catchMouseMove(int x, int y){
 }
 
 void setMouseMoveCoordinates(int x, int y){
-	mouse.setMoveCoordinate(x, y);
+	mouse.setMouseMoveCoordinate(x, y);
 }
 
 void catchMousePassiveMotion(int x, int y){
@@ -162,7 +162,7 @@ void catchMousePassiveMotion(int x, int y){
 }
 
 void setMouseMotionCoordinates(int x, int y){
-	mouse.setMotionCoordinate(x, y);
+	mouse.setMouseMotionCoordinate(x, y);
 }
 
 void catchTimerEvent(){
