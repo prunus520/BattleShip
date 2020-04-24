@@ -48,7 +48,7 @@ void drawComputerCheckerBoard(){
 void loadPlayerShipGroupImage(){
 	for (int i = 5; i >= 0; i--){
 		shipMOVE = i;
-		shipXY(140, 310, 540, 540);
+		placeShipInCell(140, 310, 540, 540);
 		toTransparentImage(ship[i].getImage());
 //		width&height
 		if (ship[shipMOVE].getShipRealSizeWidth() > ship[shipMOVE].getShipRealSizeHeight() || ship[i].getShipRotation())

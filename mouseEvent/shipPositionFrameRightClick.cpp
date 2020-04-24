@@ -6,12 +6,12 @@ void shipPositionFrameRightClick(int state, int x, int y){
 
 void rotateShip(int state, int x, int y){
 	if (frame == SHIP_POSITION_FRAME){
-		clickedShipID(state, x, y);
+		rightClickedShipID(state, x, y);
 		rotateShipDirection(state, x, y);
 	}
 }
 
-void clickedShipID(int state, int x, int y){
+void rightClickedShipID(int state, int x, int y){
 	for (int i = 0; i != 6; ++i){
 		if (state == 0 && ship[i].isShipPositionWithinRange(x, y)){
 			shipMOVE = ship[i].getID();
@@ -26,7 +26,7 @@ void rotateShipDirection(int state, int x, int y){
 			rotateShip();
 			ship[shipMOVE].resetField();
 		}
-		shipXY(123, 167, 578, 578);
+		placeShipInCell(123, 167, 578, 578);
 		shipMOVE = -1;
 	}
 }

@@ -111,6 +111,11 @@ void ShipImage::changeOldShipPositionByNewShipPosition(){
 	setOldShipPosition(newPosition.x, newPosition.y);
 }
 
+void ShipImage::initializeOldAndNewShipPositionByShipPosition(){
+	setNewShipPosition(position.x, position.y);
+	setOldShipPosition(position.x, position.y);
+}
+
 bool ShipImage::isShipPositionWithinRange(int x, int y){
 	return (x >= newPosition.x && x <= newPosition.x + realSize.width) &&
 				 (y >= newPosition.y && y <= newPosition.y + realSize.height);

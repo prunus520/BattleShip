@@ -59,6 +59,7 @@ class ShipImage:public Image{
 		GLfloat getOldShipPositionY();
 		
 		void changeOldShipPositionByNewShipPosition();
+		void initializeOldAndNewShipPositionByShipPosition();
 		bool isShipPositionWithinRange(int, int);
 		bool isNewShipPositionWithoutRange(int, int, int, int);
 		

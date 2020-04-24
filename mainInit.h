@@ -45,7 +45,7 @@ extern uchar alpha;
 
 extern Battleship computer, player;
 
-void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
+void placeShipInCell(GLfloat x, GLfloat y, GLfloat width, GLfloat height);
 void player_computer_sleep_Timer(int id);
 void player_computer_flag_Timer(int id);
 void glint_START_Timer(int id);

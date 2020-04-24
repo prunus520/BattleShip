@@ -28,7 +28,7 @@ uchar alpha = 0;
 
 Battleship computer, player;
 
-void shipXY(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
+void placeShipInCell(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
 //	width&height
 	ship[shipMOVE].setNewShipPosition(x + ship[shipMOVE].getShipHeadColumn() * width / 8 + (ship[shipMOVE].getShipLengthWidth() * width / 8 - ship[shipMOVE].getShipRealSizeWidth()) / 2,
 																	y + ship[shipMOVE].getShipHeadRow() * height / 8 + (ship[shipMOVE].getShipLengthHeight() * height / 8 - ship[shipMOVE].getShipRealSizeHeight()) / 2);
