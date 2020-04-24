@@ -10,19 +10,20 @@ class Image{
 	public:
 		Image(const char*);
 		~Image();
+		void loadImage();
+		void toRGBImage();
+		void releaseImage();
+		bool isImageEmpty();
+		void showImage();
+		void showTransparentBackgroundForImage(uchar = 255, uchar = 255, uchar = 255, uchar = 255);
+		void setImageSize(GLfloat, GLfloat, GLfloat, GLfloat);
+		void setImageSizeAndColor(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1, GLfloat = 1, GLfloat = 1);
 		IplImage *getImage();
-		void load();
-		void release();
-		bool isEmpty();
-		void show(bool = false);
-		void toTransparent(uchar = 255, uchar = 255, uchar = 255, uchar = 255);
-		void setSize(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1, GLfloat = 1, GLfloat = 1);
-		int getWidth();
-		int getHeight();
+		int getImageWidth();
+		int getImageHeight();
 	private:
 		IplImage *image = nullptr;
 		const char *title;
-		void toRGB();
 };
 
 #endif

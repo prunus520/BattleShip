@@ -58,8 +58,8 @@ void clickButton(int state, int x, int y){
 		glutTimerFunc(200, glint_START_Timer, 1);
 		alpha = 0;
 		frame = MAIN_FRAME;
-		back.release();
-		radarBoard.release();
+		back.releaseImage();
+		radarBoard.releaseImage();
 	}
 	else if (x >= 1165 && x <= 1315 && y >= 620 && y <= 770){
 		int i;
@@ -69,8 +69,8 @@ void clickButton(int state, int x, int y){
 		}
 		if (i == 6){
 			frame = BATTLE_FRAME;
-			back.release();
-			radarBoard.release();
+			back.releaseImage();
+			radarBoard.releaseImage();
 		}
 	}
 	else if (state == 0 && x >= 960 && x <= 1110 && y >= 620 && y <= 770){

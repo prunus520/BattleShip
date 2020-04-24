@@ -7,19 +7,19 @@ void mainFrame(){
 }
 
 void loadBackgroundImage(){
-	if(background.isEmpty()){
-		background.load();
+	if(background.isImageEmpty()){
+		background.loadImage();
 	}
-	background.show();
-	background.setSize(0, 0, windowWidth, windowHeight);
+	background.showImage();
+	background.setImageSize(0, 0, windowWidth, windowHeight);
 }
 
 void loadTitleImage(){
-	if(title.isEmpty()){
-		title.load();
+	if(title.isImageEmpty()){
+		title.loadImage();
 	}
-	title.toTransparent(0, 0, 0, alpha);
-	title.setSize(centerTitleX(), 20, drawTitleWidth(), drawTitleHight());
+	title.showTransparentBackgroundForImage(0, 0, 0, alpha);
+	title.setImageSize(centerTitleX(), 20, drawTitleWidth(), drawTitleHight());
 	if (alpha < 255)
 		alpha++;
 }
@@ -29,11 +29,11 @@ GLfloat centerTitleX(){
 }
 
 GLfloat drawTitleWidth(){
-	return title.getWidth() * 1.5;
+	return title.getImageWidth() * 1.5;
 }
 
 GLfloat drawTitleHight(){
-	return title.getHeight() * 1.5;
+	return title.getImageHeight() * 1.5;
 }
 
 void drawStartFont(){

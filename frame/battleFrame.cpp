@@ -12,11 +12,11 @@ void battleFrame(){
 }
 
 void loadSeaImage(){
-	if(sea.isEmpty()){
-		sea.load();
+	if(sea.isImageEmpty()){
+		sea.loadImage();
 	}
-	sea.show();
-	sea.setSize(0, 0, windowWidth, windowHeight);
+	sea.showImage();
+	sea.setImageSize(0, 0, windowWidth, windowHeight);
 }
 
 void drawPlayerCheckerBoard(){
@@ -52,7 +52,7 @@ void loadPlayerShipGroupImage(){
 		toTransparentImage(ship[i].getImage());
 		if (ship[shipMOVE].getRealSizeWidth() > ship[shipMOVE].getRealSizeHeight() || ship[i].getRotation())
 			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
-		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getWidth(), ship[i].getHeight(), 1, 1, 1);
+		setImageSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getImageWidth(), ship[i].getImageHeight(), 1, 1, 1);
 		glLoadIdentity();
 		gluOrtho2D(0, windowWidth, windowHeight, 0);
 	}
@@ -76,11 +76,11 @@ void judgePlayerOrComputer(){
 }
 
 void judgeToHit(){
-	if(fire.isEmpty()){
-		fire.load();
+	if(fire.isImageEmpty()){
+		fire.loadImage();
 	}
-	if(wave.isEmpty()){
-		wave.load();
+	if(wave.isImageEmpty()){
+		wave.loadImage();
 	}
 	player.showBoard(140, 310, fire.getImage(), wave.getImage());
 	computer.showBoard(800, 310, fire.getImage(), wave.getImage());

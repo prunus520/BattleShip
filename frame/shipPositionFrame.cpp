@@ -20,19 +20,19 @@ void randomComputerShips(){
 }
 
 void loadRadarBoardImage(){
-	if(radarBoard.isEmpty()){
-		radarBoard.load();
+	if(radarBoard.isImageEmpty()){
+		radarBoard.loadImage();
 	}
-	radarBoard.show();
-	radarBoard.setSize(0, 0, windowWidth, windowHeight);
+	radarBoard.showImage();
+	radarBoard.setImageSize(0, 0, windowWidth, windowHeight);
 }
 
 void loadBackImage(){
-	if(back.isEmpty()){
-		back.load();
+	if(back.isImageEmpty()){
+		back.loadImage();
 	}
-	back.show(TRANSPARENT_BACKGROUND);
-	back.setSize(0, 0, 100, 100);
+	back.showTransparentBackgroundForImage();
+	back.setImageSize(0, 0, 100, 100);
 }
 
 void useGreenPaint(){
@@ -45,24 +45,24 @@ void drawCheckerBoard(){
 }
 
 void loadShipGroupImage(){
-	if(ship[0].isEmpty()){
+	if(ship[0].isImageEmpty()){
 		int position[6][2] = {{1108, 186}, {1161, 186}, {1228, 186}, {1100, 280}, {1202, 280}, {1010, 170}};
 		float size[6][2] = {{16, 67.2}, {24, 65.6}, {16, 67.2}, {65, 212.5}, {50, 212.5}, {54, 336}};
 		int length[6][2] = {{1, 1}, {1, 1}, {1, 1}, {1, 3}, {1, 3}, {1, 5}};
 		for(int i = 5; i != -1; --i){
-			ship[i].load();
+			ship[i].loadImage();
 			ship[i].setPosition(position[i][0], position[i][1]);
 			ship[i].setSizes(size[i][0], size[i][1]);
 			ship[i].setLength(length[i][0], length[i][1]);
 		}
 	}
 	for (int i = 5; i != -1; --i){
-		ship[i].show(TRANSPARENT_BACKGROUND);
-		ship[i].setSize(ship[i].getX(), ship[i].getY(), ship[i].getSizeWidth(), ship[i].getSizeHeight(), 0, 0, 0);
+		ship[i].showTransparentBackgroundForImage();
+		ship[i].setImageSizeAndColor(ship[i].getX(), ship[i].getY(), ship[i].getSizeWidth(), ship[i].getSizeHeight(), 0, 0, 0);
 		if (ship[i].getRotation())
 			Counterclockwise_Degree_Rotation(ship[i].getNewX(), ship[i].getNewY());
 
-		ship[i].setSize(ship[i].getNewX(), ship[i].getNewY(), ship[i].getSizeWidth(), ship[i].getSizeHeight(), 0, 1, 0);
+		ship[i].setImageSizeAndColor(ship[i].getNewX(), ship[i].getNewY(), ship[i].getSizeWidth(), ship[i].getSizeHeight(), 0, 1, 0);
 		glLoadIdentity();
 		gluOrtho2D(0, windowWidth, windowHeight, 0);
 	}

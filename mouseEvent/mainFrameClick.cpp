@@ -12,6 +12,6 @@ void startTheGame(int x, int y){
 }
 
 void releaseMainImage(){
-	background.release();
-	title.release();
+	background.releaseImage();
+	title.releaseImage();
 }

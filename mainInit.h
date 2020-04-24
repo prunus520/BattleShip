@@ -18,8 +18,6 @@
 #define battle_ship_alarm_red glColor3f(0.4372, 0.0313, 0.0941)
 #define battle_ship_alarm_green glColor3f(0.0941, 0.4372, 0.0313)
 
-#define TRANSPARENT_BACKGROUND true
-
 enum Frame{MAIN_FRAME, SHIP_POSITION_FRAME, BATTLE_FRAME};
 extern Frame frame;
 
