@@ -4,7 +4,8 @@ void shipPositionFrameClick(int state, int x, int y){
 	moveShip(state, x, y);
 	placeShip(state, x, y);
 	clickButton(state, x, y);
-	checkShipState(state, x, y);
+//	·Æ¹«ÂIÀ»¾É­Pµøµ¡±Y¼ì 
+//	checkShipState(state, x, y);
 }
 
 void moveShip(int state, int x, int y){

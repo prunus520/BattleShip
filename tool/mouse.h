@@ -1,12 +1,11 @@
 #ifndef MOUSE_H
 #define MOUSE_H
+class Mouse{	
+	struct Coordinate{
+		int x;
+		int y;
+	};
 
-struct Coordinate{
-	int x;
-	int y;
-};
-
-class Mouse{
 	public:
 		Mouse() = default;
 		void setMotionCoordinate(int, int);

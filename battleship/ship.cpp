@@ -7,10 +7,8 @@ Ship::Ship(const char *imagePath):Image(imagePath){
 void Ship::setPosition(GLfloat x, GLfloat y){
 	position.x = x;
 	position.y = y;
-	oldPosition.x = x;
-	oldPosition.y = y;
-	newPosition.x = x;
-	newPosition.y = y;
+	setNewPosition(x, y);
+	setOldPosition(x, y);
 }
 
 void Ship::setNewPosition(GLfloat x, GLfloat y){

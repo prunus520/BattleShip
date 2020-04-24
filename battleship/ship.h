@@ -4,28 +4,27 @@
 #include <GL/glut.h>
 #include <opencv/cv.h>
 #include "../tool/image.h"
-
-struct CoordinateGL{
-	GLfloat x;
-	GLfloat y;
-};
-
-struct Size{
-	GLfloat width;
-	GLfloat height;
-};
-
-struct Field{
-	int row;
-	int column;
-};
-
-struct Length{
-	int width;
-	int height;
-};
-
 class Ship:public Image{
+	struct Coordinate{
+		GLfloat x;
+		GLfloat y;
+	};
+	
+	struct Size{
+		GLfloat width;
+		GLfloat height;
+	};
+	
+	struct Field{
+		int row;
+		int column;
+	};
+	
+	struct Length{
+		int width;
+		int height;
+	};
+
 	public:
 		Ship(const char*);
 		void setPosition(GLfloat, GLfloat);
@@ -65,9 +64,9 @@ class Ship:public Image{
 		Size size;
 		Size realSize;
 		Length length;
-		CoordinateGL position;
-		CoordinateGL oldPosition;
-		CoordinateGL newPosition;
+		Coordinate position;
+		Coordinate oldPosition;
+		Coordinate newPosition;
 		Field head = {0, 0};
 		Field body = {0, 0};
 		bool rotation = false;

@@ -91,12 +91,12 @@ void drawTest(){
 						mouse.getMoveX(), mouse.getMoveY(),
 						mouse.getMotionX(), mouse.getMotionY());
 
-	player.testBoardTable(300, 0);
-	computer.testBoardTable(500, 0);
+//	player.testBoardTable(300, 0);
+//	computer.testBoardTable(500, 0);
 	player.testShipTable(700, 0);
 	computer.testShipTable(900, 0);
-	player.testHitTable(1100, 0);
-	computer.testHitTable(1200, 0);
+//	player.testHitTable(1100, 0);
+//	computer.testHitTable(1200, 0);
 }
 void updateCanvas(){
 	glutPostRedisplay();
@@ -157,7 +157,7 @@ void setMouseMoveCoordinates(int x, int y){
 
 void catchMousePassiveMotion(int x, int y){
 	setMouseMotionCoordinates(x, y);
-	shipPositionFrameMotion(x, y);
+	shipPositionFrameMotion();
 	glutPostRedisplay();
 }
 

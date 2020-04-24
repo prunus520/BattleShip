@@ -3,7 +3,7 @@
 
 #include "../mainInit.h"
 
-void shipPositionFrameMotion(int x, int y);
-void motionShip(int x, int y);
+void shipPositionFrameMotion();
+void motionShip();
 
 #endif
