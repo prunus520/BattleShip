@@ -5,7 +5,7 @@ void shipPositionFrameClick(int state, int x, int y){
 	placeShip(state, x, y);
 	clickButton(state, x, y);
 //	·Æ¹«ÂIÀ»¾É­Pµøµ¡±Y¼ì 
-//	checkShipState(state, x, y);
+	checkShipState(state, x, y);
 }
 
 void moveShip(int state, int x, int y){
@@ -82,7 +82,7 @@ void clickButton(int state, int x, int y){
 }
 
 void checkShipState(int state, int x, int y){
-	if (state == 0){
+	if (state == 0 && shipMOVE != -1){
 		for (int j = ship[shipMOVE].getShipHeadColumn(); j <= ship[shipMOVE].getShipBodyColumn(); j++)
 			for (int k = ship[shipMOVE].getShipHeadRow(); k <= ship[shipMOVE].getShipBodyRow(); k++){
 				if (ship[shipMOVE].getShipRotation())
