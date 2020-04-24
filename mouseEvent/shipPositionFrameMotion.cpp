@@ -7,7 +7,7 @@ void shipPositionFrameMotion(){
 
 void motionShip(){
 	if (frame == SHIP_POSITION_FRAME){
-		ship[shipMOVE].setOldShipPosition(ship[shipMOVE].getNewShipPositionX(), ship[shipMOVE].getNewShipPositionY());
+		ship[shipMOVE].changeOldShipPositionByNewShipPosition();
 		shipMOVE = -1;
 	}
 }

@@ -58,6 +58,8 @@ class ShipImage:public Image{
 		GLfloat getOldShipPositionX();
 		GLfloat getOldShipPositionY();
 		
+		void changeOldShipPositionByNewShipPosition();
+		
 		void setShipField(int, int, int, int);
 		int getShipHeadRow();
 		int getShipHeadColumn();

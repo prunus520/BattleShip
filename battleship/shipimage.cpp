@@ -107,6 +107,10 @@ GLfloat ShipImage::getOldShipPositionY(){
 	return oldPosition.y;
 }
 
+void ShipImage::changeOldShipPositionByNewShipPosition(){
+	setOldShipPosition(newPosition.x, newPosition.y);
+}
+
 void ShipImage::setShipField(int headRow, int headColumn, int bodyRow, int bodyColumn){
 	head.row = headRow;
 	head.column = headColumn;
