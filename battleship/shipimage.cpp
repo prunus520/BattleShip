@@ -100,8 +100,8 @@ bool ShipImage::isShipPositionWithinRange(int x, int y){
 }
 
 bool ShipImage::isNewShipPositionWithoutRange(int minX, int maxX, int minY, int maxY){
-	return (newPosition.x < minX || newPosition.x + (rotation ? size.height: size.width) > maxX) ||
-				 (newPosition.y < minY || newPosition.y + (rotation ? size.width: size.height) > maxY);
+	return (newPosition.x < minX || newPosition.x + (rotation ? size.height: size.width) > maxX + (maxX - minX) / 8 * 0.7) ||
+				 (newPosition.y < minY || newPosition.y + (rotation ? size.width: size.height) > maxY + (maxX - minX) / 8 * 0.7);
 }
 
 void ShipImage::placeShipInCell(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
