@@ -1,12 +1,17 @@
 #include "shipPositionFrameClick.h"
 
 void shipPositionFrameClick(int state, int x, int y){
-	clickedShipID(state, x, y);
+	clickShip(state, x, y);
 	placeShip(state, x, y);
 	clickButton(state, x, y);
 }
 
-void clickedShipID(int state, int x, int y){
+void clickShip(int state, int x, int y){
+	clickShipID(state, x, y);
+	clearPlaceShipCell(state, x, y);
+}
+
+void clickShipID(int state, int x, int y){
 	for (int i = 0; i != 6; ++i){
 		if (state == 0 && ship[i].isShipPositionWithinRange(x, y)){
 			shipMOVE = ship[i].getID();
@@ -15,27 +20,31 @@ void clickedShipID(int state, int x, int y){
 	}
 }
 
+void clearPlaceShipCell(int state, int x, int y){
+	if (state == 0 && ship[shipMOVE].isShipPositionWithinRange(x, y)){
+		for (int row = ship[shipMOVE].getShipHeadRow(); row <= ship[shipMOVE].getShipBodyRow(); row++){
+			for (int column = ship[shipMOVE].getShipHeadColumn(); column <= ship[shipMOVE].getShipBodyColumn(); column++){
+				player.setShipCell(row, column, 0);
+			}
+		}
+	}
+}
+
 void placeShip(int state, int x, int y){
 	if (shipMOVE != -1){
 		if (state == 1 && ship[shipMOVE].isNewShipPositionWithoutRange(123, 701, 167, 745)){
-			initShipPosition();
+			initializeShipPosition();
 		}
 		else if (state == 1 && ship[shipMOVE].isShipPositionWithinRange(x, y)){
-			placeShipInCell(123, 167, 578, 578);
-			for (int i = ship[shipMOVE].getShipHeadColumn(); i <= ship[shipMOVE].getShipBodyColumn(); i++){
-				for (int j = ship[shipMOVE].getShipHeadRow(); j <= ship[shipMOVE].getShipBodyRow(); j++){
-					if (player.getShipCell(j, i) != 0){
-						initShipPosition();
+			ship[shipMOVE].placeShipInCell(123, 167, 578, 578);
+			for (int row = ship[shipMOVE].getShipHeadRow(); row <= ship[shipMOVE].getShipBodyRow(); row++){
+				for (int column = ship[shipMOVE].getShipHeadColumn(); column <= ship[shipMOVE].getShipBodyColumn(); column++){
+					if (player.getShipCell(row, column) != 0){
+						initializeShipPosition();
 					}
-					else{
-//						width&height
-						if (ship[i].getShipRotation()){
-							player.setShipCell(j, i, ship[shipMOVE].getShipLengthWidth());
-						}
-						else {
-							player.setShipCell(j, i, ship[shipMOVE].getShipLengthHeight());
-						}
-						ship[i].setShipReady(true);
+					else {
+						player.setShipCell(row, column, ship[shipMOVE].getShipLengthHeight());
+						ship[shipMOVE].setShipReady(true);
 					}
 				}
 			}
@@ -43,11 +52,9 @@ void placeShip(int state, int x, int y){
 	}
 }
 
-void initShipPosition(){
+void initializeShipPosition(){
 	ship[shipMOVE].initializeOldAndNewShipPositionByShipPosition();
 	if (ship[shipMOVE].getShipRotation()){
-//		width&height
-		transWidthHeight();
 		ship[shipMOVE].notShipRotate();
 	}
 	ship[shipMOVE].setShipReady(false);
@@ -63,7 +70,7 @@ void clickButton(int state, int x, int y){
 	}
 	else if (state == 0 && x >= 960 && x <= 1110 && y >= 620 && y <= 770){
 		resetShipsPosition();
-}
+	}
 }
 
 void backToMainFrame(){
@@ -91,8 +98,6 @@ void resetShipsPosition(){
 	for (int i = 5; i != -1; --i){
 		ship[i].initializeOldAndNewShipPositionByShipPosition();
 		if (ship[i].getShipRotation()){
-	//		width&height
-			transWidthHeight();
 			ship[i].notShipRotate();
 		}
 		ship[i].setShipReady(false);

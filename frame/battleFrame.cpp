@@ -48,10 +48,9 @@ void drawComputerCheckerBoard(){
 void loadPlayerShipGroupImage(){
 	for (int i = 5; i >= 0; i--){
 		shipMOVE = i;
-		placeShipInCell(140, 310, 540, 540);
+		ship[shipMOVE].placeShipInCell(140, 310, 540, 540);
 		toTransparentImage(ship[i].getImage());
-//		width&height
-		if (ship[shipMOVE].getShipRealSizeWidth() > ship[shipMOVE].getShipRealSizeHeight() || ship[i].getShipRotation())
+		if (ship[i].getShipRotation())
 			Counterclockwise_Degree_Rotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
 		setImageSize(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY(), ship[i].getImageWidth(), ship[i].getImageHeight(), 1, 1, 1);
 		glLoadIdentity();

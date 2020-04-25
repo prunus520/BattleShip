@@ -161,7 +161,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit22]
-FileName=battleship\ship.cpp
+FileName=battleship\shipimage.cpp
 CompileCpp=1
 Folder=battleship
 Compile=1
@@ -171,7 +171,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit23]
-FileName=battleship\ship.h
+FileName=battleship\shipimage.h
 CompileCpp=1
 Folder=battleship
 Compile=1

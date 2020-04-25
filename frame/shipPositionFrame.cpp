@@ -4,10 +4,8 @@ void shipPositionFrame(){
 	randomComputerShips();
 	loadRadarBoardImage();
 	loadBackImage();
-	useGreenPaint();
-	drawCheckerBoard();
 	loadShipGroupImage();
-	moveShipByMouse();
+	drawCheckerBoard();
 }
 
 void randomComputerShips(){
@@ -35,16 +33,8 @@ void loadBackImage(){
 	back.setImageSize(0, 0, 100, 100);
 }
 
-void useGreenPaint(){
-	glDisable(GL_TEXTURE_2D);
-	glColor3f(0.0941, 0.5372, 0.0313);
-}
-
-void drawCheckerBoard(){
-	checkerboard(123, 167, 578, 578, table, table, 2);
-}
-
 void loadShipGroupImage(){
+	useGreenPaint();
 	if(ship[0].isImageEmpty()){
 		int position[6][2] = {{1108, 186}, {1161, 186}, {1228, 186}, {1100, 280}, {1202, 280}, {1010, 170}};
 		float size[6][2] = {{16, 67.2}, {24, 65.6}, {16, 67.2}, {65, 212.5}, {50, 212.5}, {54, 336}};
@@ -68,21 +58,12 @@ void loadShipGroupImage(){
 	}
 }
 
-void moveShipByMouse(){
-	if (mouse.getMouseClicked()){
-		player.initShips();
-		for (int i = 0; i < 6; i++){
-			if (123 > ship[i].getNewShipPositionX() || 701 < ship[i].getNewShipPositionX() || 167 > ship[i].getNewShipPositionY() || 745 < ship[i].getNewShipPositionY()){
-				ship[i].setShipReady(false);
-			}
-			else{
-				for (int j = ship[i].getShipHeadColumn(); j <= ship[i].getShipBodyColumn(); j++)
-					for (int k = ship[i].getShipHeadRow(); k <= ship[i].getShipBodyRow(); k++){
-//						width&height
-						player.setShipCell(k, j, ship[i].getShipRotation() ? ship[i].getShipLengthWidth() : ship[i].getShipLengthHeight());
-						ship[i].setShipReady(true);
-					}
-			}
-		}
-	}
+void useGreenPaint(){
+	glDisable(GL_TEXTURE_2D);
+	glColor3f(0.0941, 0.5372, 0.0313);
+}
+
+void drawCheckerBoard(){
+	useGreenPaint();
+	checkerboard(123, 167, 578, 578, table, table, 2);
 }

@@ -23,10 +23,8 @@ void rightClickedShipID(int state, int x, int y){
 void rotateShipDirection(int state, int x, int y){
 	if(state == 0 && !ship[shipMOVE].isNewShipPositionWithoutRange(123, 701, 167, 745)){
 		if(checkRotationSuccess()){
-			rotateShip();
-			ship[shipMOVE].resetField();
+			rotatedShip(state, x, y);
 		}
-		placeShipInCell(123, 167, 578, 578);
 		shipMOVE = -1;
 	}
 }
@@ -49,19 +47,26 @@ bool checkRotationArrayIsZero(int row, int column){
 	return player.getShipCell(column + ship[shipMOVE].getShipHeadRow(), row + ship[shipMOVE].getShipHeadColumn());
 }
 
-void rotateShip(){
+void rotatedShip(int state, int x, int y){
 	ship[shipMOVE].notShipRotate();
-	ship[shipMOVE].notShipReady();
-//	width&height
-	transWidthHeight();
+	clearShipCellBeforeRotation(state, x, y);
+	ship[shipMOVE].resetField();
 	rotateShipBoard();
+	ship[shipMOVE].placeShipInCell(123, 167, 578, 578);
+}
+
+void clearShipCellBeforeRotation(int state, int x, int y){
+	for (int row = ship[shipMOVE].getShipHeadRow(); row <= ship[shipMOVE].getShipBodyRow(); ++row){
+		for (int column = ship[shipMOVE].getShipHeadColumn(); column <= ship[shipMOVE].getShipBodyColumn(); ++column){
+			player.setShipCell(row, column, 0);
+		}
+	}
 }
 
 void rotateShipBoard(){
 	for (int row = ship[shipMOVE].getShipHeadRow(); row <= ship[shipMOVE].getShipBodyRow(); ++row){
 		for (int column = ship[shipMOVE].getShipHeadColumn(); column <= ship[shipMOVE].getShipBodyColumn(); ++column){
-//			width&height
-			player.setShipCell(row, column, ship[shipMOVE].getShipRotation() ? ship[shipMOVE].getShipLengthWidth() : ship[shipMOVE].getShipLengthHeight());
+			player.setShipCell(row, column, ship[shipMOVE].getShipLengthHeight());
 		}
 	}
 }

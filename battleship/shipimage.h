@@ -34,12 +34,6 @@ class ShipImage:public Image{
 		GLfloat getShipSizeWidth();
 		GLfloat getShipSizeHeight();
 		
-		void setShipRealSize(GLfloat, GLfloat);
-		void setShipRealSizeWidth(GLfloat);
-		void setShipRealSizeHeight(GLfloat);
-		GLfloat getShipRealSizeWidth();
-		GLfloat getShipRealSizeHeight();
-		
 		void setShipLength(int, int);
 		void setShipLengthWidth(int);
 		void setShipLengthHeight(int);
@@ -62,6 +56,7 @@ class ShipImage:public Image{
 		void initializeOldAndNewShipPositionByShipPosition();
 		bool isShipPositionWithinRange(int, int);
 		bool isNewShipPositionWithoutRange(int, int, int, int);
+		void placeShipInCell(GLfloat, GLfloat, GLfloat, GLfloat);
 		
 		void setShipField(int, int, int, int);
 		void resetField();
@@ -83,7 +78,6 @@ class ShipImage:public Image{
 		static int IDCouter;
 		int ID;
 		Size size;
-		Size realSize;
 		Length length;
 		Coordinate position;
 		Coordinate newPosition;

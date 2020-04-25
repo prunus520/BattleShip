@@ -28,12 +28,6 @@ uchar alpha = 0;
 
 Battleship computer, player;
 
-void placeShipInCell(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
-//	width&height
-	ship[shipMOVE].setNewShipPosition(x + ship[shipMOVE].getShipHeadColumn() * width / 8 + (ship[shipMOVE].getShipLengthWidth() * width / 8 - ship[shipMOVE].getShipRealSizeWidth()) / 2,
-																	y + ship[shipMOVE].getShipHeadRow() * height / 8 + (ship[shipMOVE].getShipLengthHeight() * height / 8 - ship[shipMOVE].getShipRealSizeHeight()) / 2);
-}
-
 void player_computer_sleep_Timer(int id){
 	if (player_computer_sleep)
 		player_computer_sleep = false;
@@ -61,18 +55,6 @@ void glint_START_Timer(int id){
 
 	if (frame == MAIN_FRAME)
 		glutTimerFunc(200, glint_START_Timer, id);
-}
-
-//width&height
-void transWidthHeight(){
-	GLfloat tempf;
-	tempf = ship[shipMOVE].getShipRealSizeWidth();
-	ship[shipMOVE].setShipRealSizeWidth(ship[shipMOVE].getShipRealSizeHeight());
-	ship[shipMOVE].setShipRealSizeHeight(tempf);
-	int tempi;
-	tempi = ship[shipMOVE].getShipLengthWidth();
-	ship[shipMOVE].setShipLengthWidth(ship[shipMOVE].getShipLengthHeight());
-	ship[shipMOVE].setShipLengthHeight(tempi);
 }
 
 bool checkRangeX(int x, int min, int max){

@@ -7,9 +7,8 @@ void shipPositionFrame();
 void randomComputerShips();
 void loadRadarBoardImage();
 void loadBackImage();
+void loadShipGroupImage();
 void useGreenPaint();
 void drawCheckerBoard();
-void loadShipGroupImage();
-void moveShipByMouse();
 
 #endif
