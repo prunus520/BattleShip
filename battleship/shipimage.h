@@ -4,6 +4,8 @@
 #include <GL/glut.h>
 #include <opencv/cv.h>
 #include "../tool/image.h"
+#include "../tool/draw.h"
+
 class ShipImage:public Image{
 	struct Coordinate{
 		GLfloat x;
@@ -69,6 +71,7 @@ class ShipImage:public Image{
 		void setShipRotation(bool);
 		bool getShipRotation();
 		void notShipRotate();
+		void rotateShipImage();
 		bool checkRotationLengthSuccess();
 		
 		void setShipReady(bool);

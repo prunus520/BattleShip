@@ -26,25 +26,6 @@ bool palyer_down = true;
 
 Battleship computer, player;
 
-void player_computer_sleep_Timer(int id){
-	if (player_computer_sleep)
-		player_computer_sleep = false;
-	else
-		player_computer_sleep = true;
-}
-
-void player_computer_flag_Timer(int id){
-	if (player_computer_flag){
-		player_computer_flag = false;
-		do{
-			player.setRow(rand() % 8);
-			player.setColumn(rand() % 8);
-		} while (player.getBoardCell() != -1);
-	}
-	else if (player_computer_sleep == false)
-		player_computer_flag = true;
-}
-
 bool checkRangeX(int x, int min, int max){
 	return x >= min && x <= max;
 }

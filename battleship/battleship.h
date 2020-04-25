@@ -15,14 +15,15 @@ class Battleship{
 		void setColumn(int);
 		void setShipCell(int, int, int);
 		int getShipCell(int, int);
-		int getHitCell(int);
+		int getHitShipCell();
+		int getHitCell();
 		int getBoardCell();
 		void initBoard();
 		void initShips();
 		void initShots();
 		void initHits();
 		void randomShips();
-		void showBoard(int, int, IplImage *, IplImage *);
+		void showHitImage(int, int, IplImage *, IplImage *);
 		void checkShots();
 		void testShipTable(int, int);
 		void testHitTable(int, int);

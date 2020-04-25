@@ -76,7 +76,7 @@ void switchFrame(){
 			shipPositionFrame::display();
 			break;
 		case BATTLE_FRAME:
-			battleFrame::battleFrame();
+			battleFrame::display();
 			break;
 	}
 }

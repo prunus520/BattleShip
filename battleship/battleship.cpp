@@ -20,8 +20,12 @@ int Battleship::getShipCell(int newRow, int newColumn){
 	return ships[newRow][newColumn];
 }
 
-int Battleship::getHitCell(int index){
-	return hits[index];
+int Battleship::getHitShipCell(){
+	return hits[0];
+}
+
+int Battleship::getHitCell(){
+	return hits[1];
 }
 
 int Battleship::getBoardCell(){
@@ -77,16 +81,12 @@ void Battleship::randomShips(){
 	}
 }
 
-void Battleship::showBoard(int x, int y, IplImage *hit, IplImage *nohit){
-	for (int i = 0; i < 8; i++){
-		for (int j = 0; j < 8; j++){
-			if (board[i][j] == 0){
-				showImage(nohit);
-				setImageSize(x + 1.5 + j * 67.5, y + 1.5 + i * 67.5, 64.5, 64.5);
-			}
-			else if (board[i][j] == 1){
-				toTransparentImage(hit);
-				setImageSize(x + 1.5 + j * 67.5, y + 1.5 + i * 67.5, 64.5, 64.5);
+void Battleship::showHitImage(int x, int y, IplImage *hit, IplImage *nohit){
+	for (int row = 0; row != 8; ++row){
+		for (int column = 0; column != 8; ++column){
+			if (board[row][column] != -1){
+				board[row][column] == 0 ? showImage(nohit) : toTransparentImage(hit);
+				setImageSize(x + 1.5 + column * 67.5, y + 1.5 + row * 67.5, 64.5, 64.5);
 			}
 		}
 	}
@@ -174,10 +174,7 @@ void Battleship::testHitTable(int x, int y){
 	setFontHeight(20);
 	setFontXY(x, y);
 	printFont("hit:\n");
-	for (int i = 0; i < 2; i++){
-			printFont("%d ", getHitCell(i));
-		printFont("\n");
-	}
+	printFont("%d/%d ", getHitShipCell(), getHitCell());
 }
 
 void Battleship::testBoardTable(int x, int y){

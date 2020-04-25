@@ -4,14 +4,30 @@
 #include "../mainInit.h"
 
 namespace battleFrame{
-	void battleFrame();
+	void display();
+	
 	void loadSeaImage();
+	
+	void drawCheckerBoard();
 	void drawPlayerCheckerBoard();
 	void drawComputerCheckerBoard();
-	void loadPlayerShipGroupImage();
+	void printCheckerBoardMark(GLfloat, GLfloat, GLfloat, GLfloat);
+	void printCheckerBoardAlphabet(GLfloat, GLfloat);
+	void printCheckerBoardNumber(GLfloat, GLfloat);
+	
+	void loadPlayerShipsGroupImage();
+	void initializeCoordinate();
+	
+	void loadHitImage();
+	void loadFireImage();
+	void loadWaveImage();
+	void showHitImage();
+	
+	void judgeGame();
 	void judgePlayerOrComputer();
-	void judgeToHit();
-	void drawWinOrLoseFont();
+	void player_computer_sleep_Timer(int);
+	void player_computer_flag_Timer(int);
+	void printWinOrLoseFont();
 }
 
 #endif

@@ -154,6 +154,10 @@ void ShipImage::notShipRotate(){
 	rotation = !rotation;
 }
 
+void ShipImage::rotateShipImage(){
+	counterclockwiseDegreeRotation(newPosition.x, newPosition.y);
+}
+
 bool ShipImage::checkRotationLengthSuccess(){
 	return (head.column + (rotation ? length.width: length.height) - 1 < 8) && (head.row + (rotation ? length.height: length.width) - 1 < 8);
 }

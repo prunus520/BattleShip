@@ -44,8 +44,6 @@ extern bool palyer_down;
 
 extern Battleship computer, player;
 
-void player_computer_sleep_Timer(int);
-void player_computer_flag_Timer(int);
 bool checkRangeX(int, int, int);
 bool checkRangeY(int, int, int);
 

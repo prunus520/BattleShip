@@ -20,7 +20,7 @@ namespace shipPositionFrame{
 	void loadImage(){
 		loadRadarBoardImage();
 		loadBackImage();
-		loadShipGroupImage();
+		loadShipsGroupImage();
 	}
 	
 	void loadRadarBoardImage(){
@@ -38,7 +38,7 @@ namespace shipPositionFrame{
 		back.setImageSize(0, 0, 100, 100);
 	}
 	
-	void loadShipGroupImage(){
+	void loadShipsGroupImage(){
 		initializeShips();
 		loadShipsImage();
 	}
@@ -72,7 +72,7 @@ namespace shipPositionFrame{
 	
 	void loadGreenShipImage(int i){
 		if (ship[i].getShipRotation()){
-			counterclockwiseDegreeRotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
+			ship[i].rotateShipImage();
 		}
 		ship[i].setImageSizeAndColor(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY(), ship[i].getShipSizeWidth(), ship[i].getShipSizeHeight(), 0, 1, 0);
 	}

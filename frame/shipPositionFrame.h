@@ -12,7 +12,7 @@ namespace shipPositionFrame{
 	void loadImage();
 	void loadRadarBoardImage();
 	void loadBackImage();
-	void loadShipGroupImage();
+	void loadShipsGroupImage();
 	
 	void initializeShips();
 	void loadShipsImage();
