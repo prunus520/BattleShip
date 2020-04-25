@@ -105,8 +105,8 @@ bool ShipImage::isNewShipPositionWithoutRange(int minX, int maxX, int minY, int 
 }
 
 void ShipImage::placeShipInCell(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
-	setNewShipPosition(x + head.column * width / 8 + (length.width * width / 8 - size.width) / 2,
-										 y + head.row * height / 8 + (length.height * height / 8 - size.height) / 2);
+	setNewShipPosition(x + head.column * width / 8 + ((rotation ? length.height: length.width) * width / 8 - (rotation ? size.height: size.width)) / 2,
+										 y + head.row * height / 8 + ((rotation ? length.width: length.height) * height / 8 - (rotation ? size.width: size.height)) / 2);
 }
 
 void ShipImage::setShipField(int headRow, int headColumn, int bodyRow, int bodyColumn){
