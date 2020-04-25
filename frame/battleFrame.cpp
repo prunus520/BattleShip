@@ -1,105 +1,107 @@
 #include "battleFrame.h"
 
-void battleFrame(){
-	loadSeaImage();
-	drawPlayerCheckerBoard();
-	drawComputerCheckerBoard();
-	loadPlayerShipGroupImage();
-	judgePlayerOrComputer();
-	judgeToHit();
-	Sleep(100);
-	drawWinOrLoseFont();
-}
-
-void loadSeaImage(){
-	if(sea.isImageEmpty()){
-		sea.loadImage();
+namespace battleFrame{
+	void battleFrame(){
+		loadSeaImage();
+		drawPlayerCheckerBoard();
+		drawComputerCheckerBoard();
+		loadPlayerShipGroupImage();
+		judgePlayerOrComputer();
+		judgeToHit();
+		Sleep(100);
+		drawWinOrLoseFont();
 	}
-	sea.showImage();
-	sea.setImageSize(0, 0, windowWidth, windowHeight);
-}
-
-void drawPlayerCheckerBoard(){
-	glColor3f(0, 0, 1);
-	setFontHeight(67);
 	
-	setFontXY(85, 314);
-	for (int i = 65; i < 65 + table; i++)
-		printFont("%c\n", i);
-	setFontXY(140, 247);
-	for (int i = 1; i < 1 + table; i++)
-		printFont("% d ", i);
-	checkerboard(140, 310, 540, 540, table, table, 5);
-}
-
-void drawComputerCheckerBoard(){
-	glColor3f(0, 0, 1);
-	setFontHeight(67);
+	void loadSeaImage(){
+		if(sea.isImageEmpty()){
+			sea.loadImage();
+		}
+		sea.showImage();
+		sea.setImageSize(0, 0, windowWidth, windowHeight);
+	}
 	
-	setFontXY(745, 314);
-	for (int i = 65; i < 65 + table; i++)
-		printFont("%c\n", i);
-	setFontXY(800, 247);
-	for (int i = 1; i < 1 + table; i++)
-		printFont("% d ", i);
-	checkerboard(800, 310, 540, 540, table, table, 5);
-}
-
-void loadPlayerShipGroupImage(){
-	for (int i = 5; i >= 0; i--){
-		shipMOVE = i;
-		ship[i].placeShipInCell(140, 310, 540, 540);
-		toTransparentImage(ship[i].getImage());
-		if (ship[i].getShipRotation())
-			Counterclockwise_Degree_Rotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
-		ship[i].loadNewShipPosition();
-		glLoadIdentity();
-		gluOrtho2D(0, windowWidth, windowHeight, 0);
+	void drawPlayerCheckerBoard(){
+		glColor3f(0, 0, 1);
+		setFontHeight(67);
+		
+		setFontXY(85, 314);
+		for (int i = 65; i < 65 + table; i++)
+			printFont("%c\n", i);
+		setFontXY(140, 247);
+		for (int i = 1; i < 1 + table; i++)
+			printFont("% d ", i);
+		checkerboard(140, 310, 540, 540, table, table, 5);
 	}
-}
-
-void judgePlayerOrComputer(){
-	if (player_computer_flag && player_computer_sleep == false)
-		glutTimerFunc(1, player_computer_sleep_Timer, 2);
-
-	if (player_computer_flag && player_computer_sleep && palyer_down && palyer_init){
-		computer.checkShots();
-		glutTimerFunc(500, player_computer_flag_Timer, 3);
-		palyer_down = false;
-		palyer_init = false;
+	
+	void drawComputerCheckerBoard(){
+		glColor3f(0, 0, 1);
+		setFontHeight(67);
+		
+		setFontXY(745, 314);
+		for (int i = 65; i < 65 + table; i++)
+			printFont("%c\n", i);
+		setFontXY(800, 247);
+		for (int i = 1; i < 1 + table; i++)
+			printFont("% d ", i);
+		checkerboard(800, 310, 540, 540, table, table, 5);
 	}
-	else if (player_computer_flag == false && player_computer_sleep){
-		player.checkShots();
-		palyer_down = true;
-		palyer_init = true;
+	
+	void loadPlayerShipGroupImage(){
+		for (int i = 5; i >= 0; i--){
+			shipMOVE = i;
+			ship[i].placeShipInCell(140, 310, 540, 540);
+			toTransparentImage(ship[i].getImage());
+			if (ship[i].getShipRotation())
+				Counterclockwise_Degree_Rotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
+			ship[i].loadNewShipPosition();
+			glLoadIdentity();
+			gluOrtho2D(0, windowWidth, windowHeight, 0);
+		}
 	}
-}
-
-void judgeToHit(){
-	if(fire.isImageEmpty()){
-		fire.loadImage();
+	
+	void judgePlayerOrComputer(){
+		if (player_computer_flag && player_computer_sleep == false)
+			glutTimerFunc(1, player_computer_sleep_Timer, 2);
+	
+		if (player_computer_flag && player_computer_sleep && palyer_down && palyer_init){
+			computer.checkShots();
+			glutTimerFunc(500, player_computer_flag_Timer, 3);
+			palyer_down = false;
+			palyer_init = false;
+		}
+		else if (player_computer_flag == false && player_computer_sleep){
+			player.checkShots();
+			palyer_down = true;
+			palyer_init = true;
+		}
 	}
-	if(wave.isImageEmpty()){
-		wave.loadImage();
+	
+	void judgeToHit(){
+		if(fire.isImageEmpty()){
+			fire.loadImage();
+		}
+		if(wave.isImageEmpty()){
+			wave.loadImage();
+		}
+		player.showBoard(140, 310, fire.getImage(), wave.getImage());
+		computer.showBoard(800, 310, fire.getImage(), wave.getImage());
 	}
-	player.showBoard(140, 310, fire.getImage(), wave.getImage());
-	computer.showBoard(800, 310, fire.getImage(), wave.getImage());
-}
-
-void drawWinOrLoseFont(){
-	glColor3f(0, 0, 0);
-	setFontHeight(55);
-	setFontXY(windowWidth / 2 - 260, windowHeight / 2);
-
-	if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
-		if (computer.getHitCell(0) == 14)
-			printFont("You win the game");
-		else if (computer.getHitCell(1) == 40)
-			printFont("You are garbage");
-		if (player.getHitCell(0) == 14)
-			printFont("You lose the game");
-		else if (player.getHitCell(1) == 40)
-			printFont("You are garbage");
-		palyer_down = false;
+	
+	void drawWinOrLoseFont(){
+		glColor3f(0, 0, 0);
+		setFontHeight(55);
+		setFontXY(windowWidth / 2 - 260, windowHeight / 2);
+	
+		if (computer.getHitCell(0) == 14 || computer.getHitCell(1) == 40 || player.getHitCell(0) == 14 || player.getHitCell(1) == 40){
+			if (computer.getHitCell(0) == 14)
+				printFont("You win the game");
+			else if (computer.getHitCell(1) == 40)
+				printFont("You are garbage");
+			if (player.getHitCell(0) == 14)
+				printFont("You lose the game");
+			else if (player.getHitCell(1) == 40)
+				printFont("You are garbage");
+			palyer_down = false;
+		}
 	}
 }

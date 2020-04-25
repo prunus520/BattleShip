@@ -26,7 +26,7 @@ class ShipImage:public Image{
 	};
 
 	public:
-		ShipImage(const char*);
+		ShipImage(const char *);
 		
 		int getID();
 		

@@ -8,7 +8,7 @@
 
 class Image{
 	public:
-		Image(const char*);
+		Image(const char *);
 		~Image();
 		void loadImage();
 		void toRGBImage();

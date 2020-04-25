@@ -3,7 +3,9 @@
 
 #include "../mainInit.h"
 
-void battleFrameClick(int state, int x, int y);
-void hitPlayerOrComputer(int state, int x, int y);
+namespace battleFrameClick{
+	void battleFrameClick(int, int, int);
+	void hitPlayerOrComputer(int, int, int);
+}
 
 #endif

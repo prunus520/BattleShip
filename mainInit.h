@@ -46,9 +46,9 @@ extern uchar alpha;
 
 extern Battleship computer, player;
 
-void player_computer_sleep_Timer(int id);
-void player_computer_flag_Timer(int id);
-void glint_START_Timer(int id);
+void player_computer_sleep_Timer(int);
+void player_computer_flag_Timer(int);
+void glint_START_Timer(int);
 bool checkRangeX(int, int, int);
 bool checkRangeY(int, int, int);
 

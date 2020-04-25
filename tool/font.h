@@ -5,10 +5,10 @@
 #include <windows.h>
 #include <GL/glut.h>
 
-int printFont(const char *format, ...);
-void setFontHeight(int Height);
+int printFont(const char *, ...);
+void setFontHeight(int);
 void setCreateFont();
-void setFontXY(GLfloat x, GLfloat y);
-void setFontFace(const char *FaceName);
+void setFontXY(GLfloat, GLfloat);
+void setFontFace(const char *);
 
 #endif

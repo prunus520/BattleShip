@@ -3,12 +3,14 @@
 
 #include "../mainInit.h"
 
-void mainFrame();
-void loadBackgroundImage();
-void loadTitleImage();
-GLfloat centerTitleX();
-GLfloat drawTitleWidth();
-GLfloat drawTitleHight();
-void drawStartFont();
+namespace mainFrame{
+	void mainFrame();
+	void loadBackgroundImage();
+	void loadTitleImage();
+	GLfloat centerTitleX();
+	GLfloat drawTitleWidth();
+	GLfloat drawTitleHight();
+	void drawStartFont();
+}
 
 #endif

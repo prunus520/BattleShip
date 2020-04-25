@@ -70,13 +70,13 @@ void clearCanvas(){
 void switchFrame(){
 	switch (frame){
 		case MAIN_FRAME:
-			mainFrame();
+			mainFrame::mainFrame();
 			break;
 		case SHIP_POSITION_FRAME:
-			shipPositionFrame();
+			shipPositionFrame::shipPositionFrame();
 			break;
 		case BATTLE_FRAME:
-			battleFrame();
+			battleFrame::battleFrame();
 			break;
 	}
 }
@@ -143,7 +143,7 @@ void catchMouseButton(int button, int state, int x, int y){
 			switchFrameClick(state, x, y);
 			break;
 		case GLUT_RIGHT_BUTTON:
-			shipPositionFrameRightClick(state, x, y);
+			shipPositionFrameRightClick::shipPositionFrameRightClick(state, x, y);
 			break;
 	}
 }
@@ -151,20 +151,20 @@ void catchMouseButton(int button, int state, int x, int y){
 void switchFrameClick(int state, int x, int y){
 	switch (frame){
 		case MAIN_FRAME:
-			mainFrameClick(x, y);
+			mainFrameClick::mainFrameClick(x, y);
 			break;
 		case SHIP_POSITION_FRAME:
-			shipPositionFrameClick(state, x, y);
+			shipPositionFrameClick::shipPositionFrameClick(state, x, y);
 			break;
 		case BATTLE_FRAME:
-			battleFrameClick(state, x, y);
+			battleFrameClick::battleFrameClick(state, x, y);
 			break;
 	}
 }
 
 void catchMouseMove(int x, int y){
 	setMouseMoveCoordinates(x, y);
-	shipPositionFrameMove(x, y);
+	shipPositionFrameMove::shipPositionFrameMove(x, y);
 	glutPostRedisplay();
 }
 
@@ -174,7 +174,7 @@ void setMouseMoveCoordinates(int x, int y){
 
 void catchMousePassiveMotion(int x, int y){
 	setMouseMotionCoordinates(x, y);
-	shipPositionFrameMotion();
+	shipPositionFrameMotion::shipPositionFrameMotion();
 	glutPostRedisplay();
 }
 
