@@ -48,7 +48,7 @@ void ShipImage::setShipPosition(GLfloat x, GLfloat y){
 	position.x = x;
 	position.y = y;
 	setShipCoordinate(x, y);
-	setOldShipCoordinate(x, y);
+	setPlaceShipCoordinate(x, y);
 }
 
 GLfloat ShipImage::getShipPositionX(){
@@ -72,26 +72,26 @@ GLfloat ShipImage::getShipCoordinateY(){
 	return coordinate.y;
 }
 
-void ShipImage::setOldShipCoordinate(GLfloat x, GLfloat y){
-	oldCoordinate.x = x;
-	oldCoordinate.y = y;
+void ShipImage::setPlaceShipCoordinate(GLfloat x, GLfloat y){
+	placeCoordinate.x = x;
+	placeCoordinate.y = y;
 }
 
-GLfloat ShipImage::getOldShipCoordinateX(){
-	return oldCoordinate.x;
+GLfloat ShipImage::getPlaceShipCoordinateX(){
+	return placeCoordinate.x;
 }
 
-GLfloat ShipImage::getOldShipCoordinateY(){
-	return oldCoordinate.y;
+GLfloat ShipImage::getPlaceShipCoordinateY(){
+	return placeCoordinate.y;
 }
 
-void ShipImage::changeOldShipCoordinateByShipCoordinate(){
-	setOldShipCoordinate(coordinate.x, coordinate.y);
+void ShipImage::changePlaceShipCoordinateByShipCoordinate(){
+	setPlaceShipCoordinate(coordinate.x, coordinate.y);
 }
 
-void ShipImage::initializeOldAndNewShipCoordinateByShipPosition(){
+void ShipImage::initializeShipCoordinate(){
 	setShipCoordinate(position.x, position.y);
-	setOldShipCoordinate(position.x, position.y);
+	setPlaceShipCoordinate(position.x, position.y);
 }
 
 bool ShipImage::isShipCoordinateWithinRange(int x, int y){

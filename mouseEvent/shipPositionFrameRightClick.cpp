@@ -2,17 +2,11 @@
 
 namespace shipPositionFrame{
 	void rightClick(int state, int x, int y){
-		rotateShip(state, x, y);
+		rightClickShipID(state, x, y);
+		rotateShipDirection(state, x, y);
 	}
 	
-	void rotateShip(int state, int x, int y){
-		if (frame == SHIP_POSITION_FRAME){
-			rightClickedShipID(state, x, y);
-			rotateShipDirection(state, x, y);
-		}
-	}
-	
-	void rightClickedShipID(int state, int x, int y){
+	void rightClickShipID(int state, int x, int y){
 		for (int i = 0; i != 6; ++i){
 			if (state == 0 && ship[i].isShipCoordinateWithinRange(x, y)){
 				shipMove = ship[i].getID();

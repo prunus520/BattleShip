@@ -22,8 +22,8 @@ class Mouse{
 		int getMouseClickY();
 		bool isMouseClickRangeCoordinate(int, int, int, int);
 		
-		void setMouseClicked(int);
-		int getMouseClicked();
+		void setMouseState(int);
+		int getMouseState();
 		
 		void setMouseButton(int);
 		int getMouseButton();
@@ -32,7 +32,7 @@ class Mouse{
 		Coordinate motion = {0};
 		Coordinate move = {0};
 		Coordinate click = {0};
-		int clicked = 0;
+		int state = 0;
 		int button = 0;
 };
 

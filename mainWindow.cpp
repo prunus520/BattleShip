@@ -85,8 +85,8 @@ void drawTest(){
 	glColor3f(1, 1, 0);
 	setFontHeight(30);
 	setFontXY(0, 0);
-	printFont(" clicked: %d\n clickX: %d\n clickY: %d\n moveX: %d\n moveY: %d\n motionX: %d\n motionY: %d",
-						mouse.getMouseClicked(), mouse.getMouseClickX(), mouse.getMouseClickY(),
+	printFont(" state: %d\n clickX: %d\n clickY: %d\n moveX: %d\n moveY: %d\n motionX: %d\n motionY: %d",
+						mouse.getMouseState(), mouse.getMouseClickX(), mouse.getMouseClickY(),
 						mouse.getMouseMoveX(), mouse.getMouseMoveY(),
 						mouse.getMouseMotionX(), mouse.getMouseMotionY());
 
@@ -131,7 +131,7 @@ void catchMouseClick(int button, int state, int x, int y){
 }
 
 void setMouseClickCoordinates(int state, int x, int y){
-	mouse.setMouseClicked(state);
+	mouse.setMouseState(state);
 	mouse.setMouseClickCoordinate(x, y);
 }
 
@@ -142,7 +142,9 @@ void catchMouseButton(int button, int state, int x, int y){
 			switchFrameClick(state, x, y);
 			break;
 		case GLUT_RIGHT_BUTTON:
-			shipPositionFrame::rightClick(state, x, y);
+			if (frame == SHIP_POSITION_FRAME){
+				shipPositionFrame::rightClick(state, x, y);
+			}
 			break;
 	}
 }

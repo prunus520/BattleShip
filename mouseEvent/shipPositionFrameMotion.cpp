@@ -7,7 +7,7 @@ namespace shipPositionFrame{
 	
 	void motionShip(){
 		if (frame == SHIP_POSITION_FRAME && shipMove != -1){
-			ship[shipMove].changeOldShipCoordinateByShipCoordinate();
+			ship[shipMove].changePlaceShipCoordinateByShipCoordinate();
 			shipMove = -1;
 		}
 	}

@@ -2,14 +2,9 @@
 
 namespace shipPositionFrame{
 	void click(int state, int x, int y){
-		clickShip(state, x, y);
+		clickShipID(state, x, y);
 		placeShip(state, x, y);
 		clickButton(state, x, y);
-	}
-	
-	void clickShip(int state, int x, int y){
-		clickShipID(state, x, y);
-		clearPlaceShipCell(state, x, y);
 	}
 	
 	void clickShipID(int state, int x, int y){
@@ -21,42 +16,58 @@ namespace shipPositionFrame{
 		}
 	}
 	
-	void clearPlaceShipCell(int state, int x, int y){
-		if (shipMove != -1 && state == 0 && ship[shipMove].isShipCoordinateWithinRange(x, y)){
+	void placeShip(int state, int x, int y){
+		if (shipMove != -1){
 			ship[shipMove].resetField();
-			for (int row = ship[shipMove].getShipHeadRow(); row <= ship[shipMove].getShipBodyRow(); row++){
-				for (int column = ship[shipMove].getShipHeadColumn(); column <= ship[shipMove].getShipBodyColumn(); column++){
-					player.setShipCell(row, column, 0);
+			if (state == 0 && ship[shipMove].isShipCoordinateWithinRange(x, y)){
+				clearPlaceShipCell();
+			}
+			else if (state == 1 && ship[shipMove].isShipCoordinateWithoutRange(123, 701, 167, 745)){
+				initializeShipPosition();
+			}
+			else if (state == 1 && ship[shipMove].isShipCoordinateWithinRange(x, y)){
+				ship[shipMove].placeShipInCell(123, 167, 578, 578);
+				if(checkPlaceFail()){
+					initializeShipPosition();
+				}
+				else {
+					placeShipCell();
 				}
 			}
 		}
 	}
 	
-	void placeShip(int state, int x, int y){
-		if (shipMove != -1){
-			ship[shipMove].resetField();
-			if (state == 1 && ship[shipMove].isShipCoordinateWithoutRange(123, 701, 167, 745)){
-				initializeShipPosition();
+	void clearPlaceShipCell(){
+		for (int row = ship[shipMove].getShipHeadRow(); row <= ship[shipMove].getShipBodyRow(); row++){
+			for (int column = ship[shipMove].getShipHeadColumn(); column <= ship[shipMove].getShipBodyColumn(); column++){
+				player.setShipCell(row, column, 0);
 			}
-			else if (state == 1 && ship[shipMove].isShipCoordinateWithinRange(x, y)){
-				ship[shipMove].placeShipInCell(123, 167, 578, 578);
-				for (int row = ship[shipMove].getShipHeadRow(); row <= ship[shipMove].getShipBodyRow(); row++){
-					for (int column = ship[shipMove].getShipHeadColumn(); column <= ship[shipMove].getShipBodyColumn(); column++){
-						if (player.getShipCell(row, column) != 0){
-							initializeShipPosition();
-						}
-						else {
-							player.setShipCell(row, column, ship[shipMove].getShipLengthHeight());
-							ship[shipMove].setShipReady(true);
-						}
-					}
+		}
+	}
+	
+	bool checkPlaceFail(){
+		int fail = 0;
+		for (int row = ship[shipMove].getShipHeadRow(); row <= ship[shipMove].getShipBodyRow(); row++){
+			for (int column = ship[shipMove].getShipHeadColumn(); column <= ship[shipMove].getShipBodyColumn(); column++){
+				if (player.getShipCell(row, column) != 0){
+					++fail;
 				}
+			}
+		}
+		return fail;
+	}
+	
+	void placeShipCell(){
+		for (int row = ship[shipMove].getShipHeadRow(); row <= ship[shipMove].getShipBodyRow(); row++){
+			for (int column = ship[shipMove].getShipHeadColumn(); column <= ship[shipMove].getShipBodyColumn(); column++){
+				player.setShipCell(row, column, ship[shipMove].getShipLengthHeight());
+				ship[shipMove].setShipReady(true);
 			}
 		}
 	}
 	
 	void initializeShipPosition(){
-		ship[shipMove].initializeOldAndNewShipCoordinateByShipPosition();
+		ship[shipMove].initializeShipCoordinate();
 		if (ship[shipMove].getShipRotation()){
 			ship[shipMove].notShipRotate();
 		}
@@ -97,7 +108,7 @@ namespace shipPositionFrame{
 	
 	void resetShipsPosition(){
 		for (int i = 5; i != -1; --i){
-			ship[i].initializeOldAndNewShipCoordinateByShipPosition();
+			ship[i].initializeShipCoordinate();
 			if (ship[i].getShipRotation()){
 				ship[i].notShipRotate();
 			}

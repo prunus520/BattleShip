@@ -5,10 +5,11 @@
 
 namespace shipPositionFrame{
 	void click(int, int, int);
-	void clickShip(int, int, int);
 	void clickShipID(int, int, int);
-	void clearPlaceShipCell(int, int, int);
 	void placeShip(int, int, int);
+	void clearPlaceShipCell();
+	bool checkPlaceFail();
+	void placeShipCell();
 	void initializeShipPosition();
 	void clickButton(int, int, int);
 	void backToMainFrame();

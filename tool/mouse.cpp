@@ -43,12 +43,12 @@ bool Mouse::isMouseClickRangeCoordinate(int minX, int maxX, int minY, int maxY){
 	return (click.x >= minX && click.x <= maxX) && (click.y >= minY && click.y <= maxY);
 }
 
-void Mouse::setMouseClicked(int state){
-	clicked = state;
+void Mouse::setMouseState(int newState){
+	state = newState;
 }
 
-int Mouse::getMouseClicked(){
-	return clicked;
+int Mouse::getMouseState(){
+	return state;
 }
 
 void Mouse::setMouseButton(int newButton){

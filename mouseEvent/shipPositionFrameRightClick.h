@@ -5,8 +5,7 @@
 
 namespace shipPositionFrame{
 	void rightClick(int, int, int);
-	void rotateShip(int, int, int);
-	void rightClickedShipID(int, int, int);
+	void rightClickShipID(int, int, int);
 	void rotateShipDirection(int, int, int);
 	bool checkRotationSuccess();
 	bool checkRotationArrayIsZero(int, int);

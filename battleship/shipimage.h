@@ -50,12 +50,12 @@ class ShipImage:public Image{
 		GLfloat getShipCoordinateX();
 		GLfloat getShipCoordinateY();
 		
-		void setOldShipCoordinate(GLfloat, GLfloat);
-		GLfloat getOldShipCoordinateX();
-		GLfloat getOldShipCoordinateY();
+		void setPlaceShipCoordinate(GLfloat, GLfloat);
+		GLfloat getPlaceShipCoordinateX();
+		GLfloat getPlaceShipCoordinateY();
 		
-		void changeOldShipCoordinateByShipCoordinate();
-		void initializeOldAndNewShipCoordinateByShipPosition();
+		void changePlaceShipCoordinateByShipCoordinate();
+		void initializeShipCoordinate();
 		bool isShipCoordinateWithinRange(int, int);
 		bool isShipCoordinateWithoutRange(int, int, int, int);
 		void placeShipInCell(GLfloat, GLfloat, GLfloat, GLfloat);
@@ -89,7 +89,7 @@ class ShipImage:public Image{
 		Length length;
 		Coordinate position;
 		Coordinate coordinate;
-		Coordinate oldCoordinate;
+		Coordinate placeCoordinate;
 		Field head = {0, 0};
 		Field body = {0, 0};
 		bool rotation = false;
