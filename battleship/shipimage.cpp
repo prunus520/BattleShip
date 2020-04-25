@@ -117,7 +117,7 @@ void ShipImage::setShipField(int headRow, int headColumn, int bodyRow, int bodyC
 }
 
 void ShipImage::resetField(){
-	setShipField((int)((newPosition.y - 167) / 72.25), (int)((newPosition.x - 123) / 72.25),
+	setShipField(round((newPosition.y - 72.25 / 4 - 167) / 72.25), round((newPosition.x - 72.25 / 4 - 123) / 72.25),
 											head.row + (rotation ? length.width : length.height) - 1,
 											head.column + (rotation ? length.height : length.width) - 1);
 }

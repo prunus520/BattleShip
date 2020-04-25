@@ -9,6 +9,7 @@ void moveShip(int x, int y){
 		if (shipMOVE != -1 && mouse.getMouseClicked() == 0){
 			ship[shipMOVE].setNewShipPosition(ship[shipMOVE].getOldShipPositionX() - mouse.getMouseClickX() + x,
 																			ship[shipMOVE].getOldShipPositionY() - mouse.getMouseClickY() + y);
+			
 			ship[shipMOVE].resetField();
 		}
 	}
