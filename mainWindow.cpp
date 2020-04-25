@@ -54,7 +54,7 @@ void catchDisplay(){
 	resetCoordinates();
 	clearCanvas();
 	switchFrame();
-//	drawTest();
+	drawTest();
 	updateCanvas();
 }
 

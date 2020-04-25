@@ -21,7 +21,10 @@ void clickShipID(int state, int x, int y){
 }
 
 void clearPlaceShipCell(int state, int x, int y){
-	if (state == 0 && ship[shipMOVE].isShipPositionWithinRange(x, y)){
+	if (shipMOVE != -1 && state == 0 && ship[shipMOVE].isShipPositionWithinRange(x, y)){
+		ship[shipMOVE].setNewShipPosition(ship[shipMOVE].getOldShipPositionX() - mouse.getMouseClickX() + x,
+																			ship[shipMOVE].getOldShipPositionY() - mouse.getMouseClickY() + y);
+		ship[shipMOVE].resetField();
 		for (int row = ship[shipMOVE].getShipHeadRow(); row <= ship[shipMOVE].getShipBodyRow(); row++){
 			for (int column = ship[shipMOVE].getShipHeadColumn(); column <= ship[shipMOVE].getShipBodyColumn(); column++){
 				player.setShipCell(row, column, 0);
