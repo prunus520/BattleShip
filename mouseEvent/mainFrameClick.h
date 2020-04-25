@@ -3,10 +3,10 @@
 
 #include "../mainInit.h"
 
-namespace mainFrameClick{
-	void mainFrameClick(int, int);
+namespace mainFrame{
+	void click(int, int);
 	void startTheGame(int, int);
-	void releaseMainImage();
+	void releaseImage();
 }
 
 #endif

@@ -4,22 +4,22 @@
 #include "../mainInit.h"
 
 namespace mainFrame{
-	extern uchar alpha;
-	extern bool isTimer;
-	extern bool isFlicker;
-	
 	void display();
 	
 	void loadImage();
 	void loadBackgroundImage();
+	extern uchar alpha;
 	void loadTitleImage();
+	void floatImage();
 	
 	GLfloat centerTitleX();
 	GLfloat drawTitleWidth();
 	GLfloat drawTitleHight();
 	
 	void printFont();
+	extern bool isTimer;
 	void setTimer();
+	extern bool isFlicker;
 	void flickerFontTimer(int);
 	void printFlickeringStartFont();
 }

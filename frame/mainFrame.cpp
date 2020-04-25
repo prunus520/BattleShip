@@ -1,10 +1,6 @@
 #include "mainFrame.h"
 
 namespace mainFrame{
-	uchar alpha;
-	bool isTimer = false;
-	bool isFlicker = true;
-	
 	void display(){
 		loadImage();
 		printFont();
@@ -22,15 +18,21 @@ namespace mainFrame{
 		background.showImage(0, 0, windowWidth, windowHeight);
 	}
 	
+	uchar alpha;
 	void loadTitleImage(){
 		if(title.isImageEmpty()){
 			title.loadImage();
 			alpha = 0;
 		}
+		floatImage();
+	}
+	
+	void floatImage(){
 		title.showPNGImage(0, 0, 0, alpha);
 		title.setImageSize(centerTitleX(), 20, drawTitleWidth(), drawTitleHight());
-		if (alpha < 255)
+		if (alpha < 255){
 			++alpha;
+		}
 	}
 	
 	GLfloat centerTitleX(){
@@ -50,6 +52,7 @@ namespace mainFrame{
 		printFlickeringStartFont();
 	}
 	
+	bool isTimer = false;
 	void setTimer(){
 		if(!isTimer){
 			glutTimerFunc(200, flickerFontTimer, 1);
@@ -57,6 +60,7 @@ namespace mainFrame{
 		}
 	}
 	
+	bool isFlicker = true;
 	void flickerFontTimer(int id){
 		isFlicker = !isFlicker;
 		glutTimerFunc(200, flickerFontTimer, id);

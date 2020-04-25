@@ -8,6 +8,7 @@ class Mouse{
 
 	public:
 		Mouse() = default;
+		
 		void setMouseMotionCoordinate(int, int);
 		int getMouseMotionX();
 		int getMouseMotionY();
@@ -19,12 +20,14 @@ class Mouse{
 		void setMouseClickCoordinate(int, int);
 		int getMouseClickX();
 		int getMouseClickY();
+		bool isMouseClickRangeCoordinate(int, int, int, int);
 		
 		void setMouseClicked(int);
 		int getMouseClicked();
 		
 		void setMouseButton(int);
 		int getMouseButton();
+		
 	private:
 		Coordinate motion = {0};
 		Coordinate move = {0};

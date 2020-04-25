@@ -1,18 +1,18 @@
 #include "mainFrameClick.h"
 
-namespace mainFrameClick{
-	void mainFrameClick(int x, int y){
+namespace mainFrame{
+	void click(int x, int y){
 		startTheGame(x, y);
 	}
 	
 	void startTheGame(int x, int y){
-		if (checkRangeX(x, 637.6, 807.6) && checkRangeY(y, 674, 729)){
+		if (mouse.isMouseClickRangeCoordinate(637.6, 807.6, 674, 729)){
 			frame = SHIP_POSITION_FRAME;
-			releaseMainImage();
+			releaseImage();
 		}
 	}
 	
-	void releaseMainImage(){
+	void releaseImage(){
 		background.releaseImage();
 		title.releaseImage();
 	}

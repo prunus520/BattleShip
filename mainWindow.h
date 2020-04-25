@@ -40,6 +40,4 @@ void setMouseMoveCoordinates(int, int);
 void catchMousePassiveMotion(int, int);
 void setMouseMotionCoordinates(int, int);
 
-void catchTimerEvent();
-
 #endif

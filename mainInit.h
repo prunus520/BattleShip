@@ -44,7 +44,4 @@ extern bool palyer_down;
 
 extern Battleship computer, player;
 
-bool checkRangeX(int, int, int);
-bool checkRangeY(int, int, int);
-
 #endif

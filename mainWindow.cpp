@@ -21,7 +21,6 @@ void catchGlutEvent(){
 	catchWindowSizeEvent();
 	catchDisplayEvent();
 	catchMouseEvent();
-	catchTimerEvent();
 
 	glutMainLoop();
 }
@@ -54,7 +53,7 @@ void catchDisplay(){
 	resetCoordinates();
 	clearCanvas();
 	switchFrame();
-	drawTest();
+//	drawTest();
 	updateCanvas();
 }
 
@@ -151,7 +150,7 @@ void catchMouseButton(int button, int state, int x, int y){
 void switchFrameClick(int state, int x, int y){
 	switch (frame){
 		case MAIN_FRAME:
-			mainFrameClick::mainFrameClick(x, y);
+			mainFrame::click(x, y);
 			break;
 		case SHIP_POSITION_FRAME:
 			shipPositionFrameClick::shipPositionFrameClick(state, x, y);
@@ -180,8 +179,4 @@ void catchMousePassiveMotion(int x, int y){
 
 void setMouseMotionCoordinates(int x, int y){
 	mouse.setMouseMotionCoordinate(x, y);
-}
-
-void catchTimerEvent(){
-//	glutTimerFunc(200, flickerFontTimer, 1);
 }

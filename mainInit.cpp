@@ -25,11 +25,3 @@ bool palyer_init = false;
 bool palyer_down = true;
 
 Battleship computer, player;
-
-bool checkRangeX(int x, int min, int max){
-	return x >= min && x <= max;
-}
-
-bool checkRangeY(int y, int min, int max){
-	return y >= min && y <= max;
-}
