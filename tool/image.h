@@ -15,6 +15,7 @@ class Image{
 		void releaseImage();
 		bool isImageEmpty();
 		void showImage();
+		void showImage(GLfloat, GLfloat, GLfloat, GLfloat);
 		void showTransparentBackgroundForImage(uchar = 255, uchar = 255, uchar = 255, uchar = 255);
 		void setImageSize(GLfloat, GLfloat, GLfloat, GLfloat);
 		void setImageSizeAndColor(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1, GLfloat = 1, GLfloat = 1);

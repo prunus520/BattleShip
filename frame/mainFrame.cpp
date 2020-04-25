@@ -1,28 +1,36 @@
 #include "mainFrame.h"
 
 namespace mainFrame{
-	void mainFrame(){
+	uchar alpha;
+	bool isTimer = false;
+	bool isFlicker = true;
+	
+	void display(){
+		loadImage();
+		printFont();
+	}
+	
+	void loadImage(){
 		loadBackgroundImage();
 		loadTitleImage();
-		drawStartFont();
 	}
 	
 	void loadBackgroundImage(){
 		if(background.isImageEmpty()){
 			background.loadImage();
 		}
-		background.showImage();
-		background.setImageSize(0, 0, windowWidth, windowHeight);
+		background.showImage(0, 0, windowWidth, windowHeight);
 	}
 	
 	void loadTitleImage(){
 		if(title.isImageEmpty()){
 			title.loadImage();
+			alpha = 0;
 		}
 		title.showTransparentBackgroundForImage(0, 0, 0, alpha);
 		title.setImageSize(centerTitleX(), 20, drawTitleWidth(), drawTitleHight());
 		if (alpha < 255)
-			alpha++;
+			++alpha;
 	}
 	
 	GLfloat centerTitleX(){
@@ -37,13 +45,30 @@ namespace mainFrame{
 		return title.getImageHeight() * 1.5;
 	}
 	
-	void drawStartFont(){
-		glDisable(GL_TEXTURE_2D);
-		if (glint_START){
+	void printFont(){
+		setTimer();
+		printFlickeringStartFont();
+	}
+	
+	void setTimer(){
+		if(!isTimer){
+			glutTimerFunc(200, flickerFontTimer, 1);
+			isTimer = !isTimer;
+		}
+	}
+	
+	void flickerFontTimer(int id){
+		isFlicker = !isFlicker;
+		glutTimerFunc(200, flickerFontTimer, id);
+	}
+	
+	void printFlickeringStartFont(){
+		if (isFlicker){
+			glDisable(GL_TEXTURE_2D);
 			glColor3f(1, 1, 0);
 			setFontHeight(55);
 			setFontXY(windowWidth / 2 - 80, windowHeight - 190);
-			printFont("START");
+			::printFont("START");
 		}
 	}
 }

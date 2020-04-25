@@ -54,7 +54,7 @@ void catchDisplay(){
 	resetCoordinates();
 	clearCanvas();
 	switchFrame();
-	drawTest();
+//	drawTest();
 	updateCanvas();
 }
 
@@ -70,7 +70,7 @@ void clearCanvas(){
 void switchFrame(){
 	switch (frame){
 		case MAIN_FRAME:
-			mainFrame::mainFrame();
+			mainFrame::display();
 			break;
 		case SHIP_POSITION_FRAME:
 			shipPositionFrame::shipPositionFrame();
@@ -183,5 +183,5 @@ void setMouseMotionCoordinates(int x, int y){
 }
 
 void catchTimerEvent(){
-	glutTimerFunc(200, glint_START_Timer, 1);
+//	glutTimerFunc(200, flickerFontTimer, 1);
 }

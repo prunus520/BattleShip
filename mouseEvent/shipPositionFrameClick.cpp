@@ -78,8 +78,6 @@ namespace shipPositionFrameClick{
 	}
 	
 	void backToMainFrame(){
-		glutTimerFunc(200, glint_START_Timer, 1);
-		alpha = 0;
 		frame = MAIN_FRAME;
 		back.releaseImage();
 		radarBoard.releaseImage();

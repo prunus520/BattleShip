@@ -4,7 +4,6 @@ Frame frame = MAIN_FRAME;
 
 float windowWidth = 1196 * 1.2, windowHeight = 720 * 1.2;
 float scaleX = 1, scaleY = 1;
-bool glint_START = true;
 
 Mouse mouse;
 
@@ -24,7 +23,6 @@ bool player_computer_flag = true;
 bool player_computer_sleep = false;
 bool palyer_init = false;
 bool palyer_down = true;
-uchar alpha = 0;
 
 Battleship computer, player;
 
@@ -45,16 +43,6 @@ void player_computer_flag_Timer(int id){
 	}
 	else if (player_computer_sleep == false)
 		player_computer_flag = true;
-}
-
-void glint_START_Timer(int id){
-	if (glint_START)
-		glint_START = false;
-	else
-		glint_START = true;
-
-	if (frame == MAIN_FRAME)
-		glutTimerFunc(200, glint_START_Timer, id);
 }
 
 bool checkRangeX(int x, int min, int max){

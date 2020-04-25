@@ -24,7 +24,6 @@ extern Frame frame;
 
 extern float windowWidth, windowHeight;
 extern float scaleX, scaleY;
-extern bool glint_START;
 
 extern Mouse mouse;
 
@@ -42,13 +41,11 @@ extern bool player_computer_flag;
 extern bool player_computer_sleep;
 extern bool palyer_init;
 extern bool palyer_down;
-extern uchar alpha;
 
 extern Battleship computer, player;
 
 void player_computer_sleep_Timer(int);
 void player_computer_flag_Timer(int);
-void glint_START_Timer(int);
 bool checkRangeX(int, int, int);
 bool checkRangeY(int, int, int);
 

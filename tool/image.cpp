@@ -29,6 +29,11 @@ void Image::showImage(){
 	::showImage(image);
 }
 
+void Image::showImage(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
+	::showImage(image);
+	::setImageSize(x, y, width, height);
+}
+
 void Image::showTransparentBackgroundForImage(uchar red, uchar green, uchar blue, uchar alpha){
 	toTransparentImage(image, red, green, blue, alpha);
 }
