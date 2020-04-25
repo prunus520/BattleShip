@@ -46,20 +46,20 @@ class ShipImage:public Image{
 		GLfloat getShipPositionX();
 		GLfloat getShipPositionY();
 		
-		void setNewShipPosition(GLfloat, GLfloat);
-		GLfloat getNewShipPositionX();
-		GLfloat getNewShipPositionY();
+		void setShipCoordinate(GLfloat, GLfloat);
+		GLfloat getShipCoordinateX();
+		GLfloat getShipCoordinateY();
 		
-		void setOldShipPosition(GLfloat, GLfloat);
-		GLfloat getOldShipPositionX();
-		GLfloat getOldShipPositionY();
+		void setOldShipCoordinate(GLfloat, GLfloat);
+		GLfloat getOldShipCoordinateX();
+		GLfloat getOldShipCoordinateY();
 		
-		void changeOldShipPositionByNewShipPosition();
-		void initializeOldAndNewShipPositionByShipPosition();
-		bool isShipPositionWithinRange(int, int);
-		bool isNewShipPositionWithoutRange(int, int, int, int);
+		void changeOldShipCoordinateByShipCoordinate();
+		void initializeOldAndNewShipCoordinateByShipPosition();
+		bool isShipCoordinateWithinRange(int, int);
+		bool isShipCoordinateWithoutRange(int, int, int, int);
 		void placeShipInCell(GLfloat, GLfloat, GLfloat, GLfloat);
-		void loadNewShipPosition();
+		void loadShipCoordinate();
 		
 		void setShipField(int, int, int, int);
 		void resetField();
@@ -73,6 +73,10 @@ class ShipImage:public Image{
 		void notShipRotate();
 		void rotateShipImage();
 		bool checkRotationLengthSuccess();
+		GLfloat getRotateSizeWidth();
+		GLfloat getRotateSizeHeight();
+		GLfloat getRotateLenghtWidth();
+		GLfloat getRotateLenghtHeight();
 		
 		void setShipReady(bool);
 		bool getShipReady();
@@ -84,8 +88,8 @@ class ShipImage:public Image{
 		Size size;
 		Length length;
 		Coordinate position;
-		Coordinate newPosition;
-		Coordinate oldPosition;
+		Coordinate coordinate;
+		Coordinate oldCoordinate;
 		Field head = {0, 0};
 		Field body = {0, 0};
 		bool rotation = false;

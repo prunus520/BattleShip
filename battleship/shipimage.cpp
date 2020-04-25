@@ -47,8 +47,8 @@ int ShipImage::getShipLengthHeight(){
 void ShipImage::setShipPosition(GLfloat x, GLfloat y){
 	position.x = x;
 	position.y = y;
-	setNewShipPosition(x, y);
-	setOldShipPosition(x, y);
+	setShipCoordinate(x, y);
+	setOldShipCoordinate(x, y);
 }
 
 GLfloat ShipImage::getShipPositionX(){
@@ -59,58 +59,58 @@ GLfloat ShipImage::getShipPositionY(){
 	return position.y;
 }
 
-void ShipImage::setNewShipPosition(GLfloat x, GLfloat y){
-	newPosition.x = x;
-	newPosition.y = y;
+void ShipImage::setShipCoordinate(GLfloat x, GLfloat y){
+	coordinate.x = x;
+	coordinate.y = y;
 }
 
-GLfloat ShipImage::getNewShipPositionX(){
-	return newPosition.x;
+GLfloat ShipImage::getShipCoordinateX(){
+	return coordinate.x;
 }
 
-GLfloat ShipImage::getNewShipPositionY(){
-	return newPosition.y;
+GLfloat ShipImage::getShipCoordinateY(){
+	return coordinate.y;
 }
 
-void ShipImage::setOldShipPosition(GLfloat x, GLfloat y){
-	oldPosition.x = x;
-	oldPosition.y = y;
+void ShipImage::setOldShipCoordinate(GLfloat x, GLfloat y){
+	oldCoordinate.x = x;
+	oldCoordinate.y = y;
 }
 
-GLfloat ShipImage::getOldShipPositionX(){
-	return oldPosition.x;
+GLfloat ShipImage::getOldShipCoordinateX(){
+	return oldCoordinate.x;
 }
 
-GLfloat ShipImage::getOldShipPositionY(){
-	return oldPosition.y;
+GLfloat ShipImage::getOldShipCoordinateY(){
+	return oldCoordinate.y;
 }
 
-void ShipImage::changeOldShipPositionByNewShipPosition(){
-	setOldShipPosition(newPosition.x, newPosition.y);
+void ShipImage::changeOldShipCoordinateByShipCoordinate(){
+	setOldShipCoordinate(coordinate.x, coordinate.y);
 }
 
-void ShipImage::initializeOldAndNewShipPositionByShipPosition(){
-	setNewShipPosition(position.x, position.y);
-	setOldShipPosition(position.x, position.y);
+void ShipImage::initializeOldAndNewShipCoordinateByShipPosition(){
+	setShipCoordinate(position.x, position.y);
+	setOldShipCoordinate(position.x, position.y);
 }
 
-bool ShipImage::isShipPositionWithinRange(int x, int y){
-	return (x >= newPosition.x && x <= newPosition.x + (rotation ? size.height: size.width)) &&
-				 (y >= newPosition.y && y <= newPosition.y + (rotation ? size.width: size.height));
+bool ShipImage::isShipCoordinateWithinRange(int x, int y){
+	return (x >= coordinate.x && x <= coordinate.x + getRotateSizeHeight()) &&
+				 (y >= coordinate.y && y <= coordinate.y + getRotateSizeWidth());
 }
 
-bool ShipImage::isNewShipPositionWithoutRange(int minX, int maxX, int minY, int maxY){
-	return (newPosition.x < minX || newPosition.x + (rotation ? size.height: size.width) > maxX + (maxX - minX) / 8 * 0.7) ||
-				 (newPosition.y < minY || newPosition.y + (rotation ? size.width: size.height) > maxY + (maxX - minX) / 8 * 0.7);
+bool ShipImage::isShipCoordinateWithoutRange(int minX, int maxX, int minY, int maxY){
+	return (coordinate.x < minX || coordinate.x + getRotateSizeHeight() > maxX + (maxX - minX) / 8 * 0.7) ||
+				 (coordinate.y < minY || coordinate.y + getRotateSizeWidth() > maxY + (maxX - minX) / 8 * 0.7);
 }
 
 void ShipImage::placeShipInCell(GLfloat x, GLfloat y, GLfloat width, GLfloat height){
-	setNewShipPosition(x + head.column * width / 8 + ((rotation ? length.height: length.width) * width / 8 - (rotation ? size.height: size.width)) / 2,
-										 y + head.row * height / 8 + ((rotation ? length.width: length.height) * height / 8 - (rotation ? size.width: size.height)) / 2);
+	setShipCoordinate(x + head.column * width / 8 + (getRotateLenghtHeight() * width / 8 - getRotateSizeHeight()) / 2,
+										 y + head.row * height / 8 + (getRotateLenghtWidth() * height / 8 - getRotateSizeWidth()) / 2);
 }
 
-void ShipImage::loadNewShipPosition(){
-		setImageSize(newPosition.x, newPosition.y, size.width, size.height);
+void ShipImage::loadShipCoordinate(){
+		setImageSize(coordinate.x, coordinate.y, size.width, size.height);
 }
 
 void ShipImage::setShipField(int headRow, int headColumn, int bodyRow, int bodyColumn){
@@ -121,9 +121,9 @@ void ShipImage::setShipField(int headRow, int headColumn, int bodyRow, int bodyC
 }
 
 void ShipImage::resetField(){
-	setShipField(round((newPosition.y - 72.25 / 4 - 167) / 72.25), round((newPosition.x - 72.25 / 4 - 123) / 72.25),
-											head.row + (rotation ? length.width : length.height) - 1,
-											head.column + (rotation ? length.height : length.width) - 1);
+	setShipField(round((coordinate.y - 72.25 / 4 - 167) / 72.25), round((coordinate.x - 72.25 / 4 - 123) / 72.25),
+											head.row + getRotateLenghtWidth() - 1,
+											head.column + getRotateLenghtHeight() - 1);
 }
 
 int ShipImage::getShipHeadRow(){
@@ -155,11 +155,27 @@ void ShipImage::notShipRotate(){
 }
 
 void ShipImage::rotateShipImage(){
-	counterclockwiseDegreeRotation(newPosition.x, newPosition.y);
+	counterclockwiseDegreeRotation(coordinate.x, coordinate.y);
 }
 
 bool ShipImage::checkRotationLengthSuccess(){
-	return (head.column + (rotation ? length.width: length.height) - 1 < 8) && (head.row + (rotation ? length.height: length.width) - 1 < 8);
+	return (head.column + getRotateLenghtWidth() - 1 < 8) && (head.row + getRotateLenghtHeight() - 1 < 8);
+}
+
+GLfloat ShipImage::getRotateSizeWidth(){
+	return rotation ? size.width: size.height;
+}
+
+GLfloat ShipImage::getRotateSizeHeight(){
+	return rotation ? size.height: size.width;
+}
+
+GLfloat ShipImage::getRotateLenghtWidth(){
+	return rotation ? length.width: length.height;
+}
+
+GLfloat ShipImage::getRotateLenghtHeight(){
+	return rotation ? length.height: length.width;
 }
 
 void ShipImage::setShipReady(bool newReady){

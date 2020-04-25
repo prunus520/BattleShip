@@ -53,7 +53,7 @@ void catchDisplay(){
 	resetCoordinates();
 	clearCanvas();
 	switchFrame();
-//	drawTest();
+	drawTest();
 	updateCanvas();
 }
 
@@ -81,8 +81,8 @@ void switchFrame(){
 }
 
 void drawTest(){
-	glColor3f(1, 1, 0);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glColor3f(1, 1, 0);
 	setFontHeight(30);
 	setFontXY(0, 0);
 	printFont(" clicked: %d\n clickX: %d\n clickY: %d\n moveX: %d\n moveY: %d\n motionX: %d\n motionY: %d",
@@ -97,21 +97,21 @@ void drawTest(){
 //	player.testHitTable(1050, 0);
 //	computer.testHitTable(1100, 0);
 
-	glColor3f(1, 1, 0);
-	setFontHeight(20);
-	setFontXY(1150, 0);
-	printFont("ship rotation:\n");
-	for (int i = 0; i < 6; i++){
-		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipRotation());
-	}
-	
-	glColor3f(1, 1, 0);
-	setFontHeight(20);
-	setFontXY(1300, 0);
-	printFont("ship ready:\n");
-	for (int i = 0; i < 6; i++){
-		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipReady());
-	}
+//	glColor3f(1, 1, 0);
+//	setFontHeight(20);
+//	setFontXY(1150, 0);
+//	printFont("ship rotation:\n");
+//	for (int i = 0; i < 6; i++){
+//		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipRotation());
+//	}
+//	
+//	glColor3f(1, 1, 0);
+//	setFontHeight(20);
+//	setFontXY(1300, 0);
+//	printFont("ship ready:\n");
+//	for (int i = 0; i < 6; i++){
+//		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipReady());
+//	}
 }
 void updateCanvas(){
 	glutPostRedisplay();
@@ -142,7 +142,7 @@ void catchMouseButton(int button, int state, int x, int y){
 			switchFrameClick(state, x, y);
 			break;
 		case GLUT_RIGHT_BUTTON:
-			shipPositionFrameRightClick::shipPositionFrameRightClick(state, x, y);
+			shipPositionFrame::rightClick(state, x, y);
 			break;
 	}
 }
@@ -153,7 +153,7 @@ void switchFrameClick(int state, int x, int y){
 			mainFrame::click(x, y);
 			break;
 		case SHIP_POSITION_FRAME:
-			shipPositionFrameClick::shipPositionFrameClick(state, x, y);
+			shipPositionFrame::click(state, x, y);
 			break;
 		case BATTLE_FRAME:
 			battleFrameClick::battleFrameClick(state, x, y);
@@ -163,17 +163,16 @@ void switchFrameClick(int state, int x, int y){
 
 void catchMouseMove(int x, int y){
 	setMouseMoveCoordinates(x, y);
-	shipPositionFrameMove::shipPositionFrameMove(x, y);
+	shipPositionFrame::move(x, y);
 	glutPostRedisplay();
 }
 
 void setMouseMoveCoordinates(int x, int y){
 	mouse.setMouseMoveCoordinate(x, y);
 }
-
 void catchMousePassiveMotion(int x, int y){
 	setMouseMotionCoordinates(x, y);
-	shipPositionFrameMotion::shipPositionFrameMotion();
+	shipPositionFrame::motion();
 	glutPostRedisplay();
 }
 

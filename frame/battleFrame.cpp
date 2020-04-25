@@ -58,7 +58,7 @@ namespace battleFrame{
 			if (ship[i].getShipRotation()){
 				ship[i].rotateShipImage();
 			}
-			ship[i].loadNewShipPosition();
+			ship[i].loadShipCoordinate();
 			initializeCoordinate();
 		}
 	}

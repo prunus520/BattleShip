@@ -3,8 +3,8 @@
 
 #include "../mainInit.h"
 
-namespace shipPositionFrameMotion{
-	void shipPositionFrameMotion();
+namespace shipPositionFrame{
+	void motion();
 	void motionShip();
 }
 

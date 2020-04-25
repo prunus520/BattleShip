@@ -12,13 +12,13 @@ Image title("image/title.png");
 Image sea("image/sea.jpg");
 Image radarBoard("image/radarBoard.jpg");
 ShipImage ship[6] = {"image/ship0.png", "image/ship1.png",
-									"image/ship2.png", "image/ship3.png",
-									"image/ship4.png", "image/ship5.png"};
+										 "image/ship2.png", "image/ship3.png",
+										 "image/ship4.png", "image/ship5.png"};
 Image back("image/back.png");
 Image wave("image/wave.jpg");
 Image fire("image/fire.png");
 
-int shipMOVE = -1;
+int shipMove = -1;
 bool player_computer_flag = true;
 bool player_computer_sleep = false;
 bool palyer_init = false;

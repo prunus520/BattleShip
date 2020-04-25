@@ -3,8 +3,8 @@
 
 #include "../mainInit.h"
 
-namespace shipPositionFrameRightClick{
-	void shipPositionFrameRightClick(int, int, int);
+namespace shipPositionFrame{
+	void rightClick(int, int, int);
 	void rotateShip(int, int, int);
 	void rightClickedShipID(int, int, int);
 	void rotateShipDirection(int, int, int);

@@ -13,15 +13,15 @@ namespace mainFrame{
 	void floatImage();
 	
 	GLfloat centerTitleX();
-	GLfloat drawTitleWidth();
-	GLfloat drawTitleHight();
+	GLfloat imageTitleWidth();
+	GLfloat imageTitleHight();
 	
-	void printFont();
+	void drawFont();
 	extern bool isTimer;
 	void setTimer();
 	extern bool isFlicker;
 	void flickerFontTimer(int);
-	void printFlickeringStartFont();
+	void drawFlickeringStartFont();
 }
 
 #endif

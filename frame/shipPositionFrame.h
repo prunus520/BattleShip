@@ -4,9 +4,9 @@
 #include "../mainInit.h"
 
 namespace shipPositionFrame{
-	extern bool isRandomShip;
-	
 	void display();
+	
+	extern bool isRandomShip;
 	void randomComputerShips();
 	
 	void loadImage();
@@ -14,7 +14,7 @@ namespace shipPositionFrame{
 	void loadBackImage();
 	void loadShipsGroupImage();
 	
-	void initializeShips();
+	void setShipsData();
 	void loadShipsImage();
 	void loadShipShadowImage(int);
 	void loadGreenShipImage(int);

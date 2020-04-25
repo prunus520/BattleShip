@@ -36,7 +36,7 @@ extern Image back;
 extern Image wave;
 extern Image fire;
 
-extern int shipMOVE;
+extern int shipMove;
 extern bool player_computer_flag;
 extern bool player_computer_sleep;
 extern bool palyer_init;

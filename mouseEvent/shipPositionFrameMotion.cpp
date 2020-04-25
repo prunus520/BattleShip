@@ -1,14 +1,14 @@
 #include "shipPositionFrameMotion.h"
 
-namespace shipPositionFrameMotion{
-	void shipPositionFrameMotion(){
+namespace shipPositionFrame{
+	void motion(){
 		motionShip();
 	}
 	
 	void motionShip(){
-		if (frame == SHIP_POSITION_FRAME && shipMOVE != -1){
-			ship[shipMOVE].changeOldShipPositionByNewShipPosition();
-			shipMOVE = -1;
+		if (frame == SHIP_POSITION_FRAME && shipMove != -1){
+			ship[shipMove].changeOldShipCoordinateByShipCoordinate();
+			shipMove = -1;
 		}
 	}
 }

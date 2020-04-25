@@ -3,7 +3,7 @@
 namespace mainFrame{
 	void display(){
 		loadImage();
-		printFont();
+		drawFont();
 	}
 	
 	void loadImage(){
@@ -29,27 +29,27 @@ namespace mainFrame{
 	
 	void floatImage(){
 		title.showPNGImage(0, 0, 0, alpha);
-		title.setImageSize(centerTitleX(), 20, drawTitleWidth(), drawTitleHight());
+		title.setImageSize(centerTitleX(), 20, imageTitleWidth(), imageTitleHight());
 		if (alpha < 255){
 			++alpha;
 		}
 	}
 	
 	GLfloat centerTitleX(){
-		return (windowWidth - drawTitleWidth()) / 2;
+		return (windowWidth - imageTitleWidth()) / 2;
 	}
 	
-	GLfloat drawTitleWidth(){
+	GLfloat imageTitleWidth(){
 		return title.getImageWidth() * 1.5;
 	}
 	
-	GLfloat drawTitleHight(){
+	GLfloat imageTitleHight(){
 		return title.getImageHeight() * 1.5;
 	}
 	
-	void printFont(){
+	void drawFont(){
 		setTimer();
-		printFlickeringStartFont();
+		drawFlickeringStartFont();
 	}
 	
 	bool isTimer = false;
@@ -66,7 +66,7 @@ namespace mainFrame{
 		glutTimerFunc(200, flickerFontTimer, id);
 	}
 	
-	void printFlickeringStartFont(){
+	void drawFlickeringStartFont(){
 		if (isFlicker){
 			glDisable(GL_TEXTURE_2D);
 			glColor3f(1, 1, 0);

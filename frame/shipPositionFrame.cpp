@@ -1,16 +1,15 @@
 #include "shipPositionFrame.h"
 
 namespace shipPositionFrame{
-	bool isRandomShip = false;
-	
 	void display(){
 		randomComputerShips();
 		loadImage();
 		drawCheckerBoard();
 	}
 	
+	bool isRandomShip = false;
 	void randomComputerShips(){
-		if(!isRandomShip){
+		if (!isRandomShip){
 			srand(time(NULL));
 			computer.randomShips();
 			isRandomShip = true;
@@ -24,14 +23,14 @@ namespace shipPositionFrame{
 	}
 	
 	void loadRadarBoardImage(){
-		if(radarBoard.isImageEmpty()){
+		if (radarBoard.isImageEmpty()){
 			radarBoard.loadImage();
 		}
 		radarBoard.showImage(0, 0, windowWidth, windowHeight);
 	}
 	
 	void loadBackImage(){
-		if(back.isImageEmpty()){
+		if (back.isImageEmpty()){
 			back.loadImage();
 		}
 		back.showPNGImage();
@@ -39,16 +38,16 @@ namespace shipPositionFrame{
 	}
 	
 	void loadShipsGroupImage(){
-		initializeShips();
+		setShipsData();
 		loadShipsImage();
 	}
 	
-	void initializeShips(){
-		if(ship[0].isImageEmpty()){
+	void setShipsData(){
+		if (ship[0].isImageEmpty()){
 			int position[6][2] = {{1108, 186}, {1161, 186}, {1228, 186}, {1100, 280}, {1202, 280}, {1010, 170}};
 			float size[6][2] = {{16, 67.2}, {24, 65.6}, {16, 67.2}, {65, 212.5}, {50, 212.5}, {54, 336}};
 			int length[6][2] = {{1, 1}, {1, 1}, {1, 1}, {1, 3}, {1, 3}, {1, 5}};
-			for(int i = 5; i != -1; --i){
+			for (int i = 5; i != -1; --i){
 				ship[i].loadImage();
 				ship[i].setShipPosition(position[i][0], position[i][1]);
 				ship[i].setShipSize(size[i][0], size[i][1]);
@@ -74,7 +73,7 @@ namespace shipPositionFrame{
 		if (ship[i].getShipRotation()){
 			ship[i].rotateShipImage();
 		}
-		ship[i].setImageSizeAndColor(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY(), ship[i].getShipSizeWidth(), ship[i].getShipSizeHeight(), 0, 1, 0);
+		ship[i].setImageSizeAndColor(ship[i].getShipCoordinateX(), ship[i].getShipCoordinateY(), ship[i].getShipSizeWidth(), ship[i].getShipSizeHeight(), 0, 1, 0);
 	}
 	
 	void initializeCoordinate(){
