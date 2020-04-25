@@ -57,6 +57,7 @@ class ShipImage:public Image{
 		bool isShipPositionWithinRange(int, int);
 		bool isNewShipPositionWithoutRange(int, int, int, int);
 		void placeShipInCell(GLfloat, GLfloat, GLfloat, GLfloat);
+		void loadNewShipPosition();
 		
 		void setShipField(int, int, int, int);
 		void resetField();

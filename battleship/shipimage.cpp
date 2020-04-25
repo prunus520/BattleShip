@@ -109,6 +109,10 @@ void ShipImage::placeShipInCell(GLfloat x, GLfloat y, GLfloat width, GLfloat hei
 										 y + head.row * height / 8 + ((rotation ? length.width: length.height) * height / 8 - (rotation ? size.width: size.height)) / 2);
 }
 
+void ShipImage::loadNewShipPosition(){
+		setImageSize(newPosition.x, newPosition.y, size.width, size.height);
+}
+
 void ShipImage::setShipField(int headRow, int headColumn, int bodyRow, int bodyColumn){
 	head.row = headRow;
 	head.column = headColumn;
