@@ -8,6 +8,6 @@ void line(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1);
 void Hollow_Square(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1);
 void Solid_Square(GLfloat, GLfloat, GLfloat, GLfloat);
 void checkerboard(GLfloat, GLfloat, GLfloat, GLfloat, int, int, GLfloat = 1);
-void Counterclockwise_Degree_Rotation(GLfloat, GLfloat);
+void counterclockwiseDegreeRotation(GLfloat, GLfloat);
 
 #endif

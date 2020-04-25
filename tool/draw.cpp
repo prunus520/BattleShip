@@ -46,7 +46,7 @@ void checkerboard(GLfloat x, GLfloat y, GLfloat width, GLfloat height, int width
 	}
 }
 
-void Counterclockwise_Degree_Rotation(GLfloat x, GLfloat y){
+void counterclockwiseDegreeRotation(GLfloat x, GLfloat y){
 	glRotatef(90, 1, 0, 0);
 	glRotatef(90, 0, 1, 0);
 	glRotatef(90, 1, 0, 0);

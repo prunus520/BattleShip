@@ -54,7 +54,7 @@ void catchDisplay(){
 	resetCoordinates();
 	clearCanvas();
 	switchFrame();
-//	drawTest();
+	drawTest();
 	updateCanvas();
 }
 
@@ -73,7 +73,7 @@ void switchFrame(){
 			mainFrame::display();
 			break;
 		case SHIP_POSITION_FRAME:
-			shipPositionFrame::shipPositionFrame();
+			shipPositionFrame::display();
 			break;
 		case BATTLE_FRAME:
 			battleFrame::battleFrame();

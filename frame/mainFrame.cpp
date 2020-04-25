@@ -27,7 +27,7 @@ namespace mainFrame{
 			title.loadImage();
 			alpha = 0;
 		}
-		title.showTransparentBackgroundForImage(0, 0, 0, alpha);
+		title.showPNGImage(0, 0, 0, alpha);
 		title.setImageSize(centerTitleX(), 20, drawTitleWidth(), drawTitleHight());
 		if (alpha < 255)
 			++alpha;
@@ -53,7 +53,7 @@ namespace mainFrame{
 	void setTimer(){
 		if(!isTimer){
 			glutTimerFunc(200, flickerFontTimer, 1);
-			isTimer = !isTimer;
+			isTimer = true;
 		}
 	}
 	

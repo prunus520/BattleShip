@@ -52,7 +52,7 @@ namespace battleFrame{
 			ship[i].placeShipInCell(140, 310, 540, 540);
 			toTransparentImage(ship[i].getImage());
 			if (ship[i].getShipRotation())
-				Counterclockwise_Degree_Rotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
+				counterclockwiseDegreeRotation(ship[i].getNewShipPositionX(), ship[i].getNewShipPositionY());
 			ship[i].loadNewShipPosition();
 			glLoadIdentity();
 			gluOrtho2D(0, windowWidth, windowHeight, 0);

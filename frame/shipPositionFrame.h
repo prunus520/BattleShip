@@ -4,13 +4,24 @@
 #include "../mainInit.h"
 
 namespace shipPositionFrame{
-	void shipPositionFrame();
+	extern bool isRandomShip;
+	
+	void display();
 	void randomComputerShips();
+	
+	void loadImage();
 	void loadRadarBoardImage();
 	void loadBackImage();
 	void loadShipGroupImage();
-	void useGreenPaint();
+	
+	void initializeShips();
+	void loadShipsImage();
+	void loadShipShadowImage(int);
+	void loadGreenShipImage(int);
+	void initializeCoordinate();
+	
 	void drawCheckerBoard();
+	void useGreenPaint();
 }
 
 #endif
