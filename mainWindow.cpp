@@ -137,6 +137,7 @@ void setMouseClickCoordinates(int state, int x, int y){
 }
 
 void catchMouseButton(int button, int state, int x, int y){
+	mouse.setMouseButton(button);
 	switch (button){
 		case GLUT_LEFT_BUTTON:
 			switchFrameClick(state, x, y);

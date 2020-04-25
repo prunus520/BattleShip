@@ -22,11 +22,15 @@ class Mouse{
 		
 		void setMouseClicked(int);
 		int getMouseClicked();
+		
+		void setMouseButton(int);
+		int getMouseButton();
 	private:
 		Coordinate motion = {0};
 		Coordinate move = {0};
 		Coordinate click = {0};
 		int clicked = 0;
+		int button = 0;
 };
 
 #endif

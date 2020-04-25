@@ -46,3 +46,11 @@ void Mouse::setMouseClicked(int state){
 int Mouse::getMouseClicked(){
 	return clicked;
 }
+
+void Mouse::setMouseButton(int newButton){
+	button = newButton;
+}
+
+int Mouse::getMouseButton(){
+	return button;
+}
