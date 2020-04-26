@@ -3,7 +3,7 @@
 namespace shipPositionFrame{
 	void click(int state, int x, int y){
 		clickShipID(state, x, y);
-		placeShip(state, x, y);
+		catchAndPlaceShip(state, x, y);
 		clickButton(state, x, y);
 	}
 	
@@ -16,7 +16,7 @@ namespace shipPositionFrame{
 		}
 	}
 	
-	void placeShip(int state, int x, int y){
+	void catchAndPlaceShip(int state, int x, int y){
 		if (shipMove != -1){
 			ship[shipMove].resetField();
 			if (state == 0 && ship[shipMove].isShipCoordinateWithinRange(x, y)){
@@ -43,6 +43,7 @@ namespace shipPositionFrame{
 				player.setShipCell(row, column, isNull);
 			}
 		}
+		ship[shipMove].setShipReady(false);
 	}
 	
 	void initializeShipPosition(){
@@ -75,7 +76,6 @@ namespace shipPositionFrame{
 		}
 	}
 	
-	////////////////////////
 	void clickButton(int state, int x, int y){
 		if (mouse.isMouseClickRangeCoordinate(0, 100, 0, 100)){
 			backToMainFrame();

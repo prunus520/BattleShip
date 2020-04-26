@@ -6,7 +6,7 @@
 namespace shipPositionFrame{
 	void click(int, int, int);
 	void clickShipID(int, int, int);
-	void placeShip(int, int, int);
+	void catchAndPlaceShip(int, int, int);
 	void clearPlaceShipCell();
 	void initializeShipPosition();
 	bool checkPlaceFail();
