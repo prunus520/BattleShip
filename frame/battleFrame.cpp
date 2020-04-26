@@ -23,36 +23,38 @@ namespace battleFrame{
 	}
 	
 	void drawPlayerCheckerBoard(){
-		printCheckerBoardMark(85, 314, 140, 247);
+		drawCheckerBoardMark(85, 314, 140, 247);
 		checkerboard(140, 310, 540, 540, table, table, 5);
 	}
 	
 	void drawComputerCheckerBoard(){
-		printCheckerBoardMark(745, 314, 800, 247);
+		drawCheckerBoardMark(745, 314, 800, 247);
 		checkerboard(800, 310, 540, 540, table, table, 5);
 	}
 	
-	void printCheckerBoardMark(GLfloat alphabetX, GLfloat alphabetY, GLfloat numberX, GLfloat numberY){
+	void drawCheckerBoardMark(GLfloat alphabetX, GLfloat alphabetY, GLfloat numberX, GLfloat numberY){
 		glColor3f(0, 0, 1);
 		setFontHeight(67);
-		printCheckerBoardAlphabet(alphabetX, alphabetY);
-		printCheckerBoardNumber(numberX, numberY);
+		drawCheckerBoardAlphabet(alphabetX, alphabetY);
+		drawCheckerBoardNumber(numberX, numberY);
 	}
 	
-	void printCheckerBoardAlphabet(GLfloat x, GLfloat y){
+	void drawCheckerBoardAlphabet(GLfloat x, GLfloat y){
 		setFontXY(x, y);
-		for (int i = 65; i < 65 + table; i++)
+		for (int i = 65; i != 65 + table; ++i){
 			printFont("%c\n", i);
+		}
 	}
 	
-	void printCheckerBoardNumber(GLfloat x, GLfloat y){
+	void drawCheckerBoardNumber(GLfloat x, GLfloat y){
 		setFontXY(x, y);
-		for (int i = 1; i < 1 + table; i++)
+		for (int i = 1; i != 1 + table; ++i){
 			printFont("% d ", i);
+		}
 	}
 	
 	void loadPlayerShipsGroupImage(){
-		for (int i = 5; i >= 0; i--){
+		for (int i = 5; i != -1; --i){
 			ship[i].placeShipInCell(140, 310, 540, 540);
 			ship[i].showPNGImage();
 			if (ship[i].getShipRotation()){
@@ -129,19 +131,16 @@ namespace battleFrame{
 	}
 	
 	void printWinOrLoseFont(){
-		if (computer.getHitShipCell() == 14 || computer.getHitCell() == 40 || player.getHitShipCell() == 14 || player.getHitCell() == 40){
+		if (computer.isLose() || player.isLose()){
 			glColor3f(0, 0, 0);
 			setFontHeight(55);
 			setFontXY(windowWidth / 2 - 260, windowHeight / 2);
 			
-			if (computer.getHitShipCell() == 14){
+			if (computer.isLose()){
 				printFont("You win.");
 			}
-			else if (player.getHitShipCell() == 14){
+			else if (player.isLose()){
 				printFont("You lose.");
-			}
-			else if (computer.getHitCell() == 40 || player.getHitCell() == 40){
-				printFont("You are garbage.");
 			}
 			palyer_down = false;
 		}

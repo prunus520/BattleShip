@@ -11,9 +11,9 @@ namespace battleFrame{
 	void drawCheckerBoard();
 	void drawPlayerCheckerBoard();
 	void drawComputerCheckerBoard();
-	void printCheckerBoardMark(GLfloat, GLfloat, GLfloat, GLfloat);
-	void printCheckerBoardAlphabet(GLfloat, GLfloat);
-	void printCheckerBoardNumber(GLfloat, GLfloat);
+	void drawCheckerBoardMark(GLfloat, GLfloat, GLfloat, GLfloat);
+	void drawCheckerBoardAlphabet(GLfloat, GLfloat);
+	void drawCheckerBoardNumber(GLfloat, GLfloat);
 	
 	void loadPlayerShipsGroupImage();
 	void initializeCoordinate();

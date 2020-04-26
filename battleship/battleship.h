@@ -34,6 +34,7 @@ class Battleship{
 		
 		void initShots();
 		void checkShots();
+		bool isLose();
 		
 		void testHitTable(int, int);
 		void testBoardTable(int, int);

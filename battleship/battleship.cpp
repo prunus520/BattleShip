@@ -109,6 +109,10 @@ void Battleship::checkShots(){
 	}
 }
 
+bool Battleship::isLose(){
+	return hits[0] == 14;
+}
+
 bool Battleship::giveShots(){
 	if (board[row][column] == isHit || board[row][column] == isnHit){
 		return false;
