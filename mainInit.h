@@ -44,7 +44,7 @@ extern int shipMove;
 extern bool player_computer_flag;
 extern bool player_computer_sleep;
 extern bool palyer_init;
-extern bool palyer_down;
+extern bool isPalyerMouseClickedUp;
 
 extern Battleship computer, player;
 

@@ -84,13 +84,12 @@ void Battleship::randomShips(){
 void Battleship::showHitImage(int x, int y, IplImage *hit, IplImage *nohit){
 	for (int row = 0; row != 8; ++row){
 		for (int column = 0; column != 8; ++column){
-			if (board[row][column] != isNull){
-				if (board[row][column] == isHit){
-					toTransparentImage(hit);
-				}
-				else if (board[row][column] == isnHit){
-					showImage(nohit);
-				}
+			if (board[row][column] == isHit){
+				toTransparentImage(hit);
+				setImageSize(x + 1.5 + column * 67.5, y + 1.5 + row * 67.5, 64.5, 64.5);
+			}
+			else if (board[row][column] == isnHit){
+				showImage(nohit);
 				setImageSize(x + 1.5 + column * 67.5, y + 1.5 + row * 67.5, 64.5, 64.5);
 			}
 		}

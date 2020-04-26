@@ -2,12 +2,11 @@
 
 namespace battleFrameClick{
 	void battleFrameClick(int state, int x, int y){
-		hitPlayerOrComputer(state, x, y);
+		hitComputerShip(state, x, y);
 	}
 	
-	void hitPlayerOrComputer(int state, int x, int y){
-		if (state == 1 && x >= 800 && x <= 1340 &&
-				y >= 310 && y <= 850 && player_computer_sleep && palyer_down){
+	void hitComputerShip(int state, int x, int y){
+		if (state == 1 && mouse.isMouseClickRangeCoordinate(800, 1340, 310, 850) && player_computer_sleep && isPalyerMouseClickedUp){
 			computer.setRow((y - 310) / 67.5);
 			computer.setColumn((x - 800) / 67.5);
 			player_computer_flag = true;

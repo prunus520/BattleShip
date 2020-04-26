@@ -103,15 +103,15 @@ namespace battleFrame{
 		if (player_computer_flag && player_computer_sleep == false){
 			glutTimerFunc(1, player_computer_sleep_Timer, 2);
 		}
-		if (player_computer_flag && player_computer_sleep && palyer_down && palyer_init){
+		if (player_computer_flag && player_computer_sleep && isPalyerMouseClickedUp && palyer_init){
 			computer.checkShots();
 			glutTimerFunc(500, player_computer_flag_Timer, 3);
-			palyer_down = false;
+			isPalyerMouseClickedUp = false;
 			palyer_init = false;
 		}
 		else if (player_computer_flag == false && player_computer_sleep){
 			player.checkShots();
-			palyer_down = true;
+			isPalyerMouseClickedUp = true;
 			palyer_init = true;
 		}
 	}
@@ -142,7 +142,7 @@ namespace battleFrame{
 			else if (player.isLose()){
 				printFont("You lose.");
 			}
-			palyer_down = false;
+			isPalyerMouseClickedUp = false;
 		}
 	}
 }
