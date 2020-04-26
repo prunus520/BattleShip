@@ -16,8 +16,8 @@ namespace shipPositionFrame{
 	}
 	
 	void rotateShipDirection(int state, int x, int y){
-		if(state == 0 && !ship[shipMove].isShipCoordinateWithoutRange(123, 701, 167, 745)){
-			if(checkRotationSuccess()){
+		if (state == 0 && !ship[shipMove].isShipCoordinateWithoutRange(123, 701, 167, 745)){
+			if (checkRotationSuccess()){
 				rotatedShip(state, x, y);
 			}
 			shipMove = -1;
@@ -26,10 +26,10 @@ namespace shipPositionFrame{
 	
 	bool checkRotationSuccess(){
 		int fail = -1;
-		if(ship[shipMove].checkRotationLengthSuccess()){
+		if (ship[shipMove].checkRotationLengthSuccess()){
 			for (int row = 0; row <= ship[shipMove].getShipBodyRow() - ship[shipMove].getShipHeadRow(); ++row){
 				for (int column = 0; column <= ship[shipMove].getShipBodyColumn() - ship[shipMove].getShipHeadColumn(); ++column){
-					if(checkRotationArrayIsZero(row, column)){
+					if (checkRotationArrayIsZero(row, column)){
 						++fail;
 					}
 				}
@@ -53,7 +53,7 @@ namespace shipPositionFrame{
 	void clearShipCellBeforeRotation(int state, int x, int y){
 		for (int row = ship[shipMove].getShipHeadRow(); row <= ship[shipMove].getShipBodyRow(); ++row){
 			for (int column = ship[shipMove].getShipHeadColumn(); column <= ship[shipMove].getShipBodyColumn(); ++column){
-				player.setShipCell(row, column, 0);
+				player.setShipCell(row, column, isNull);
 			}
 		}
 	}
@@ -61,7 +61,7 @@ namespace shipPositionFrame{
 	void rotateShipBoard(){
 		for (int row = ship[shipMove].getShipHeadRow(); row <= ship[shipMove].getShipBodyRow(); ++row){
 			for (int column = ship[shipMove].getShipHeadColumn(); column <= ship[shipMove].getShipBodyColumn(); ++column){
-				player.setShipCell(row, column, ship[shipMove].getShipLengthHeight());
+				player.setShipCell(row, column, isShip);
 			}
 		}
 	}

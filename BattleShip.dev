@@ -310,27 +310,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit27]
-FileName=mouseEvent\shipPositionFrameMotion.h
-CompileCpp=1
-Folder=mouseEvent
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit28]
-FileName=mouseEvent\shipPositionFrameMove.h
-CompileCpp=1
-Folder=mouseEvent
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit29]
 FileName=mouseEvent\shipPositionFrameRightClick.h
 CompileCpp=1
 Folder=mouseEvent
@@ -340,7 +320,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit30]
+[Unit29]
 FileName=mouseEvent\battleFrameClick.cpp
 CompileCpp=1
 Folder=mouseEvent
@@ -350,7 +330,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit31]
+[Unit30]
 FileName=mouseEvent\mainFrameClick.cpp
 CompileCpp=1
 Folder=mouseEvent
@@ -360,7 +340,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit32]
+[Unit31]
 FileName=mouseEvent\shipPositionFrameClick.cpp
 CompileCpp=1
 Folder=mouseEvent
@@ -370,17 +350,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit33]
-FileName=mouseEvent\shipPositionFrameMotion.cpp
-CompileCpp=1
-Folder=mouseEvent
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit34]
+[Unit32]
 FileName=mouseEvent\shipPositionFrameMove.cpp
 CompileCpp=1
 Folder=mouseEvent
@@ -390,7 +360,47 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit34]
+FileName=tool\mouse.cpp
+CompileCpp=1
+Folder=tool
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
 [Unit35]
+FileName=tool\mouse.h
+CompileCpp=1
+Folder=tool
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit37]
+FileName=mouseEvent\shipPositionFrameMotion.h
+CompileCpp=1
+Folder=mouseEvent
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit27]
+FileName=mouseEvent\shipPositionFrameMove.h
+CompileCpp=1
+Folder=mouseEvent
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit33]
 FileName=mouseEvent\shipPositionFrameRightClick.cpp
 CompileCpp=1
 Folder=mouseEvent
@@ -401,19 +411,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit36]
-FileName=tool\mouse.cpp
+FileName=mouseEvent\shipPositionFrameMotion.cpp
 CompileCpp=1
-Folder=tool
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit37]
-FileName=tool\mouse.h
-CompileCpp=1
-Folder=tool
+Folder=mouseEvent
 Compile=1
 Link=1
 Priority=1000

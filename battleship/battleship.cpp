@@ -13,11 +13,11 @@ void Battleship::setColumn(int newColumn){
 }
 
 void Battleship::setShipCell(int newRow, int newColumn, int newValue){
-	ships[newRow][newColumn] = newValue;
+	board[newRow][newColumn] = newValue;
 }
 
 int Battleship::getShipCell(int newRow, int newColumn){
-	return ships[newRow][newColumn];
+	return board[newRow][newColumn];
 }
 
 int Battleship::getHitShipCell(){
@@ -33,11 +33,11 @@ int Battleship::getBoardCell(){
 }
 
 void Battleship::initBoard(){
-	std::fill(&board[0][0], &board[8][0], -1);
+	std::fill(&board[0][0], &board[8][0], isNull);
 }
 
 void Battleship::initShips(){
-	std::fill(&ships[0][0], &ships[8][0], 0);
+	initBoard();
 }
 
 void Battleship::initShots(){
@@ -63,7 +63,7 @@ void Battleship::randomShips(){
 				successCount = 0;
 				for(int index = 0; index != shipLength[shipType]; ++index){
 					shipIndex = randomRotation == true ? (randomRow + index) * 8 + randomColumn : randomRow * 8 + randomColumn + index;
-					if(*(*ships + shipIndex) == 0){
+					if(*(*board + shipIndex) == isNull){
 						++successCount;
 					}else{
 						continue;
@@ -72,7 +72,7 @@ void Battleship::randomShips(){
 				if(successCount == shipLength[shipType]){
 					for(int index = 0; index != shipLength[shipType]; ++index){
 						shipIndex = randomRotation == true ? (randomRow + index) * 8 + randomColumn : randomRow * 8 + randomColumn + index;
-						*(*ships + shipIndex) = shipLength[shipType];
+						*(*board + shipIndex) = isShip;
 					}
 					break;
 				}
@@ -84,8 +84,13 @@ void Battleship::randomShips(){
 void Battleship::showHitImage(int x, int y, IplImage *hit, IplImage *nohit){
 	for (int row = 0; row != 8; ++row){
 		for (int column = 0; column != 8; ++column){
-			if (board[row][column] != -1){
-				board[row][column] == 0 ? showImage(nohit) : toTransparentImage(hit);
+			if (board[row][column] != isNull){
+				if (board[row][column] == isHit){
+					toTransparentImage(hit);
+				}
+				else if (board[row][column] == isnHit){
+					showImage(nohit);
+				}
 				setImageSize(x + 1.5 + column * 67.5, y + 1.5 + row * 67.5, 64.5, 64.5);
 			}
 		}
@@ -95,15 +100,17 @@ void Battleship::showHitImage(int x, int y, IplImage *hit, IplImage *nohit){
 void Battleship::checkShots(){
 	if (giveShots()){
 		changeBoard();
-		if (board[row][column] == 1)
+		if (board[row][column] == isHit){
 			hits[0]++;
-		else if (board[row][column] == 0)
+		}
+		else if (board[row][column] == isnHit){
 			hits[1]++;
+		}
 	}
 }
 
 bool Battleship::giveShots(){
-	if (board[row][column] == 0 || board[row][column] == 1){
+	if (board[row][column] == isHit || board[row][column] == isnHit){
 		return false;
 	}
 	else{
@@ -113,10 +120,12 @@ bool Battleship::giveShots(){
 }
 
 void Battleship::changeBoard(){
-	if (hitShips() == 1)
-		board[row][column] = 1;
-	else
-		board[row][column] = 0;
+	if (hitShips() == 1){
+		board[row][column] = isHit;
+	}
+	else {
+		board[row][column] = isnHit;
+	}
 }
 
 int Battleship::hitShips(){
@@ -124,23 +133,29 @@ int Battleship::hitShips(){
 	glColor3f(0, 0, 0);
 	setFontHeight(65);
 	setFontXY(270, 100);
-	if (shots[row][column] == ships[row][column]){
-		if (row >= 800)
+	if (shots[row][column] == board[row][column]){
+		if (row >= 800){
 			printFont("You hit a small ship with the shot ( %d , %d )", row + 1, column + 1);
-		else
+		}
+		else {
 			printFont("Hit a small ship with the shot ( %d , %d )", row + 1, column + 1);
+		}
 	}
-	else if (shots[row][column] + 2 == ships[row][column]){
-		if (row >= 800)
+	else if (shots[row][column] + 2 == board[row][column]){
+		if (row >= 800){
 			printFont("You hit a medium ship with the shot (%d , %d )", row + 1, column + 1);
-		else
+		}
+		else {
 			printFont("Hit a medium ship with the shot (%d , %d )", row + 1, column + 1);
+		}
 	}
-	else if (shots[row][column] + 4 == ships[row][column]){
-		if (row >= 800)
+	else if (shots[row][column] + 4 == board[row][column]){
+		if (row >= 800) {
 			printFont("You hit a large ship with the shot ( %d , %d )", row + 1, column + 1);
-		else
+		}
+		else {
 			printFont("Hit a large ship with the shot ( %d , %d )", row + 1, column + 1);
+		}
 	}
 	else{
 		if (row >= 800){
@@ -154,19 +169,6 @@ int Battleship::hitShips(){
 		return 0;
 	}
 	return 1;
-}
-
-void Battleship::testShipTable(int x, int y){
-	glColor3f(1, 1, 0);
-	setFontHeight(20);
-	setFontXY(x, y);
-	printFont("ship:\n");
-	for (int i = 0; i < table; i++){
-		for (int j = 0; j < table; j++){
-			printFont("%d ", getShipCell(i, j));
-		}
-		printFont("\n");
-	}
 }
 
 void Battleship::testHitTable(int x, int y){

@@ -90,28 +90,26 @@ void drawTest(){
 						mouse.getMouseMoveX(), mouse.getMouseMoveY(),
 						mouse.getMouseMotionX(), mouse.getMouseMotionY());
 
-//	player.testBoardTable(300, 0);
-//	computer.testBoardTable(500, 0);
-	player.testShipTable(700, 0);
-	computer.testShipTable(900, 0);
-//	player.testHitTable(1050, 0);
-//	computer.testHitTable(1100, 0);
+	player.testBoardTable(300, 0);
+	computer.testBoardTable(500, 0);
+	player.testHitTable(700, 0);
+	computer.testHitTable(800, 0);
 
-//	glColor3f(1, 1, 0);
-//	setFontHeight(20);
-//	setFontXY(1150, 0);
-//	printFont("ship rotation:\n");
-//	for (int i = 0; i < 6; i++){
-//		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipRotation());
-//	}
-//	
-//	glColor3f(1, 1, 0);
-//	setFontHeight(20);
-//	setFontXY(1300, 0);
-//	printFont("ship ready:\n");
-//	for (int i = 0; i < 6; i++){
-//		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipReady());
-//	}
+	glColor3f(1, 1, 0);
+	setFontHeight(20);
+	setFontXY(1000, 0);
+	printFont("ship rotation:\n");
+	for (int i = 0; i < 6; i++){
+		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipRotation());
+	}
+	
+	glColor3f(1, 1, 0);
+	setFontHeight(20);
+	setFontXY(1200, 0);
+	printFont("ship ready:\n");
+	for (int i = 0; i < 6; i++){
+		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipReady());
+	}
 }
 void updateCanvas(){
 	glutPostRedisplay();

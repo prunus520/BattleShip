@@ -124,7 +124,7 @@ namespace battleFrame{
 			do{
 				player.setRow(rand() % 8);
 				player.setColumn(rand() % 8);
-			} while (player.getBoardCell() != -1);
+			} while (player.getBoardCell() != isNull);
 		}
 	}
 	

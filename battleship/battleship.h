@@ -8,30 +8,38 @@
 
 #define table 8
 
+#define isNull 0
+#define isShip 1
+#define isHit 2
+#define isnHit 3
+
 class Battleship{
 	public:
 		Battleship();
 		void setRow(int);
 		void setColumn(int);
+		
 		void setShipCell(int, int, int);
 		int getShipCell(int, int);
+		void initShips();
+		void randomShips();
+		
 		int getHitShipCell();
 		int getHitCell();
+		void initHits();
+		void showHitImage(int, int, IplImage *, IplImage *);
+		
 		int getBoardCell();
 		void initBoard();
-		void initShips();
+		
 		void initShots();
-		void initHits();
-		void randomShips();
-		void showHitImage(int, int, IplImage *, IplImage *);
 		void checkShots();
-		void testShipTable(int, int);
+		
 		void testHitTable(int, int);
 		void testBoardTable(int, int);
 	private:
 		int row = 0, column = 0;
 		int board[8][8] = {{0}};
-		int ships[8][8] = {{0}};
 		int shots[8][8] = {{0}};
 		int hits[2] = {0};
 		bool giveShots();
