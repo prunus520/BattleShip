@@ -21,6 +21,7 @@ void catchGlutEvent(){
 	catchWindowSizeEvent();
 	catchDisplayEvent();
 	catchMouseEvent();
+	catchKeyboardEvent();
 
 	glutMainLoop();
 }
@@ -81,34 +82,36 @@ void switchFrame(){
 }
 
 void drawTest(){
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glColor3f(1, 1, 0);
-	setFontHeight(30);
-	setFontXY(0, 0);
-	printFont(" state: %d\n clickX: %d\n clickY: %d\n moveX: %d\n moveY: %d\n motionX: %d\n motionY: %d",
-						mouse.getMouseState(), mouse.getMouseClickX(), mouse.getMouseClickY(),
-						mouse.getMouseMoveX(), mouse.getMouseMoveY(),
-						mouse.getMouseMotionX(), mouse.getMouseMotionY());
-
-	player.testBoardTable(300, 0);
-	computer.testBoardTable(500, 0);
-	player.testHitTable(700, 0);
-	computer.testHitTable(800, 0);
-
-	glColor3f(1, 1, 0);
-	setFontHeight(20);
-	setFontXY(1000, 0);
-	printFont("ship rotation:\n");
-	for (int i = 0; i < 6; i++){
-		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipRotation());
-	}
+	if(isDebug == true){
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glColor3f(1, 1, 0);
+		setFontHeight(30);
+		setFontXY(0, 0);
+		printFont(" state: %d\n clickX: %d\n clickY: %d\n moveX: %d\n moveY: %d\n motionX: %d\n motionY: %d",
+							mouse.getMouseState(), mouse.getMouseClickX(), mouse.getMouseClickY(),
+							mouse.getMouseMoveX(), mouse.getMouseMoveY(),
+							mouse.getMouseMotionX(), mouse.getMouseMotionY());
 	
-	glColor3f(1, 1, 0);
-	setFontHeight(20);
-	setFontXY(1200, 0);
-	printFont("ship ready:\n");
-	for (int i = 0; i < 6; i++){
-		printFont("%d: %d\n", ship[i].getID(), ship[i].getShipReady());
+		player.testBoardTable(300, 0);
+		computer.testBoardTable(500, 0);
+		player.testHitTable(700, 0);
+		computer.testHitTable(800, 0);
+	
+		glColor3f(1, 1, 0);
+		setFontHeight(20);
+		setFontXY(1000, 0);
+		printFont("ship rotation:\n");
+		for (int i = 0; i < 6; i++){
+			printFont("%d: %d\n", ship[i].getID(), ship[i].getShipRotation());
+		}
+		
+		glColor3f(1, 1, 0);
+		setFontHeight(20);
+		setFontXY(1200, 0);
+		printFont("ship ready:\n");
+		for (int i = 0; i < 6; i++){
+			printFont("%d: %d\n", ship[i].getID(), ship[i].getShipReady());
+		}
 	}
 }
 void updateCanvas(){
@@ -178,4 +181,17 @@ void catchMousePassiveMotion(int x, int y){
 
 void setMouseMotionCoordinates(int x, int y){
 	mouse.setMouseMotionCoordinate(x, y);
+}
+
+void catchKeyboardEvent(){
+	glutKeyboardFunc(catchKeyboard);
+}
+
+void catchKeyboard(unsigned char key, int x, int y){
+	if (key == ESC){
+		exit( 1 );
+	}
+	else if (key == KEY_d || key == KEY_D){
+		isDebug = !isDebug;
+	}
 }

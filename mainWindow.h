@@ -40,4 +40,8 @@ void setMouseMoveCoordinates(int, int);
 void catchMousePassiveMotion(int, int);
 void setMouseMotionCoordinates(int, int);
 
+bool isDebug = false;
+void catchKeyboardEvent();
+void catchKeyboard(unsigned char, int, int);
+
 #endif

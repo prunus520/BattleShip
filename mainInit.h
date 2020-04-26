@@ -15,6 +15,10 @@
 
 #define table 8
 
+#define ESC 27
+#define KEY_D 68
+#define KEY_d 100
+
 //			battle_ship_color
 #define battle_ship_alarm_red glColor3f(0.4372, 0.0313, 0.0941)
 #define battle_ship_alarm_green glColor3f(0.0941, 0.4372, 0.0313)
