@@ -6,11 +6,12 @@ namespace battleFrameClick{
 	}
 	
 	void hitComputerShip(int state, int x, int y){
-		if (state == 1 && mouse.isMouseClickRangeCoordinate(800, 1340, 310, 850) && player_computer_sleep && isPalyerMouseClickedUp){
+		if (state == 1 && mouse.isMouseClickRangeCoordinate(800, 1340, 310, 850) && isPalyerMouseClickedUp){
 			computer.setRow((y - 310) / 67.5);
 			computer.setColumn((x - 800) / 67.5);
-			player_computer_flag = true;
-			palyer_init = true;
+			if(computer.hitSuccess()){
+				isComputer = true;
+			}
 		}
 	}
 }

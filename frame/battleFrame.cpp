@@ -73,7 +73,7 @@ namespace battleFrame{
 	void loadHitImage(){
 		loadFireImage();
 		loadWaveImage();
-		showHitImage();
+		showHitAndnHitImage();
 	}
 	
 	void loadFireImage(){
@@ -88,53 +88,79 @@ namespace battleFrame{
 		}
 	}
 	
-	void showHitImage(){
-		player.showHitImage(140, 310, fire.getImage(), wave.getImage());
-		computer.showHitImage(800, 310, fire.getImage(), wave.getImage());
+	void showHitAndnHitImage(){
+		showHitImage(140, 310, 800, 310);
+		shownHitImage(140, 310, 800, 310);
+		
+	}
+	
+	void showHitImage(int playerX, int playerY, int computerX, int computerY){
+		for (int row = 0; row != 8; ++row){
+			for (int column = 0; column != 8; ++column){
+				if (player.getBoardCell(row, column) == isHit){
+					fire.showPNGImage();
+					setImageSize(playerX + 1.5 + column * 67.5, playerY + 1.5 + row * 67.5, 64.5, 64.5);
+				}
+				if (computer.getBoardCell(row, column) == isHit){
+					fire.showPNGImage();
+					setImageSize(computerX + 1.5 + column * 67.5, computerY + 1.5 + row * 67.5, 64.5, 64.5);
+				}
+			}
+		}
+	}
+	
+	void shownHitImage(int playerX, int playerY, int computerX, int computerY){
+		for (int row = 0; row != 8; ++row){
+			for (int column = 0; column != 8; ++column){
+				if (player.getBoardCell(row, column) == isnHit){
+					wave.showImage();
+					setImageSize(playerX + 1.5 + column * 67.5, playerY + 1.5 + row * 67.5, 64.5, 64.5);
+				}
+				if (computer.getBoardCell(row, column) == isnHit){
+					wave.showImage();
+					setImageSize(computerX + 1.5 + column * 67.5, computerY + 1.5 + row * 67.5, 64.5, 64.5);
+				}
+			}
+		}
 	}
 	
 	void judgeGame(){
-		judgePlayerOrComputer();
-		Sleep(100);
-		printWinOrLoseFont();
+		judgePlayerOrComputerRound();
+		drawWinOrLoseFont();
 	}
 	
-	void judgePlayerOrComputer(){
-		if (player_computer_flag && player_computer_sleep == false){
-			glutTimerFunc(1, player_computer_sleep_Timer, 2);
-		}
-		if (player_computer_flag && player_computer_sleep && isPalyerMouseClickedUp && palyer_init){
-			computer.checkShots();
-			glutTimerFunc(500, player_computer_flag_Timer, 3);
+	void judgePlayerOrComputerRound(){
+		
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glColor3f(1, 1, 0);
+		setFontHeight(100);
+		setFontXY(0, 500);
+		printFont("%d", isComputer);
+		
+		if (isComputer && isPalyerMouseClickedUp){
+			glutTimerFunc(100, isComputerTimer, 3);
 			isPalyerMouseClickedUp = false;
-			palyer_init = false;
 		}
-		else if (player_computer_flag == false && player_computer_sleep){
-			player.checkShots();
+		else if (!isComputer){
 			isPalyerMouseClickedUp = true;
-			palyer_init = true;
 		}
 	}
 	
-	void player_computer_sleep_Timer(int id){
-		player_computer_sleep = !player_computer_sleep;
-	}
-	
-	void player_computer_flag_Timer(int id){
-		player_computer_flag = !player_computer_flag;
-		if (player_computer_flag){
-			do{
+	void isComputerTimer(int id){
+		if (isComputer){
+			while(!player.hitSuccess()){
 				player.setRow(rand() % 8);
 				player.setColumn(rand() % 8);
-			} while (player.getBoardCell() != isNull);
+			}
 		}
+		isComputer = !isComputer;
 	}
 	
-	void printWinOrLoseFont(){
+	void drawWinOrLoseFont(){
 		if (computer.isLose() || player.isLose()){
 			glColor3f(0, 0, 0);
 			setFontHeight(55);
-			setFontXY(windowWidth / 2 - 260, windowHeight / 2);
+			setFontXY(windowWidth / 2 - 200, windowHeight / 2);
 			
 			if (computer.isLose()){
 				printFont("You win.");

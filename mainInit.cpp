@@ -19,9 +19,7 @@ Image wave("image/wave.jpg");
 Image fire("image/fire.png");
 
 int shipMove = -1;
-bool player_computer_flag = true;
-bool player_computer_sleep = false;
-bool palyer_init = false;
+bool isComputer = true;
 bool isPalyerMouseClickedUp = true;
 
 Battleship computer, player;

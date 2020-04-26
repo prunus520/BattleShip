@@ -1,8 +1,8 @@
 #ifndef BATTLESHIP_H
 #define BATTLESHIP_H
 
+#include <time.h>
 #include <algorithm>
-#include <opencv/cv.h>
 #include "../tool/font.h"
 #include "../tool/imageTool.h"
 
@@ -27,25 +27,20 @@ class Battleship{
 		int getHitShipCell();
 		int getHitCell();
 		void initHits();
-		void showHitImage(int, int, IplImage *, IplImage *);
 		
-		int getBoardCell();
+		int getBoardCell(int, int);
 		void initBoard();
 		
-		void initShots();
-		void checkShots();
 		bool isLose();
+		bool hitSuccess();
 		
 		void testHitTable(int, int);
 		void testBoardTable(int, int);
 	private:
 		int row = 0, column = 0;
 		int board[8][8] = {{0}};
-		int shots[8][8] = {{0}};
 		int hits[2] = {0};
-		bool giveShots();
-		void changeBoard();
-		int hitShips();
+		void hitShips();
 };
  
 #endif

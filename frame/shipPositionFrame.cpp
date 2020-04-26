@@ -10,7 +10,6 @@ namespace shipPositionFrame{
 	bool isRandomShip = false;
 	void randomComputerShips(){
 		if (!isRandomShip){
-			srand(time(NULL));
 			computer.randomShips();
 			isRandomShip = true;
 		}

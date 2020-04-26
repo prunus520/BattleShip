@@ -41,9 +41,7 @@ extern Image wave;
 extern Image fire;
 
 extern int shipMove;
-extern bool player_computer_flag;
-extern bool player_computer_sleep;
-extern bool palyer_init;
+extern bool isComputer;
 extern bool isPalyerMouseClickedUp;
 
 extern Battleship computer, player;

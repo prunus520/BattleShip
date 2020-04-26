@@ -100,7 +100,7 @@ namespace shipPositionFrame{
 			if (ship[i].getShipReady() == false)
 				break;
 		}
-		if (i == 6){
+		if (i == 0){
 			frame = BATTLE_FRAME;
 			back.releaseImage();
 			radarBoard.releaseImage();

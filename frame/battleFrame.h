@@ -21,13 +21,15 @@ namespace battleFrame{
 	void loadHitImage();
 	void loadFireImage();
 	void loadWaveImage();
-	void showHitImage();
+	void showHitAndnHitImage();
+	void showHitImage(int, int, int, int);
+	void shownHitImage(int, int, int, int);
 	
 	void judgeGame();
-	void judgePlayerOrComputer();
+	void judgePlayerOrComputerRound();
 	void player_computer_sleep_Timer(int);
-	void player_computer_flag_Timer(int);
-	void printWinOrLoseFont();
+	void isComputerTimer(int);
+	void drawWinOrLoseFont();
 }
 
 #endif
