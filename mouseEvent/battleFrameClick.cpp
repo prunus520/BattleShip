@@ -3,6 +3,9 @@
 namespace battleFrameClick{
 	void battleFrameClick(int state, int x, int y){
 		hitComputerShip(state, x, y);
+		if (computer.isLose() || player.isLose()){
+			replayTheGame();
+		}
 	}
 	
 	void hitComputerShip(int state, int x, int y){
@@ -13,5 +16,21 @@ namespace battleFrameClick{
 				isComputer = true;
 			}
 		}
+	}
+	
+	void replayTheGame(){
+		if (mouse.isMouseClickRangeCoordinate(575, 777, 105, 146)){
+			frame = MAIN_FRAME;
+			releaseImage();
+		}
+	}
+	
+	void releaseImage(){
+		sea.releaseImage();
+		for (int i = 5; i != -1; --i){
+			ship[i].releaseImage();
+		}
+		fire.releaseImage();
+		wave.releaseImage();
 	}
 }

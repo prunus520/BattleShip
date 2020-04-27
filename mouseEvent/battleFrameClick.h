@@ -6,6 +6,8 @@
 namespace battleFrameClick{
 	void battleFrameClick(int, int, int);
 	void hitComputerShip(int, int, int);
+	void replayTheGame();
+	void releaseImage();
 }
 
 #endif

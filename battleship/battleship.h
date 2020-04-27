@@ -18,6 +18,8 @@ class Battleship{
 		Battleship();
 		void setRow(int);
 		void setColumn(int);
+		int getRow();
+		int getColumn();
 		
 		void setShipCell(int, int, int);
 		int getShipCell(int, int);
@@ -34,6 +36,7 @@ class Battleship{
 		bool isLose();
 		void randomHit();
 		bool hitSuccess();
+		int hitShips();
 		
 		void testHitTable(int, int);
 		void testBoardTable(int, int);
@@ -41,7 +44,6 @@ class Battleship{
 		int row = 0, column = 0;
 		int board[8][8] = {{0}};
 		int hits[2] = {0};
-		void hitShips();
 		
 		bool openAI = false;
 		int hitRowByAI = 0;

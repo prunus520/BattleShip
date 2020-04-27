@@ -126,10 +126,10 @@ namespace battleFrame{
 	
 	void judgeGame(){
 		judgePlayerOrComputerRound();
-		Sleep(200);
 		drawWinOrLoseFont();
 	}
 	
+	bool isInitGame = false;
 	void judgePlayerOrComputerRound(){
 		if (isComputer && isPalyerMouseClickedUp){
 			glutTimerFunc(500, isComputerTimer, 3);
@@ -137,6 +137,10 @@ namespace battleFrame{
 		}
 		else if (!isComputer){
 			isPalyerMouseClickedUp = true;
+			isInitGame = true;
+		}
+		if (isInitGame && !isPalyerMouseClickedUp){
+			drawHitShipFont();
 		}
 	}
 	
@@ -147,16 +151,42 @@ namespace battleFrame{
 		isComputer = !isComputer;
 	}
 	
+	void drawHitShipFont(){
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glColor3f(0, 0, 0);
+		setFontHeight(65);
+		setFontXY(270, 100);
+		switch (computer.hitShips()){
+			case 0:
+				break;
+			case 1:
+				printFont("You hit a ship with the shot ( %d , %d )", computer.getRow() + 1, computer.getColumn() + 1);
+				break;
+			case 2:
+				printFont("Hit a ship with the shot ( %d , %d )", computer.getRow() + 1, computer.getColumn() + 1);
+				break;
+			case 3:
+				setFontXY(600, 100);
+				printFont("Oops !");
+				break;
+			case 4:
+				setFontXY(350, 100);
+				printFont("Where did you shoot ? Noob !");
+				break;
+		}
+	}
+	
 	void drawWinOrLoseFont(){
 		if (computer.isLose() || player.isLose()){
 			glColor3f(0, 0, 0);
 			setFontHeight(55);
-			setFontXY(windowWidth / 2 - 200, windowHeight / 2);
 			
 			if (computer.isLose()){
+				setFontXY(577, 100);
 				printFont("You win.");
 			}
 			else if (player.isLose()){
+				setFontXY(566, 100);
 				printFont("You lose.");
 			}
 			isPalyerMouseClickedUp = false;

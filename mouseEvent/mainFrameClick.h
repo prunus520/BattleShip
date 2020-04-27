@@ -5,7 +5,7 @@
 
 namespace mainFrame{
 	void click(int, int);
-	void startTheGame(int, int);
+	void startTheGame();
 	void releaseImage();
 }
 

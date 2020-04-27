@@ -26,9 +26,11 @@ namespace battleFrame{
 	void shownHitImage(int, int, int, int);
 	
 	void judgeGame();
+	extern bool isInitGame;
 	void judgePlayerOrComputerRound();
 	void player_computer_sleep_Timer(int);
 	void isComputerTimer(int);
+	void drawHitShipFont();
 	void drawWinOrLoseFont();
 }
 

@@ -9,6 +9,14 @@ void Battleship::setRow(int newRow){
 	row = newRow;
 }
 
+int Battleship::getRow(){
+	return row;
+}
+
+int Battleship::getColumn(){
+	return column;
+}
+
 void Battleship::setColumn(int newColumn){
 	column = newColumn;
 }
@@ -171,29 +179,24 @@ bool Battleship::hitSuccess(){
 	return 0;
 }
 
-void Battleship::hitShips(){
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glColor3f(0, 0, 0);
-	setFontHeight(65);
-	setFontXY(270, 100);
+int Battleship::hitShips(){
 	if (board[row][column] == isHit){
 		if (row >= 800){
-			printFont("You hit a ship with the shot ( %d , %d )", row + 1, column + 1);
+			return 1;
 		}
 		else {
-			printFont("Hit a ship with the shot ( %d , %d )", row + 1, column + 1);
+			return 2;
 		}
 	}
-	else{
+	else {
 		if (row >= 800){
-			setFontXY(600, 100);
-			printFont("Oops !");
+			return 3;
 		}
-		else{
-			setFontXY(350, 100);
-			printFont("Where did you shoot ? Noob !");
+		else {
+			return 4;
 		}
 	}
+	return 0;
 }
 
 void Battleship::testHitTable(int x, int y){

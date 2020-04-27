@@ -2,10 +2,10 @@
 
 namespace mainFrame{
 	void click(int x, int y){
-		startTheGame(x, y);
+		startTheGame();
 	}
 	
-	void startTheGame(int x, int y){
+	void startTheGame(){
 		if (mouse.isMouseClickRangeCoordinate(637.6, 807.6, 674, 729)){
 			frame = SHIP_POSITION_FRAME;
 			releaseImage();
