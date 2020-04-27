@@ -1,8 +1,8 @@
 #include "mainWindow.h"
 
 int main() {
-	createGlutWindow();
-	catchGlutEvent();
+	createBattleshipWindow();
+	catchBattleshipEvent();
 	
 	return EXIT_SUCCESS;
 }

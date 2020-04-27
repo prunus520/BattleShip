@@ -11,11 +11,11 @@
 #include "mouseEvent/shipPositionFrameMove.h"
 #include "mouseEvent/shipPositionFrameMotion.h"
 
-void createGlutWindow();
+void createBattleshipWindow();
 int centerWindowX();
 int centerWindowY();
 
-void catchGlutEvent();
+void catchBattleshipEvent();
 
 void catchWindowSizeEvent();
 void catchWindowSize(int, int);

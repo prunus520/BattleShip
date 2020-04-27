@@ -1,6 +1,7 @@
 #include "battleship.h"
 
 Battleship::Battleship(){
+	srand(time(NULL));
 	initBoard();
 }
 
@@ -50,7 +51,6 @@ void Battleship::randomShips(){
 	int randomRow, randomColumn, randomRotation;
 	int successCount;
 	int shipIndex;
-	srand(time(NULL));
 	for (int shipType = 0; shipType != 3; ++shipType){
 		for (int shipCount = shipType; shipCount != -1; --shipCount){
 			randomRotation = rand() % 2;
@@ -83,7 +83,6 @@ bool Battleship::isLose(){
 }
 
 void Battleship::randomHit(){
-	srand(time(NULL));
 	initializeHitByAI();
 	smartHitByAI();
 	if (!openAI){

@@ -2,7 +2,7 @@
 #define DRAW_H
 
 #include <windows.h>
-#include <GL/glut.h>
+#include "../library/include/GL/glut.h"
 
 void line(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1);
 void Hollow_Square(GLfloat, GLfloat, GLfloat, GLfloat, GLfloat = 1);

@@ -2,8 +2,8 @@
 #define IMAGE_H
 
 #include <string>
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
+#include "../library/include/opencv/cv.h"
+#include "../library/include/opencv/highgui.h"
 #include "imageTool.h"
 
 class Image{

@@ -1,8 +1,8 @@
 #ifndef SHIPIMAGE_H
 #define SHIPIMAGE_H
 
-#include <GL/glut.h>
-#include <opencv/cv.h>
+#include "../library/include/GL/glut.h"
+#include "../library/include/opencv/cv.h"
 #include "../tool/image.h"
 #include "../tool/draw.h"
 

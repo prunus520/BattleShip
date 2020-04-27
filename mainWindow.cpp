@@ -1,6 +1,6 @@
 #include "mainWindow.h"
 
-void createGlutWindow(){
+void createBattleshipWindow(){
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
 	glutInitWindowPosition(centerWindowX(), centerWindowY());
 	glutInitWindowSize(windowWidth, windowHeight);
@@ -17,7 +17,7 @@ int centerWindowY(){
 	return (screenHeight - windowHeight) / 2;
 }
 
-void catchGlutEvent(){
+void catchBattleshipEvent(){
 	catchWindowSizeEvent();
 	catchDisplayEvent();
 	catchMouseEvent();

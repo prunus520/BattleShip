@@ -1,11 +1,11 @@
 #ifndef MAININIT_H
 #define MAININIT_H
 
-#include <stdio.h>
-#include <time.h>
-#include <math.h>
+#include <cstdio>
+#include <ctime>
+#include <cmath>
 #include <windows.h>
-#include <GL/glut.h>
+#include "library/include/GL/glut.h"
 #include "tool/image.h"
 #include "battleship/shipimage.h"
 #include "battleship/battleship.h"

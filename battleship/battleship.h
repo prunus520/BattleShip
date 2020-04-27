@@ -1,7 +1,7 @@
 #ifndef BATTLESHIP_H
 #define BATTLESHIP_H
 
-#include <time.h>
+#include <ctime>
 #include <algorithm>
 #include "../tool/font.h"
 #include "../tool/imageTool.h"

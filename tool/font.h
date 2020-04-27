@@ -1,9 +1,9 @@
 #ifndef FONT_H
 #define FONT_H
 
-#include <stdio.h>
+#include <cstdio>
 #include <windows.h>
-#include <GL/glut.h>
+#include "../library/include/GL/glut.h"
 
 int printFont(const char *, ...);
 void setFontHeight(int);
