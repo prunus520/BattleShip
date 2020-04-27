@@ -1,4 +1,10 @@
 # BattleShip
+## 預覽
+![開始畫面](/preview/main.png "開始畫面")
+![擺放戰艦](/preview/place_ship.gif "擺放戰艦")
+![沒攻擊到戰艦](/preview/not_hit_ship.png "沒攻擊到戰艦")
+![攻擊到戰艦](/preview/hit_ship.png "攻擊到戰艦")
+![電腦AI攻擊](/preview/computer_AI_attack.gif "電腦AI攻擊")
 ## 環境配置
 本專案採用 Dev-c++ 5.11 開發
 
