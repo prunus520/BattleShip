@@ -32,6 +32,7 @@ class Battleship{
 		void initBoard();
 		
 		bool isLose();
+		void randomHit();
 		bool hitSuccess();
 		
 		void testHitTable(int, int);
@@ -41,6 +42,20 @@ class Battleship{
 		int board[8][8] = {{0}};
 		int hits[2] = {0};
 		void hitShips();
+		
+		bool openAI = false;
+		int hitRowByAI = 0;
+		int hitColumnByAI = 0;
+		int hitDirection = 0;
+		int hitNorthOrSouth = 0;
+		int hitEastOrWest = 0;
+		int hitCount = 0;
+		void initializeHitByAI();
+		void smartHitByAI();
+		void hitDirectionOption();
+		void hitWest();
+		void randomHitByAI();
+		void resetHitField();
 };
  
 #endif

@@ -46,4 +46,6 @@ extern bool isPalyerMouseClickedUp;
 
 extern Battleship computer, player;
 
+extern bool isDebug;
+
 #endif

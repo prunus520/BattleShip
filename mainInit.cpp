@@ -23,3 +23,5 @@ bool isComputer = true;
 bool isPalyerMouseClickedUp = true;
 
 Battleship computer, player;
+
+bool isDebug = false;

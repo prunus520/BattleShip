@@ -126,19 +126,13 @@ namespace battleFrame{
 	
 	void judgeGame(){
 		judgePlayerOrComputerRound();
+		Sleep(200);
 		drawWinOrLoseFont();
 	}
 	
 	void judgePlayerOrComputerRound(){
-		
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glColor3f(1, 1, 0);
-		setFontHeight(100);
-		setFontXY(0, 500);
-		printFont("%d", isComputer);
-		
 		if (isComputer && isPalyerMouseClickedUp){
-			glutTimerFunc(100, isComputerTimer, 3);
+			glutTimerFunc(500, isComputerTimer, 3);
 			isPalyerMouseClickedUp = false;
 		}
 		else if (!isComputer){
@@ -148,10 +142,7 @@ namespace battleFrame{
 	
 	void isComputerTimer(int id){
 		if (isComputer){
-			while(!player.hitSuccess()){
-				player.setRow(rand() % 8);
-				player.setColumn(rand() % 8);
-			}
+			player.randomHit();
 		}
 		isComputer = !isComputer;
 	}
