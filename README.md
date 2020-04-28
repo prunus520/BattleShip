@@ -1,13 +1,15 @@
 # BattleShip
-這是一款 1931 年由 **Clifford Von Wickler** 所設計出的雙人對戰遊戲。<br>
-本遊戲是在大一的專題中使用 C 寫出來的程式，日後再將 C 改寫成 C++ 。<br>
-在遊戲中玩家將六種不同戰艦部署在不同位置，之後玩家與電腦之間開始輪流展開攻擊。攻擊時若防守方在該座標未配置任何戰艦，則表示「**未擊中**」，反之若防守方在該座標有配置任何戰艦，則表示「**擊中**」，最先將對方戰艦全部擊沉者即為遊戲贏家。
-## 預覽
-![開始畫面](/preview/main.png "開始畫面")
-![擺放戰艦](/preview/place_ship.gif "擺放戰艦")
-![沒攻擊到戰艦](/preview/not_hit_ship.png "沒攻擊到戰艦")
+這是一款 1931 年由 **Clifford Von Wickler** 所設計出的雙人對戰遊戲。<br>本遊戲是在大一的專題中使用 C 寫出來的程式，日後再將 C 改寫成 C++ 。<br>在遊戲中玩家將六種不同戰艦部署在不同位置，之後玩家與電腦之間開始輪流展開攻擊。攻擊時若防守方在該座標未配置任何戰艦，則表示「**未擊中**」，反之若防守方在該座標有配置任何戰艦，則表示「**擊中**」，最先將對方戰艦全部擊沉者即為遊戲贏家。
+## 預覽畫面
+![開始畫面](/preview/main.png)
+<center>開始畫面</center>
+![擺放戰艦](/preview/place_ship.gif)
+<center>左鍵可以抓取或拖曳戰艦，右鍵可以旋轉戰艦的方向</center>
+![沒攻擊到戰艦](/preview/not_hit_ship.png)
 ![攻擊到戰艦](/preview/hit_ship.png "攻擊到戰艦")
-![電腦AI攻擊](/preview/computer_AI_attack.gif "電腦AI攻擊")
+<center>左鍵點擊右方的格子可以攻擊電腦的戰艦</center>
+![電腦攻擊](/preview/computer_AI_attack.gif)
+<center>電腦能夠判斷周圍是否有戰艦</center>
 ## 環境配置
 本專案採用 Dev-c++ 5.11 開發
 
