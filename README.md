@@ -58,3 +58,6 @@ library/lib/opencv/libhighgui.a
 
 #### Dev-c++ 編譯器設定：
 ```TDM-GCC 4.9.2 32-bit Release```
+
+#### Dev-c++ 呼叫編譯器時加入以下的命令：
+```-std=c++11```
